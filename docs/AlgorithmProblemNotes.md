@@ -125,3 +125,55 @@ public:
 };
 ```
 
+---
+
+## 239. 滑动窗口最大值
+
+[239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
+
+> 概念补充
+
+**单调队列**
+
+- 一种 **特殊的双端队列（deque）**，队列中的元素按照一定的单调性（递增 / 递减）排列。
+- 插入时会把队尾“不符合单调性”的元素弹出，以保持整体的有序性。
+- 常用于 **滑动窗口最值** 等问题。
+
+**优先级队列**
+
+- 一般用 **堆（heap）** 实现。
+- 队列中的元素没有整体顺序，但能保证每次取出的元素是当前“最大 / 最小值”。
+- 插入和取出最大 / 最小值的复杂度是 **O(log n)**。
+
+> 实现1: 使用STD中的优先队列(大根堆)；
+>
+> -  i - k 控制当前堆中的最大元素是否在窗口范围内
+> - i >= k - 1控制从哪开始收集结果值
+
+![](http://oss.banshengua.top//blogimages/91f18118d44ad54df297e12fc7133584.gif)
+
+```c++
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        using P = pair<int,int>;
+        std::priority_queue<P> heap;
+        vector<int> ret{};
+        int n = nums.size();
+        for (int i = 0; i< n ;i++){
+            heap.push({nums[i],i});
+            // using i - k keep cureent window
+            while (heap.top().second <= i - k){
+                // beyond the scope of the current window
+                heap.pop();
+            }
+            // control where start to save result
+            if (i >= k - 1){
+                ret.push_back(heap.top().first);
+            }
+        }
+        return ret;
+    }
+};
+```
+
