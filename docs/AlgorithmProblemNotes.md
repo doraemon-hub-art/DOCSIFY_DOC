@@ -177,3 +177,34 @@ public:
 };
 ```
 
+---
+
+# 滑动窗口
+
+## 2348. 全 0 子数组的数目
+
+[2348. 全 0 子数组的数目](https://leetcode.cn/problems/number-of-zero-filled-subarrays/)
+
+> 思路
+
+- 维护都是0的子数组窗口，累加以左端为0的全0子数组个数；
+
+```c++
+class Solution {
+public:
+    long long zeroFilledSubarray(vector<int>& nums) {
+        long long ret = 0;
+        int n = nums.size();
+        // 左端点
+        int left = -1;
+        for(int i = 0 ; i < n ; i++){
+            if (nums[i]){
+                left = i;
+            }else{ // 以 left 为左端点的连续 0 子数组的个数
+                // left + 1, left + 2, left + 3 ... 都是符合条件的子数组
+                ret += i - left;
+            }
+        }
+        return ret;
+    }
+};
