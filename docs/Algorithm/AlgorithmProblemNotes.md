@@ -180,8 +180,6 @@ public:
 
 ---
 
-# 滑动窗口
-
 ## 2348. 全 0 子数组的数目
 
 [2348. 全 0 子数组的数目](https://leetcode.cn/problems/number-of-zero-filled-subarrays/)
