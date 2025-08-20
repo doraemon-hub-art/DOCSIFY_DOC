@@ -180,6 +180,49 @@ public:
 
 ---
 
+## 347. 前 K 个高频元素
+
+[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
+
+> 思路1: 遍历存储到map中，然后构造pair按照次数排序，之后遍历pair数组取出前k个。
+
+```c++
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        for (auto n : nums){
+            mp[n]++;
+        }
+        using P = pair<int,int>;
+        vector<P> retPairs;
+        for (auto m : mp){
+            retPairs.emplace_back(m.first,m.second);
+        }
+        sort(retPairs.begin(),retPairs.end(),[&](P a, P b){
+            return a.second > b.second;
+        });
+        vector<int> ret {};
+        // while (k--)
+        int n = retPairs.size();
+        for (int i = 0 ;i < n && k--;i++){
+            ret.push_back(retPairs[i].first);
+        }
+        return ret;
+
+    }
+};
+```
+
+> 思路2: 
+
+```c++
+```
+
+
+
+---
+
 ## 2348. 全 0 子数组的数目
 
 [2348. 全 0 子数组的数目](https://leetcode.cn/problems/number-of-zero-filled-subarrays/)
@@ -207,3 +250,6 @@ public:
         return ret;
     }
 };
+
+---
+
