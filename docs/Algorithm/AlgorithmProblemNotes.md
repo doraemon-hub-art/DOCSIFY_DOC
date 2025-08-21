@@ -148,10 +148,10 @@ public:
 - 队列中的元素没有整体顺序，但能保证每次取出的元素是当前“最大 / 最小值”。
 - 插入和取出最大 / 最小值的复杂度是 **O(log n)**。
 
-> 实现1: 使用STD中的优先队列(大根堆)；
->
-> -  i - k 控制当前堆中的最大元素是否在窗口范围内
-> - i >= k - 1控制从哪开始收集结果值
+> 思路: 使用STD中的优先队列(大根堆)；
+
+- i - k 控制当前堆中的最大元素是否在窗口范围内
+- i >= k - 1控制从哪开始收集结果值
 
 ![](http://oss.banshengua.top//blogimages/91f18118d44ad54df297e12fc7133584.gif)
 
@@ -186,7 +186,9 @@ public:
 
 [347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
-> 思路1: 遍历存储到map中，然后构造pair按照次数排序，之后遍历pair数组取出前k个。
+> 思路1: 
+
+- 遍历存储到map中，然后构造pair按照次数排序，之后遍历pair数组取出前k个。
 
 ```c++
 class Solution {
@@ -218,10 +220,39 @@ public:
 
 > 思路2: 
 
+- 小跟堆实现，堆顶为出现次数最小的。
+- 注意: priority_queue 和 std::sort 的比较函数意义正好相反。
+
 ```c++
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        using P = pair<int,int>;
+        auto compare_mode =  [](P& a, P& b){
+            return a.second > b.second;
+        };
+        unordered_map<int,int> map;
+        for (auto n : nums){
+            map[n]++;
+        }
+        // heap need vector save
+        priority_queue<P,vector<P>,decltype(compare_mode)> pri_que;
+        for (auto m : map){
+            pri_que.push(m);
+            // control 7 numbers
+            if (pri_que.size() > k){
+                pri_que.pop();
+            }
+        }
+        vector<int> ret {};
+        while (!pri_que.empty()){
+            ret.emplace_back(pri_que.top().first);
+            pri_que.pop();
+        }
+        return ret;
+    }
+};
 ```
-
-
 
 ---
 
