@@ -289,7 +289,7 @@ public:
 
 # 动态规划
 
-# 509. 斐波那契数
+## 509. 斐波那契数
 
 [509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
 
@@ -326,7 +326,7 @@ public:
 
 ---
 
-# 70. 爬楼梯
+## 70. 爬楼梯
 
 [70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
 
