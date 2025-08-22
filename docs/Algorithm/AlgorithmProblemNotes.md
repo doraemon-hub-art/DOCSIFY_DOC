@@ -289,3 +289,70 @@ public:
 
 # 动态规划
 
+# 509. 斐波那契数
+
+[509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
+
+>DP 思路
+
+- 确定dp数组
+- 确定递推公式——递推公式决定dp数组要如何初始化
+- dp数组如何初始化
+- 确定遍历顺序
+- 举例推导dp数组
+
+> 思路
+
+- 入门的DP题目
+
+```c++
+class Solution {
+public:
+    int fib(int n) {
+        if (n < 2)return n;
+        // just use 2 size vector can do it
+        vector<int> matrit(n+1, 0);
+        // init status
+        matrit[0] = 0;
+        matrit[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            // recursive formula
+            matrit[i] = matrit[i-1] + matrit[i-2];
+        }
+        return matrit[n];
+    }
+};
+```
+
+---
+
+# 70. 爬楼梯
+
+[70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
+
+> 思路
+
+- 递推公式解释
+  - matrix[i] = matrix[i-1] + matrix[i-2] 表示 “到第 i 阶的所有方案 = 最后一步是 1 阶时的方案数 + 最后一步是 2 阶时的方案数”。
+
+```c++
+class Solution {
+public:
+    int climbStairs(int n) {
+        if (n <= 2) return n;
+        vector<int> matrix (n+1,0);
+        matrix[0] = 0;
+        matrix[1] = 1;
+        matrix[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            matrix[i] = matrix[i-1] + matrix[i-2];
+        }
+        return matrix[n];
+    }
+};
+```
+
+---
+
+
+
