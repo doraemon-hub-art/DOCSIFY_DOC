@@ -354,5 +354,61 @@ public:
 
 ---
 
+## 746. 使用最小花费爬楼梯
 
+[746. 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+
+> 思路
+
+- 要到达 `i`，你可以从 `i-1` 台阶走 1 步，或者从 `i-2` 台阶走 2 步。
+
+```c++
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        // dp[i] 到达 i 的最小花费
+        int n = cost.size();
+        vector<int> dp(n+1,0);
+        // 0 为 第一个台阶
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i = 2; i <= n;i++){
+            dp[i] = min(dp[i-1] + cost[i-1],dp[i-2]+cost[i-2]);
+        }
+        return dp[n];
+    }
+};
+```
+
+---
+
+# 62. 不同路径
+
+[62. 不同路径](https://leetcode.cn/problems/unique-paths/)
+
+> 思路
+
+- 左 + 上，可以到此坐标。
+
+```c++
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<vector<int>> map(m,vector<int>(n,0));
+        // 初始化最上面一行和最左边一列，只有一种方法到大，就是沿着横/竖 走
+        for (int i = 0; i < n; i++) map[0][i] = 1;
+        for (int i = 0; i < m; i++) map[i][0] = 1;
+        // 开始计算 从 1,1 开始出发
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                // 左 + 上
+                map[i][j] = map[i-1][j] + map[i][j-1];
+            }
+        }
+        return map[m-1][n-1];
+    }
+};
+```
+
+---
 
