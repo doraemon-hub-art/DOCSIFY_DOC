@@ -382,7 +382,7 @@ public:
 
 ---
 
-# 62. 不同路径
+## 62. 不同路径
 
 [62. 不同路径](https://leetcode.cn/problems/unique-paths/)
 
@@ -411,4 +411,78 @@ public:
 ```
 
 ---
+
+## 63. 不同路径 II
+
+[63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/)
+
+> 思路
+
+- 与上题相同，只是添加了障碍物的判断，但是要注意，初始化上、左，的时候，一旦遇到障碍物，后面的就无法继续移动到了。
+
+```c++
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        for (int i = 0; i < n; i++) {
+            if (obstacleGrid[0][i] == 0) dp[0][i] = 1;
+            else break;
+        }
+        for (int i = 0; i < m; i++) {
+            if (obstacleGrid[i][0] == 0) dp[i][0] = 1;
+            else break;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 0){
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+        return dp[m-1][n-1];
+    }
+};
+```
+
+---
+
+# 滑动窗口
+
+## 1493. 删掉一个元素以后全为 1 的最长子数组
+
+[1493. 删掉一个元素以后全为 1 的最长子数组](https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/)
+
+> 思路
+
+- 维护只有一个值为0的窗口
+
+```c++
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int n = nums.size();
+        int ret = 0;
+        int left = 0;
+        int right = 0;
+        // 用于判断，如果全是1，也是要删掉一个
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        // 维护窗口中的0 和 1 的个数
+        unordered_map<int,int> mp;
+        for (; right < n; right++) {
+            mp[nums[right]] ++;
+            // 遇到第二个0个，开始收缩左窗口
+            // 不用担心left < n 太大了，既然当前0的个数 > 1，说明左边一定是有个满足条件的 nums[left] == 0
+            while (mp[0] > 1 && left < n) {
+                mp[nums[left++]] --;
+            }
+            // 更新结果，因为可以去掉一个0，所以只统计窗口中1的个数即可。
+            ret = max(ret,mp[1]);
+        }
+        return sum == n ? ret - 1 : ret;
+    }
+};
+```
 
