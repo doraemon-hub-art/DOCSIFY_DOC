@@ -486,3 +486,57 @@ public:
 };
 ```
 
+---
+
+# 模拟
+
+## 498. 对角线遍历
+
+[498. 对角线遍历](https://leetcode.cn/problems/diagonal-traverse/)
+
+> 思路
+
+- 一个一个push，模拟路径，到头后调转方向。
+
+```c++
+class Solution {
+public:
+    vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        int dir = 1; // 控制方向 1 右上  0 左下
+        vector<int> ret {};
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < m*n; i++) {
+            ret.push_back(mat[x][y]);
+            if (dir) { // 右上
+                // 判断调转方向
+                if (y == n-1) {
+                    dir = 0;
+                    x++;
+                } else if ( x == 0 ){
+                    dir = 0;
+                    y++;
+                } else {
+                    x--;
+                    y++;
+                }
+            } else { // 左下
+                if ( x == m-1 ) {
+                    y ++;
+                    dir = 1;
+                } else if ( y == 0) {
+                    x ++;
+                    dir = 1;
+                } else {
+                    x++;
+                    y--;
+                }
+            }
+        }
+        return ret;
+    }
+};
+```
+
