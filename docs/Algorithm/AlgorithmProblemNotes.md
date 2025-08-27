@@ -449,6 +449,47 @@ public:
 
 ---
 
+## 343. 整数拆分
+
+[343. 整数拆分](https://leetcode.cn/problems/integer-break/)
+
+> 思路
+
+- 拆分判断最大值
+
+  - `dp[i-j] * j` → 左边拆，右边不拆。
+
+  - `(i-j) * j` → 两边都不拆。
+
+```c++
+class Solution {
+public:
+    int integerBreak(int n) {
+        vector<int> dp (n+1, 0);
+        dp[1] = 1;
+        dp[2] = 1;
+        for (int i = 3; i <= n; i++) {
+            for (int j = 1; j < i - 1; j++) {
+                dp[i] = max(
+                    // 不断对比寻找最大值
+                    dp[i],
+                    // 这个随着j的遍历，左边拆，右边不拆，还是左边不拆，右边拆的，都能遍历到
+                    // 两遍都拆只可能更小
+                    max (dp[i-j] * j,(i-j) * j)
+                );
+            }
+        }
+        return dp[n];
+    }
+};
+```
+
+
+
+
+
+---
+
 # 滑动窗口
 
 ## 1493. 删掉一个元素以后全为 1 的最长子数组
