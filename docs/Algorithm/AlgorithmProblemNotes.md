@@ -484,9 +484,38 @@ public:
 };
 ```
 
+---
 
+## 96. 不同的二叉搜索树
 
+[96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
 
+> 思路
+
+- 控制节点个数，组合左右子树。
+
+> 补充
+
+- 这个数其实是 **Catalan 数**。
+
+```c++
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> dp(n+1, 0);
+        // 设 dp[k] 表示有  k k 个节点时不同 BST 的数量
+        dp[0] = 1;
+        // 遍历节点个数
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                // 以 j 为跟节点，左子树可能 * 右子树可
+                dp[i] += dp[j-1] * dp[i-j];
+            }
+        }
+        return dp[n];
+    }
+};
+```
 
 ---
 
