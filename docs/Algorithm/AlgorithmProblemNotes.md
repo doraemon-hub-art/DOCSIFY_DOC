@@ -610,3 +610,52 @@ public:
 };
 ```
 
+---
+
+# 哈希表
+
+## 36. 有效的数独
+
+[36. 有效的数独](https://leetcode.cn/problems/valid-sudoku/)
+
+> 思路
+
+- 一次遍历，统计行、列、矩阵是否出现过。
+
+```c++
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        int n = board.size();
+        int m = board[0].size();
+        // 3 * 3
+
+        vector<vector<bool>> matrix_map(9, vector<bool>(9, false));
+        vector<vector<bool>> row_map(9, vector<bool>(9, false));
+        vector<vector<bool>> col_map(9, vector<bool>(9, false));
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                char c = board[i][j];
+                if (c == '.') continue;
+                int num = c - '0' -1; // 转为为数组下标
+                // int k = i / 3 *3  + j / 3;// 定位是哪个自矩阵 x + y 是固定的
+                int k = (i / 3) * 3 + (j / 3); // 定位是哪个自矩阵
+
+                if (row_map[i][num] || 
+                    col_map[j][num] || 
+                    matrix_map[k][num] ) {
+                        return false;
+                }
+                
+                row_map[i][num] = true;
+                col_map[j][num] = true;
+                matrix_map[k][num] = true;
+
+            }
+        }
+        return true;
+    }
+};
+```
+
