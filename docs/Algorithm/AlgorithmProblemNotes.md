@@ -659,3 +659,50 @@ public:
 };
 ```
 
+---
+
+# 背包
+
+## 01背包
+
+### 416. 分割等和子集
+
+[416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+
+> 思路
+
+- 将问题转化为，背包容量为 sum / 2大小的背包，所能得到的最大物品价值，是不是 sum / 2。
+
+```c++
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int sumValue = accumulate(nums.begin(), nums.end(), 0);
+        if (sumValue % 2) return false;
+        int target = sumValue / 2;
+        int n = nums.size();
+        // dp[i][j] = 从前 i 个数（nums[0..i-1]）中，是否能选出一些数，使得它们的和恰好等于 j
+        vector<vector<bool>> dp(n+1,vector<bool>(target+1,false));
+        for (int i = 0;i <= n; i++) {
+            dp[i][0] = true ;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= target; j++) {
+                // 选择 i - 1 来对齐数组下标
+
+                // 不选 i-1
+                // 此时能不能拼出 j ，取决于前面的[i-1]能不能拼出 j
+                dp[i][j] = dp[i-1][j];
+
+                // 选 i-1
+                if (j >= nums[i-1]) {
+                    dp[i][j] = dp[i][j] || dp[i-1][j-nums[i-1]];
+                }
+
+            }
+        }
+        return dp[n][target];
+    }
+};
+```
+
