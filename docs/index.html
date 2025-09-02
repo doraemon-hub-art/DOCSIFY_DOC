@@ -37,6 +37,10 @@
         noData: '找不到结果',
         depth: 3,
       },
+      // LaTeX 公式支持
+      math: {
+      renderer: 'MathJax' // 或 'KaTeX'
+    }
     }
 
   </script>
@@ -53,5 +57,7 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 
+  <!-- LaTeX -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/markdown-it-math.min.js"></script>
 </body>
 </html>

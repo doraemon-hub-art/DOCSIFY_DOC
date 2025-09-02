@@ -706,3 +706,65 @@ public:
 };
 ```
 
+---
+
+### 1049. 最后一块石头的重量 II
+
+[1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/)
+
+> 思路
+
+- 石头分为两堆，求出其中一堆的最大值(用总重量一半作为限制)，根据下方公式，即是题目要求的最小结果。
+
+假设总重量为 $sum$，把石头分成两堆 $A$ 和 $B$，目标是最小化 $|A-B|$。
+
+总重量关系：
+$$
+A + B = sum
+$$
+
+我们想最小化剩下的石头重量：
+$$
+\text{剩余重量} = |A-B|
+$$
+
+代入总重量：
+$$
+|A-B| = |A - (sum - A)| = |2A - sum|
+$$
+
+为了最小化 $|2A - sum|$，我们希望 $A$ 尽量接近 $sum/2$，于是就用背包找出不超过 $sum/2$ 的最大重量 $dp[target]$，把它作为 $A$。
+
+剩余重量：
+$$
+\text{剩余重量} = sum - 2 \cdot dp[target]
+$$
+
+```C++
+class Solution {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        
+        int sum = accumulate(stones.begin(), stones.end(), 0);
+        int n = stones.size();
+        int target = sum / 2;
+        // dp [i][j] 从前i个石头中选择，放入容量为j的背包中，可以获得的最大重量
+        vector<vector<int>> dp (n+1, vector<int>(target+1, 0));
+
+        // 选择石头，下标从1开始，所以下面要 - 1
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= target; j++) {
+                if (j >= stones[i - 1]) { // 容量够，可以放入
+                    dp[i][j] = max(dp[i-1][j], dp[i-1][j-stones[i-1]] + stones[i-1]); 
+                } else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        return sum - 2 * dp[n][target];
+    }
+};
+```
+
+---
+
