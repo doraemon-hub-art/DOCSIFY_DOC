@@ -768,3 +768,58 @@ public:
 
 ---
 
+### 494. 目标和
+
+[494. 目标和](https://leetcode.cn/problems/target-sum/)
+
+> 思路
+
+- 转化为01背包问题
+
+设所有数的总和为：  
+$\text{sum} = \sum_{i=1}^n \text{nums}[i]$  
+
+如果把选择加号的数之和记为 $P$，选择减号的数之和记为 $N$，则有：  
+$P - N = \text{target}$  
+$P + N = \text{sum}$  
+
+联立可得：  
+$P = \dfrac{\text{target} + \text{sum}}{2}$  
+
+因此，问题就转化为：从 $\text{nums}$ 中挑选一些数，使它们的和等于 $P$，有多少种方案。
+
+存在性条件：  
+1. $\text{target} + \text{sum}$ 必须是偶数；  
+2. $|\text{target}| \leq \text{sum}$。
+
+```C++
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int n = nums.size();
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        // 两种不可能情况
+        if ((sum + target) % 2 || abs(target) > sum) return 0;
+        // 前面 i - 1 的数，可以组成和为 j 的个数是 dp[i][j]
+        int p = (sum + target) / 2;
+        vector<vector<int>> dp(n + 1, vector<int>(p + 1, 0));
+        // 初始化
+        dp[0][0] = 1;
+        // 为什么从 1 开始 ?
+        // 就是，前0个元素不用特判，在初始化定义的时候就已经定义0 了
+        // [0 - i] 中间的元素
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= p; j++) {
+                dp[i][j] = dp[i-1][j];// 不选 i - 1
+                if (j >= nums[i-1]) { // 选 i - 1
+                    dp[i][j] += dp[i-1][j - nums[i-1]];
+                }
+            }
+        }
+        return dp[n][p];
+    }
+};
+```
+
+---
+
