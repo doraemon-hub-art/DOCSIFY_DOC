@@ -218,3 +218,113 @@ int main() {
 在 C++ 中，`inline` 函数 **必须在头文件里同时写实现**，否则链接器找不到定义，就会报你之前的 `undefined reference` 错误。
 
 ---
+
+# std:mutex 禁止拷贝
+
+`std::mutex` 内部封装了操作系统的互斥量资源，这个资源和一个具体的内核对象或句柄绑定（比如 Linux 的 `pthread_mutex_t`，Windows 的 `CRITICAL_SECTION`）。
+
+- 如果允许拷贝，会出现两个 `mutex` 对象指向同一个底层资源，但两个对象并不知道彼此共享。
+- 这样可能导致：
+  - **重复析构**：多个 `mutex` 析构时释放同一个资源，造成未定义行为。
+  - **死锁/同步混乱**：多个对象操作同一锁，状态难以维护。
+- 所以标准库明确禁用了：
+
+```c++
+std::mutex(const std::mutex&) = delete;
+std::mutex& operator=(const std::mutex&) = delete;
+```
+
+> 编码时，要注意，可以将具有std::mutex成员的类，拷贝和赋值禁用掉。
+>
+> **但是可以移动。** ——  **约定俗成的最佳实践**
+
+```C++
+#include <mutex>
+#include <string>
+
+class Data {
+public:
+    Data(std::string s) : value(std::move(s)) {}
+
+    // 禁止拷贝，允许移动
+    Data(const Data&) = delete;
+    Data& operator=(const Data&) = delete;
+
+    Data(Data&&) = default;
+    Data& operator=(Data&&) = default;
+
+    void setValue(std::string v) {
+        std::lock_guard<std::mutex> lk(mtx);
+        value = std::move(v);
+    }
+
+    std::string getValue() {
+        std::lock_guard<std::mutex> lk(mtx);
+        return value;
+    }
+
+private:
+    std::string value;
+    mutable std::mutex mtx;
+};
+
+```
+
+---
+
+# std::lock_guard 和 std::unique_lock 的区别
+
+> std::lock_guard 
+
+- **轻量级封装**互斥量。
+
+- **RAII** 风格：构造时加锁，析构时解锁。
+
+- **不可解锁/重新锁定**，作用域结束才释放锁。
+
+- **只能管理 `std::mutex`（或兼容 mutex 类型）**。
+
+```C++
+#include <mutex>
+
+std::mutex mtx;
+
+void foo() {
+    std::lock_guard<std::mutex> lk(mtx); // 构造时加锁
+    // 临界区
+} // 析构时自动解锁
+```
+
+> std::unique_lock
+
+- **更灵活**的锁封装。
+
+- RAII 风格。
+
+- **可解锁/重新加锁**，支持 `lock()` 和 `unlock()`。
+
+- **可以延迟加锁或采用 `try_to_lock`、`adopt_lock`**。
+
+- 必须支持 **move**（不可拷贝）。
+
+- 支持 **条件变量**等待。
+
+```C++
+#include <mutex>
+#include <condition_variable>
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+void worker() {
+    std::unique_lock<std::mutex> lk(mtx); // 默认加锁
+    cv.wait(lk, []{ return ready; });     // 自动解锁等待，唤醒后再加锁
+    // 被唤醒时 wait 会 自动调用 lk.lock()
+        
+    // 临界区
+} // 析构时自动解锁
+```
+
+---
+
