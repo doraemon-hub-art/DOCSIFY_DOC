@@ -2,6 +2,8 @@
 
 > [PlantUML在线预览](www.plantuml.com/plantuml)
 
+> [PlantUML中文文档](https://plantuml.com/zh/)
+
 > [Ubuntu PlantUML VsCode配置](https://blog.csdn.net/yinhezhanshen/article/details/147940372)
 
 - 补充: "Ctrl + ," 打开设置 搜索 markdown-preview-enhanced.plantumlJarPath， 配置路径
