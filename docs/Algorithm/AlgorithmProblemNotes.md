@@ -777,14 +777,22 @@ public:
 - 转化为01背包问题
 
 设所有数的总和为：  
-$\text{sum} = \sum_{i=1}^n \text{nums}[i]$  
+$$
+\text{sum} = \sum_{i=1}^n \text{nums}[i]
+$$
 
 如果把选择加号的数之和记为 $P$，选择减号的数之和记为 $N$，则有：  
-$P - N = \text{target}$  
-$P + N = \text{sum}$  
+$$
+P - N = \text{target}
+$$
+$$
+P + N = \text{sum}
+$$
 
 联立可得：  
-$P = \dfrac{\text{target} + \text{sum}}{2}$  
+$$
+P = \dfrac{\text{target} + \text{sum}}{2}
+$$
 
 因此，问题就转化为：从 $\text{nums}$ 中挑选一些数，使它们的和等于 $P$，有多少种方案。
 
@@ -817,6 +825,42 @@ public:
             }
         }
         return dp[n][p];
+    }
+};
+```
+
+---
+
+### 474. 一和零
+
+[474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/)
+
+> 思路
+
+- TODO: 统计每个字符串的01数量之后，再统一便利可否？
+
+```C++
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        // i 个 0 ，j 个 1，组成的子集，最大长度是 dp[i][j]
+        vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
+        for (auto& str : strs) {
+            int zero_cnt = 0;
+            int one_cnt = 0;
+            for (auto& c : str) {
+                if (c == '0') zero_cnt ++;
+                else one_cnt ++;
+            }
+
+            // 倒序遍历，防止重复选取
+            for (int i = m; i >= zero_cnt; i--) {
+                for (int j = n; j >= one_cnt; j--) {
+                    dp[i][j] = max(dp[i][j], dp[i-zero_cnt][j-one_cnt] + 1);
+                }
+            }
+        }
+        return dp[m][n];
     }
 };
 ```

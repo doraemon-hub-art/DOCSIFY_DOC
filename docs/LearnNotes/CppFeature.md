@@ -328,3 +328,21 @@ void worker() {
 
 ---
 
+# int 定义初始化问题
+
+问题源于我在一次刷题中，连续定义两个int导致 (其实一般我不用这个写法的)
+
+```C++
+int zero_cnt, one_cnt = 0;
+for (auto& c : str) {
+    if (c == '0') zero_cnt ++;
+    else one_cnt ++;
+}
+```
+
+C++ 里 int zero_cnt, one_cnt = 0; 其实只会把 one_cnt 初始化为 0，而 zero_cnt 没有初始化，它会是一个随机值（未定义行为）。
+
+之后下方zero_cnt++后，再在下方通过此值访问数组，很可能发生越界和未定义行为。
+
+---
+
