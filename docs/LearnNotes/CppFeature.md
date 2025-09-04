@@ -346,3 +346,58 @@ C++ 里 int zero_cnt, one_cnt = 0; 其实只会把 one_cnt 初始化为 0，而 
 
 ---
 
+# std::atomic
+
+> 是什么？
+
+`std::atomic` 是 C++11 引入的 **原子类型**，它保证对某个变量的 **读写/更新操作是原子的**（不可分割）。
+
+它的实现通常依赖于 CPU 的原子指令（例如 x86 的 `lock cmpxchg`）。
+
+用于多线程共享变量时，避免数据竞争（data race）。
+
+> 特性
+
+`std::atomic` 提供 **单变量的原子操作**（读写、加减、CAS）。
+
+特性：原子性、可见性、通常无锁、不可拷贝。
+
+- 任何单个 `atomic` 的读/写/修改操作都是原子的，不会被中断。
+- 多线程同时操作同一个 `atomic<int>`，结果是确定的，不会“写一半”。
+
+常用于计数器、标志位、无锁数据结构。
+
+但它不能替代 `mutex`，因为不能保证多变量/多步操作的原子性。
+
+> 基础示例
+
+```C++
+#include <iostream>
+#include <thread>
+#include <atomic>
+
+std::atomic<int> counter{0};  // 定义一个原子整型
+
+// 每个线程执行的任务
+void worker() {
+    for (int i = 0; i < 100000; i++) {
+        counter.fetch_add(1);  // 原子加 1
+        // 等价写法： counter++;
+    }
+}
+
+int main() {
+    std::thread t1(worker);
+    std::thread t2(worker);
+
+    t1.join();
+    t2.join();
+
+    // 读取最终结果
+    std::cout << "Final counter = " << counter.load() << std::endl;
+    return 0;
+}
+```
+
+---
+
