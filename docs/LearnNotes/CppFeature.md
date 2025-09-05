@@ -434,3 +434,19 @@ multiple definition of `utils::filesystem::EnsureDir(char const*)'
 
 ---
 
+# ::修饰调用外部C API
+
+> 目的
+
+明确告诉编译器器 **全局命名空间**（global namespace）里找 `testSDKFunction` 这个函数，而不是当前类里、或者其他命名空间里的同名函数。
+
+> 为什么
+
+- **避免歧义**
+  假设类里或者某个命名空间里也有 `testSDKFunction`，直接写可能会优先匹配到错误的版本。加 `::` 就强制指定用全局的函数。
+
+- **明确调用外部 C API**
+  通常 `testSDKFunction` 这种名字，很像是 **外部 SDK 提供的 C 接口函数**，不属于类或者 C++ namespace，所以需要用 `::` 指定全局
+
+---
+
