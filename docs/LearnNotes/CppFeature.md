@@ -452,17 +452,158 @@ multiple definition of `utils::filesystem::EnsureDir(char const*)'
 
 # Impl实现风格
 
+**Impl 实现风格**（也叫 **PImpl Idiom / Pointer to Implementation**）在 C++ 里很常见，主要用于：
 
+> **隐藏实现细节**
 
+对于引用这个头文件的人，防止他窥探其中的实现细节。
 
+> **减少头文件依赖**
+
+```C++
+// Foo.h
+#include <vector>
+#include <string>
+#include <map>
+
+class Foo {
+public:
+    void doSomething();
+private:
+    std::vector<std::string> data_;
+    std::map<int, std::string> dict_;
+};
+```
+
+因为成员里直接用了 `std::vector` 和 `std::map`，所以头文件必须包含 `<vector>`、`<map>`。
+
+那么，所有 `#include "Foo.h"` 的文件，都会间接依赖 `<vector>`、`<map>`。
+
+如果以后你把 `dict_` 改成 `std::unordered_map`，那么所有依赖 `Foo.h` 的文件都得 **重新编译**。
+
+- 用Impl实现: 
+
+用户只看到 `Foo` 的接口，不会依赖 `FooImpl` 的实现细节。
+
+如果以后把 `dict_` 改成 `std::unordered_map`，只需要重新编译 `Foo.cpp`，**不会影响**使用 `Foo.h` 的用户。
+
+(实际上加快编译速度和减少头文件依赖，是一回事，减少头文件依赖是手段，加快编译速度是结果。)
+
+> **加快编译速度**
+
+编译速度和 **依赖数量** 强相关。
+
+在大型工程里，某个类的实现可能依赖一堆头文件（`<vector>`、`<map>`、第三方库头文件）。
+
+如果这些依赖直接出现在 `.h` 里，那么凡是包含这个 `.h` 的地方，都会被迫编译这些庞大的头文件。
+
+当项目很大时，这种连锁效应会让编译非常慢。
+
+- 而 PImpl 的做法是：
+
+`.h` 文件只暴露接口，不暴露实现 → 依赖最小化。
+
+`.cpp` 文件才包含真正的实现依赖。
+
+这样，改动实现时，只需重新编译 `.cpp`，而不是所有依赖这个 `.h` 的地方。
+
+> 实例
+
+```C++
+#ifndef FOO_H
+#define FOO_H
+
+#include <memory>
+#include <string>
+
+// 前置声明（forward declaration）
+// 告诉编译器有一个 FooImpl 类存在，但不需要知道它的完整定义
+class FooImpl;
+
+class Foo {
+public:
+    Foo();
+    ~Foo(); // 注意这里虚构函数不能在头文件中实现，涉及到unique_ptr对不完整类型的析构。
+
+    void doSomething(const std::string& msg);
+
+private:
+    // 用智能指针（unique_ptr）指向内部实现
+    std::unique_ptr<FooImpl> impl_;
+};
+
+#endif // FOO_H
+```
+
+```C++
+#include "Foo.h"
+#include <iostream>
+
+// 内部实现类定义，只在实现文件里可见
+class FooImpl {
+public:
+    void doSomethingImpl(const std::string& msg) {
+        std::cout << "FooImpl: " << msg << std::endl;
+    }
+};
+
+Foo::Foo() : impl_(std::make_unique<FooImpl>()) {}
+
+Foo::~Foo() = default;
+
+void Foo::doSomething(const std::string& msg) {
+    impl_->doSomethingImpl(msg);
+}
+```
+
+> 补充
+
+- 为什么一定要用指针或者智能指针，不能用内部类对象？
+
+这里 `FooImpl` 只是 **前置声明**，编译器并不知道它的大小。
+
+但类的成员对象 `impl_` 必须在编译期确定大小（对象布局固定），所以编译器会报错：
+
+而指针的大小是固定的（通常 8 字节 on x64）。
+
+即使 FooImpl 只是前置声明，编译器也知道 unique_ptr< FooImp l> 自身的大小。
+
+因此可以把它放进对象布局里，等到析构/构造时再去处理真正的 FooImpl。
 
 ---
 
 # CMAKE报找不到库的错误，如何解决？
 
+分两种情况讨论
 
+> 第三方库找不到
 
+- 库不在系统默认路径（`/usr/lib`, `/usr/local/lib`）；
 
+- 没有安装对应的开发包（只装了 `.so`，没装头文件 `.h`）；
+
+- CMake 没有找到路径；
+
+```cmake
+find_package(fmt REQUIRED)
+target_link_libraries(myapp PRIVATE fmt::fmt)
+```
+
+> 当前工程其他模块的库找不到
+
+- 上下游模块之间没有正确声明依赖关系；
+
+- 用了 `PRIVATE`，但上层 target 需要依赖；
+
+- 没有 `add_subdirectory`，导致 target 根本没编译；
+
+```cmake
+add_library(core core.cpp)
+add_library(utils utils.cpp)
+target_link_libraries(utils PUBLIC core)   # utils 依赖 core，且向外公开
+add_executable(app main.cpp)
+target_link_libraries(app PRIVATE utils)   # app 依赖 utils，自动继承 core
+```
 
 ---
 
