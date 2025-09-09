@@ -4,3 +4,5 @@
 * [PlantUML](Tools/PlantUML) 
 * [CMake](Tools/CMake) 
 * [Json](Tools/Json) 
+* [GDB](Tools/GDB) 
+* [NeoVim](Tools/NeoVim) 

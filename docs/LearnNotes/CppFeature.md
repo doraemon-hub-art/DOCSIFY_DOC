@@ -607,3 +607,7 @@ target_link_libraries(app PRIVATE utils)   # app 依赖 utils，自动继承 cor
 
 ---
 
+# 单线程的消费任务队列，执行顺序没有严格按照FIFO
+
+
+

@@ -867,3 +867,44 @@ public:
 
 ---
 
+## 完全背包
+
+## 518. 零钱兑换 II
+
+[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/)
+
+> 实现
+
+- 用例比之前范围大了，看了评论区，用tm unsigned long long ......
+
+```C++
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        int n = coins.size();
+        // dp[i][j] 使用前i个硬币，组成 j 元， 有dp[i][j] 种组合
+        // 数组下表从 0 开始，所以要组合 
+        vector<vector<unsigned long long>> dp(n + 1, vector<unsigned long long>(amount + 1,0));
+        // 初始化，凑成0元，都只有一种
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 1;
+        }
+        // 外层硬币个数，内层金额， 求组合数
+        for (int i = 1; i <= n; i++) { // 这个硬币我用不用？可以用多次
+            // 反之，从大到小便利，即为01背包的特点，每个物品最多只能用一次
+            // 从小大，每个物品可以用多次
+            for (int j = 1; j <= amount; j++) { // 
+                if (coins[i-1] <= j) {
+                    // 不用这个数 + (用这个数 + 组成另一半的个数)
+                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]];
+                }else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+
+        return dp[n][amount];
+    }
+};
+```
+
