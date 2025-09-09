@@ -1,3 +1,6 @@
 <!-- docs/LearnNotes/ROS2/_sidebar.md -->
 
-* [ROS2入门](LearnNotes/ROS2/ROS2FirstTouch)
+* [初识ROS2](LearnNotes/ROS2/ROS2FirstTouch)
+* [DDS](LearnNotes/ROS2/DDS)
+* [ethercat](LearnNotes/ROS2/ethercat)
+* [TSN](LearnNotes/ROS2/TSN)

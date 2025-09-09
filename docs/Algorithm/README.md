@@ -4,3 +4,6 @@
 
 TODO: 这里写一些链接
 
+- [LeetCode](https://leetcode.cn/)
+- [AcWing](https://www.acwing.com/about/)
+
