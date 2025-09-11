@@ -869,7 +869,7 @@ public:
 
 ## 完全背包
 
-## 518. 零钱兑换 II
+### 518. 零钱兑换 II
 
 [518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/)
 
@@ -907,4 +907,41 @@ public:
     }
 };
 ```
+
+---
+
+### 377. 组合总和 Ⅳ
+
+[377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/)
+
+> 思路
+
+- 不要纠结，哪个好理解就理解哪个。
+- `if (dp[i] > INT_MAX) dp[i] = INT_MAX;  // 剪枝操作 防止溢出`
+- 注意求排列数和求组合数在完全背包中的不同
+  - 排列数 外层背包内层物品(本题)；
+  - 组合数 反之；
+
+```c++
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        int n = nums.size();
+        vector<long long> dp(target+1, 0);
+        dp[0] = 1;
+        for(int i = 1; i <= target; i++) {
+            for (int j = 0; j < n; j++) {
+                if ( i - nums[j] >= 0) {
+                    // 选这个数，累加能组成另一半的个数
+                    dp[i] += dp[i - nums[j]];
+                    if (dp[i] > INT_MAX) dp[i] = INT_MAX;  // 剪枝 防止溢出
+                }
+            }
+        }
+        return dp[target];
+    }   
+};
+```
+
+---
 
