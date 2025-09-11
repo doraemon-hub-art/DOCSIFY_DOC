@@ -611,3 +611,27 @@ target_link_libraries(app PRIVATE utils)   # app 依赖 utils，自动继承 cor
 
 
 
+---
+# lambda表达式无法显示捕获类私有方法，直接捕获this即可
+
+把成员变量按 局部变量名 捕获，这在 C++ 里是非法的，因为 成员变量 不是独立的局部变量，而是 this->成员变量。
+
+**捕获 `this` 指针**
+
+- 写法：`[this]` 或 `[=]`（隐式包含 `this`）。
+- 含义：捕获当前对象指针 → 在 Lambda 内可以访问对象的所有成员（包括私有成员）。
+
+```C++
+class A {
+    int x = 42;
+public:
+    void f() {
+        auto lam = [this]() {
+            return x; // 合法，访问 this->x
+        };
+    }
+};
+```
+
+---
+

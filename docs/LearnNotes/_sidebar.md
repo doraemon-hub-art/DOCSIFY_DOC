@@ -4,3 +4,5 @@
 * [ROS2](LearnNotes/ROS2/)
 * [C++](LearnNotes/Cpp/) 
 * [Network](LearnNotes/Network/)
+* [设计模式](LearnNotes/DesignPattern/)
+* [Linux](LearnNotes/Linux/)
