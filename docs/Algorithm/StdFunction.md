@@ -101,3 +101,83 @@ int main() {
 }
 ```
 
+---
+
+# std::any_of(C++11) 和 ranges::any_of(C++20) 
+
+## std::any_of(C++11)
+
+检查 **区间 `[first, last)` 中是否存在至少一个元素** 使得谓词 `p(element)` 返回 `true`。
+
+- 如果找到这样的元素，返回 `true`；
+- 如果遍历结束都没有找到，返回 `false`。
+
+> 函数原型
+
+```C++
+template< class InputIt, class UnaryPredicate >
+bool any_of(InputIt first, InputIt last, UnaryPredicate p);
+```
+
+**`first, last`**
+ 输入迭代器，表示要检查的序列范围。
+
+**`p`**
+ 一元谓词（函数、函数对象或 lambda 表达式），返回 `true` 或 `false`。
+
+> 示例
+
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> nums = {1, 3, 5, -2, 7};
+
+    bool hasNegative = std::any_of(nums.begin(), nums.end(),
+                                   [](int x) { return x < 0; });
+
+    std::cout << std::boolalpha << hasNegative << std::endl; 
+    // 输出 true
+}
+```
+
+---
+
+## ranges::any_of(C++20) 
+
+定义在 `<algorithm>` 但在 **`std::ranges` 命名空间**里（C++20 引入 **Ranges** 库）。
+
+直接接受 **整个容器** 或 **ranges 视图**(划分区间)，而不是一对迭代器。
+
+> 示例
+
+```C++
+#include <algorithm>
+#include <string>
+#include <iostream>
+
+int main() {
+    std::string s = "hello";
+
+    bool res = std::ranges::any_of(s, [](char c) {
+        return c == 'e';
+    });
+
+    std::cout << std::boolalpha << res << std::endl; // true
+    
+    // 切割子区间 -----------------------------------------
+    std::vector<int> v = {1, 2, 3, 4, 5};
+
+    // 只检查前 3 个元素
+    bool res = std::ranges::any_of(v | std::views::take(3), [](int x){
+        return x == 3;
+    });
+
+    std::cout << std::boolalpha << res << std::endl; // true
+}
+```
+
+---
+

@@ -6,3 +6,4 @@
 * [Json](Tools/Json) 
 * [GDB](Tools/GDB) 
 * [NeoVim](Tools/NeoVim) 
+* [LunarVim](Tools/LunarVim)
