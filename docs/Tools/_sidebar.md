@@ -7,3 +7,4 @@
 * [GDB](Tools/GDB) 
 * [NeoVim](Tools/NeoVim) 
 * [LunarVim](Tools/LunarVim)
+* [Git](Tools/Git)
