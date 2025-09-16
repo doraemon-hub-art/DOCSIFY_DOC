@@ -2,5 +2,5 @@
 
 * [初识ROS2](LearnNotes/ROS2/ROS2FirstTouch)
 * [DDS](LearnNotes/ROS2/DDS)
-* [ethercat](LearnNotes/ROS2/ethercat)
+* [ethercat](LearnNotes/ROS2/EtherCAT)
 * [TSN](LearnNotes/ROS2/TSN)
