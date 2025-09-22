@@ -945,3 +945,36 @@ public:
 
 ---
 
+# 贪心
+
+## 45. 跳跃游戏 II
+[45. 跳跃游戏 II](https://leetcode.cn/problems/jump-game-ii/description/)
+
+> 思路
+
+1. 考虑跳到下一步，需要结合位置的下标index和nums[index]的值；
+2. 循环控制的边界，跳到n-1为止即可；
+
+```c++
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        int end = 0; // 当前范围的右边界
+        int ret = 0;
+        int maxPos = 0; // 从开始，维护当前位置可以到达的最大范围
+
+        if (n <= 1) return 0;
+
+        // 到达最后一个位置，不用跳了
+        for (int i = 0; i < n - 1; i++) {
+            maxPos = max (maxPos, i + nums[i]);
+            if (i == end) { // 到达当前最大范围的右边界
+                ret ++;
+                end = maxPos;
+            }
+        }
+        return ret;
+    }
+};
+```

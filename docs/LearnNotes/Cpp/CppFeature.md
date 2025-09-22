@@ -2,7 +2,19 @@
 
 # std::async 异步任务
 
-C++11 引入的一个模板函数，用于**启动异步任务**，并返回一个 `std::future` 对象，用于获取任务结果。它把线程创建和异步结果管理封装起来，非常适合简单的并发场景。
+C++11 引入的一个模板函数，用于**启动异步任务**，并返回一个 `std::future` 对象，用于获取任务结果。它把**线程创建和异步结果管理封装起来**，非常适合简单的并发场景。
+
+> 函数原型
+
+```c++
+std::future<ReturnType> f = std::async(std::launch::policy, func, args...);
+```
+
+**`std::launch::policy`**：启动策略
+
+- `std::launch::async` → 马上创建一个线程开始执行；
+- `std::launch::deferred` → 延迟调用（只有在 `future.get()` 时才执行，且在调用线程里执行）；
+- 默认情况是两者的组合（实现可以选择开新线程，也可以延迟执行）。
 
 > 示例
 
@@ -26,6 +38,8 @@ int main() {
 }
 
 ```
+
+
 
 ---
 
@@ -635,3 +649,86 @@ public:
 
 ---
 
+# 单例模式实现
+
+```c++
+class A {
+public:
+    static A* getInstance() {
+        if (!m_a) {
+            m_a = new A();
+        }
+        return m_a;
+    }
+
+private:
+    A() {}  // 构造函数私有化
+    A(const A&) = delete;
+    A& operator=(const A&) = delete;
+
+    static A* m_a;
+};
+
+// 类外定义并初始化
+A* A::m_a = nullptr;
+
+```
+
+---
+
+# std::optional 空值异常情况
+
+std::optional 是 C++17 引入的模板类，用来表示：“一个值可能存在，也可能不存在”。
+
+> 存储一个类型 T 的变量，或者存储一个空值 nullopt
+
+```C++
+#include <optional>
+#include <string>
+#include <iostream>
+
+int main() {
+    std::optional<std::string> optStr; // 默认空 (nullopt)
+
+    if (optStr.has_value()) {           // 检查是否有值
+        std::cout << "Value: " << optStr.value() << "\n";
+    } else {
+        std::cout << "No value\n";
+    }
+
+    // 赋值
+    optStr = "hello";
+
+    // 另一种访问方式
+    if (optStr) {                       // 与 has_value() 等价
+        std::cout << *optStr << "\n";   // 解引用获取值
+    }
+
+    // 设置为空
+    optStr = std::nullopt;
+}
+```
+
+> 我的问题，当用封装syslog打印的日志宏，打印一个为空的optional变量时，发生了异常情况，但是系统并没有崩溃；
+
+类似于:
+
+```C++
+ std::optional<std::string> str;
+    // std::cout << str.value() << std::endl;
+    syslog(LOG_INFO, "Test null optional str value is: %s", str.value().c_str());
+```
+
+程序并没有终止并抛出如下异常:
+
+```bash
+terminate called after throwing an instance of 'std::bad_optional_access'
+  what():  bad optional access
+Aborted (core dumped)
+```
+
+业务代码中中没有try catch的地方，chatgpt帮忙分析，可能是系统哪个底层框架注册了 set_terminate，然后这个没人捕获的异常被别的`hook`给吃掉了。他并没有让程序崩溃。
+
+---
+
+# 环形缓冲区的实现
