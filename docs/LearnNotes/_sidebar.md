@@ -6,3 +6,4 @@
 * [Network](LearnNotes/Network/)
 * [设计模式](LearnNotes/DesignPattern/)
 * [Linux](LearnNotes/Linux/)
+* [Other](LearnNotes/Other)
