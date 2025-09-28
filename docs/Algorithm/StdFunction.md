@@ -181,3 +181,55 @@ int main() {
 
 ---
 
+# abs
+
+> 求绝对值
+
+abs 在 C++ 里有好几个重载版本：
+
+```C++
+int abs(int)
+
+long abs(long)
+
+long long abs(long long)（C++11 之后才有）
+```
+
+如果代码需要兼容性，或者编译环境没开 C++11，abs(long long) 可能不存在。
+所以有些人会直接用 llabs 来确保处理的是 long long。
+
+> 一个求绝对值的异常情况
+
+```C++
+int numerator = INT_MIN;  // -2147483648
+int denominator = 1;
+```
+
+abs(INT_MIN) 是 未定义行为（因为 INT_MIN 的绝对值超出了 int 的范围）。
+
+---
+
+# ranges::lower_bound
+
+> 这是 C++20 引入的 ranges 版本的二分查找，在 <algorithm> 里。
+> 它跟传统的 std::lower_bound 类似，但是用起来更简洁，可以直接和 ranges 语法配合。
+
+> 搜索目标。lower_bound 会返回一个迭代器，指向 第一个大于等于 sum 的元素。
+
+- 如果找到恰好等于 sum 的值，返回它的位置；
+
+- 如果找不到，返回的迭代器指向 大于 sum 的第一个元素；
+
+- 如果没有大于等于 sum 的元素，则返回 nums.end();
+
+> 示例:
+
+```c++
+std::vector<int> nums = {1, 3, 5, 7, 9};
+int j = 1; // nums[j] = 3
+int target = 6;
+
+auto it = ranges::lower_bound(nums.begin() + j + 1, nums.end(), target);
+// 搜索区间是 [nums.begin()+2, nums.end()) => {5, 7, 9}
+// lower_bound(6) => 指向 7
+```

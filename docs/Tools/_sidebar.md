@@ -8,3 +8,5 @@
 * [NeoVim](Tools/NeoVim) 
 * [LunarVim](Tools/LunarVim)
 * [Git](Tools/Git)
+* [Valgrind](Tools/Valgrind)
+* [Audio](Tools/Audio)

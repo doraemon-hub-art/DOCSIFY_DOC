@@ -978,3 +978,67 @@ public:
     }
 };
 ```
+
+---
+
+## 976. 三角形的最大周长
+
+> 最近的日题，连续的出现了几次三角形的题目，做个简单的记录
+
+[976. 三角形的最大周长](https://leetcode.cn/problems/largest-perimeter-triangle/description/)
+
+> 思路： 排序，组成合法三角形，然后计算周长；
+
+```C++
+class Solution {
+public:
+    int largestPerimeter(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int ret = 0;
+        int n = nums.size();
+        for (int i = 0; i < n-2; i++) {
+            for (int j = i + 1; j < n-1; j++) {
+                int sum = nums[i] + nums[j];
+                // 找到第一个大于等于sum的
+                auto it = ranges::lower_bound(nums.begin() + j + 1, nums.end(),
+                    sum);
+                // 思路1: 收缩区间一个一个遍历
+                // 得从begin() + j + 1,到 it 遍历
+                // for (auto lit = nums.begin() + j + 1; lit != it; lit++) {
+                //     ret = max(ret, sum + *lit);
+                // }
+                // 思路2: 优化
+                // 不用，直接在合法范围内，拿到最大的第三条边计算即可
+                // nums.begin() + j + 1 为第一个 >= sum的，我们要去合法的第三边是 < sum 的
+                // 所以如果返回的右边第一个就是不合法的，就没戏了
+                if (it != nums.begin() + j + 1) {
+                    ret = max(ret, sum + *(it-1));
+                }
+            }
+        }
+        return ret;
+    }
+};
+```
+
+> 优化: 排序，逆向遍历，尽可能的选取最大的三条边
+
+任意两边之和大于第三边
+即：a + b > c，b + c > a，c + a > b
+因为排序后我们可以保证 a ≤ b ≤ c，只需要检查 a + b > c 就够了。
+
+```C++
+class Solution {
+public:
+    int largestPerimeter(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        for (int i = n - 1; i >= 2; i--) {
+            if (nums[i] < nums[i-1] + nums[i-2]) {
+                return nums[i] + nums[i-1] + nums[i-2];
+            }
+        }
+        return 0;
+    }
+};
+```
