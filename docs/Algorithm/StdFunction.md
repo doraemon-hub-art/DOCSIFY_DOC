@@ -233,3 +233,14 @@ auto it = ranges::lower_bound(nums.begin() + j + 1, nums.end(), target);
 // 搜索区间是 [nums.begin()+2, nums.end()) => {5, 7, 9}
 // lower_bound(6) => 指向 7
 ```
+
+> 时空复杂度 —— 二分查找
+
+时间复杂度 
+\[
+T(n) = O(\log n)
+\]
+空间复杂度
+\[
+O(1)
+\]

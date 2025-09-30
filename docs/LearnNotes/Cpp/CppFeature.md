@@ -804,3 +804,6 @@ int main(void) {
 
 ---
 
+#
+
+在录音线程里调用回调（比如 callback(buffer, size)）时，建议用局部拷贝方式：
