@@ -20,5 +20,15 @@ git config --global credential.helper store
 git clone https://github.com/doraemon-hub-art/MY_LUNARVIM_CONFIG.git ~/.config/lvim
 ```
 
+---
+
+> win10大小写不敏感导致的冲突问题
+
+```bash
+# 告诉git区分大小写
+git config core.ignorecase false  
+```
+
+- 但这样只是解决了git的冲突，但是win10文件系统，还是需要手动开启目录级的大小写敏感；
 
 

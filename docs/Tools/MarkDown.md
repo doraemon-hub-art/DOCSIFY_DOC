@@ -35,11 +35,4 @@ Typora VsCode 插件等
 
 # 基本语法
 
-> 删除操作
-
-~~删除~~
-
-```bash
-~~内容~~
-```
-
+> 详见官方文档 —— https://markdown.com.cn/basic-syntax/
