@@ -1042,3 +1042,32 @@ public:
     }
 };
 ```
+
+---
+
+## 11. 盛最多水的容器
+
+[11. 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water)
+
+> 双指针，左右移动，收缩较小的一边
+
+```C++
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n = height.size();
+        int left = 0;
+        int right = n - 1;
+        int ret = 0;
+        while (left < right) {
+            ret = max(ret, min(height[left], height[right]) * (right - left));
+            if (height[left] < height[right]) left ++;
+            else right --;
+        }
+        return ret;
+    }
+};
+```
+
+---
+
