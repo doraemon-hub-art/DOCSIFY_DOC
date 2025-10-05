@@ -1071,3 +1071,67 @@ public:
 
 ---
 
+# DFS
+
+## 417. 太平洋大西洋水流问题
+
+[417. 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow)
+
+> 从边界出发，然后取双方交集
+
+```C++
+class Solution {
+public:
+    // 四个方向上 x y 坐标的变化
+    const int dx[4] = {1,-1,0,0};
+    const int dy[4] = {0,0,-1,1};
+    int n;
+    int m;
+
+    void dfs(vector<vector<int>>& heights, 
+            vector<vector<bool>>& visited,
+            int x, int y) {
+        if (visited[x][y]) return ; // 访问过了直接返回
+        visited[x][y] = true;
+        for (int i = 0; i < 4; i++) { // 四个方向上的移动
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue; // 越界
+            // 反过来的，所以要找更大的
+            if (heights[x][y] > heights[nx][ny]) continue; // 更小的return
+            dfs(heights, visited, nx, ny);
+        }
+    }
+
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        n = heights.size();
+        m = heights[0].size();
+        // 左边 + 上边
+        vector<vector<bool>> pacific = vector<vector<bool>>(n, vector<bool>(m, false));
+        // 右边 + 下边
+        vector<vector<bool>> atlantic = vector<vector<bool>>(n, vector<bool>(m, false));
+        
+        for (int i = 0; i < m; i++) {
+            dfs (heights, pacific, 0, i);
+            dfs (heights, atlantic, n-1, i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            dfs (heights, pacific, i, 0);
+            dfs (heights, atlantic, i, m-1);
+        }
+        
+        vector<vector<int>> ret;
+        
+        // 两个洋都能到达
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (pacific[i][j] && atlantic[i][j]) {
+                    ret.push_back({i, j});
+                }
+            }
+        }
+        return ret;
+    }
+};
+```
