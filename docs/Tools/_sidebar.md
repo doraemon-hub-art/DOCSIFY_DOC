@@ -1,6 +1,6 @@
 <!-- docs/Tools/_sidebar.md -->
 
-* [Latex](Tools/Latex) 
+* [LaTex](Tools/LaTex) 
 * [PlantUML](Tools/PlantUML) 
 * [CMake](Tools/CMake) 
 * [Json](Tools/Json) 
