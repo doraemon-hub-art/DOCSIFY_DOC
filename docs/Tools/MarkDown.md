@@ -6,7 +6,8 @@
 
 > 可以新建哔哩哔哩【开发工具】or 【工具】视频专栏。
 
-本文对应视频 —— []()
+本文对应视频 —— [【工具】MarkDown的入门指北](https://www.bilibili.com/video/BV1eVxiz6Evg/?share_source=copy_web&vd_source=ada30d7f7831e09a49f20956452f6da9)
+
 # 
 # 前言
 
@@ -120,7 +121,7 @@ MarkDown中，首行缩进的格会被吞掉，文字中的连续空格会被折
 首行缩进，可以这个实现:
 
 ```bash
-emsp;&emsp; 
+&emsp;&emsp; 
 ```
 
 ---
@@ -188,9 +189,9 @@ $O(\log n)$
 独立公式更适合复杂公式或强调公式。
 
 例如:
- $$
+$$
     O(logn)
- $$
+$$
 
 ```latex
 $$
@@ -222,3 +223,4 @@ $$
 当然你也可以关注我的博客 —— [半生瓜のblog](banshengua.top)，或是笔记分站 —— [半生瓜のdoc](doc.banshengua.top)
 
 感谢你的收看，我们下期再见。
+
