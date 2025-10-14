@@ -7,3 +7,4 @@
 * [设计模式](LearnNotes/DesignPattern/)
 * [Linux](LearnNotes/Linux/)
 * [Other](LearnNotes/Other)
+* [JavaScript](LearnNotes/JavaScript)

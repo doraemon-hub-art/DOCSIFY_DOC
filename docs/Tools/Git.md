@@ -31,4 +31,6 @@ git config core.ignorecase false
 
 - 但这样只是解决了git的冲突，但是win10文件系统，还是需要手动开启目录级的大小写敏感；
 
+---
+
 
