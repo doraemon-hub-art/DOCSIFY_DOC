@@ -25,10 +25,21 @@ sudo apt-get install graphviz
 - 例如:
 
 ```bash
+# download rom github.com/plantuml/plantuml/releases/
+
 /home/xuan/workspace/package/plantuml/plantuml-1.2025.8.jar
 ```
 
-> test
+> tips
+
+- 避免大小写切换，可以只用英文小写；
+- 自动标记每一步的序号 autonumber；
+- 注释，在交互行下 note left(riht): some info；
+- 消息注释/换行，消息中添加 \n ；
+- 
+> test case
+
+文件扩展名 .puml
 
 ```plantuml
 @startuml
