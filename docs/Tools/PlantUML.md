@@ -4,9 +4,29 @@
 
 > [PlantUML中文文档](https://plantuml.com/zh/)
 
-> [Ubuntu PlantUML VsCode配置](https://blog.csdn.net/yinhezhanshen/article/details/147940372)
+> [Ubuntu PlantUML VsCode配置]
 
-- 补充: "Ctrl + ," 打开设置 搜索 markdown-preview-enhanced.plantumlJarPath， 配置路径
+- https://blog.csdn.net/yinhezhanshen/article/details/147940372
+- https://blog.csdn.net/weixin_41111116/article/details/129582436
+
+`快速配置`
+
+```bash
+sudo apt-get install openjdk-8-jdk
+sudo apt-get install graphviz
+
+# VSCode 安装插件 PlantUML
+``` 
+
+> 补充: MarkDown增强渲染PlantUML 
+
+- "Ctrl + ," 打开设置 搜索 markdown-preview-enhanced.plantumlJarPath， 配置路径
+
+- 例如:
+
+```bash
+/home/xuan/workspace/package/plantuml/plantuml-1.2025.8.jar
+```
 
 > test
 
