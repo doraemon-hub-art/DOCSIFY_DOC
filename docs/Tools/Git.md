@@ -33,4 +33,14 @@ git config core.ignorecase false
 
 ---
 
+# 概念补充
+
+## 常见的代码提交平台
+
+TODO: gitlab buket...
+
+---
+
+## PR和MR的区别
+
 
