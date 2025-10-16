@@ -1,7 +1,7 @@
-// 随便打印一些东西
-// console.log("Hello, World!");
-// console.log(1 + 3.14);
-// console.log(16 + "Volvo") // 16Volvo
+// 随便打印一些东西,写到控制台
+console.log("Hello, World!");
+console.log(1 + 3.14);
+console.log(16 + "Volvo") // 16Volvo
 
 
 
@@ -16,3 +16,7 @@
 // server.listen(3000, () => {
 //     console.log('Server running at http://localhost:3000/');
 // });
+
+var testStr = 'Test';
+var testStrDouble = "Test";
+
