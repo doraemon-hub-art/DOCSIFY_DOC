@@ -103,15 +103,53 @@ ROS 2 为了支持同步 RPC 风格的调用（像 C/S 模型），在 DDS 的�
 
 ---
 
-# Qos策略
-
-
+## Qos策略
 
 
 
 ---
 
-## FastDDS
+## RTPS
+
+>  **RTPS = Real-Time Publish-Subscribe protocol**
+
+DDS 的底层 wire protocol，也就是 **DDS 节点之间实际在网络上发送消息的格式和规则**。
+
+- 可以理解为：DDS 是规范（API + QoS + 数据模型），RTPS 是规范里规定的**在网络上通信的语言**。
+- RTPS 是 OMG（Object Management Group）标准的一部分
+
+> 主要作用：
+
+- **互操作**：不同厂商的 DDS 实现（RTI、Fast DDS、Cyclone DDS）可以通过 RTPS 互通。
+
+- **发布/订阅机制**：它定义了数据如何从 Publisher 发送到 Subscriber。
+
+- **发现机制（Discovery）**：
+
+  - DDS 节点启动时，会广播自己的信息（Participant announcement）
+
+  - RTPS 帮助 Publisher/Subscriber 找到彼此，不需要人工配置 IP。
+
+- **支持 QoS**：可靠性（Reliable）、时间约束（Deadline）、寿命（Lifespan）等策略，都通过 RTPS 实现。
+
+> 工作方式：
+
+- 基于UDP；
+  - 实时性要求高；
+  - 对于可靠性要求，可以在应用层自己实现重传；
+- 数据包格式固定：包括 **Header + Submessage list**：
+  - Header：描述消息类型、版本、GUID 等
+  - Submessage：可以是数据（Data）、心跳（Heartbeat）、发现信息（Participant/Writer announcement）
+
+---
+
+# FastDDS
+
+[1. Introduction - 3.3.0](https://fast-dds.docs.eprosima.com/en/stable/fastddsgen/introduction/introduction.html)
+
+> 以FastDDS为入口，开始学习。
+
+
 
 
 

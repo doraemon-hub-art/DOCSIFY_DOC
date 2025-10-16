@@ -47,6 +47,7 @@ int main() {
 
     // 4. epoll 循环
     while (true) {
+        // 10 不是固定值，指定每次取出来的就绪事件个数
         epoll_event events[10];
         int nfds = epoll_wait(epfd, events, 10, -1); // 阻塞等待
         if (nfds == -1) {
