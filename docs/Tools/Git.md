@@ -37,10 +37,17 @@ git config core.ignorecase false
 
 ## 常见的代码提交平台
 
-TODO: gitlab buket...
+- GitHub: 全球最流行的代码托管平台，支持Git版本控制。广泛用于开源项目和团队合作。
+
+- GitLab: 提供类似GitHub的功能，但强调企业级的私有部署。GitLab还集成了CI/CD、监控和其他DevOps功能。
+
+- Bitbucket: 主要用于私有仓库，支持Git和Mercurial（虽然Mercurial已经逐步停止支持）。在团队开发中较为常用。
 
 ---
 
 ## PR和MR的区别
 
-
+术语差异: PR 和 MR 只是不同平台的不同命名，功能上没有本质区别，都是用于将某个分支的修改合并到目标分支中。
+平台差异:
+    - GitHub、Bitbucket 使用 PR (Pull Request);
+    - GitLab 使用 MR (Merge Request);

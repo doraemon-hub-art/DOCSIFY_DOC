@@ -20,3 +20,16 @@ console.log(16 + "Volvo") // 16Volvo
 var testStr = 'Test';
 var testStrDouble = "Test";
 
+function outer() {
+    let count = 0;  // 外部函数的局部变量
+    return function inner() {
+        count++;  // 内部函数修改外部函数的变量
+        console.log(count);
+    };
+}
+
+const counter = outer();
+
+counter(); // 1
+counter(); // 2
+counter(); // 3
