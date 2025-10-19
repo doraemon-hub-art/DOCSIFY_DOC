@@ -1,6 +1,7 @@
 <!-- index.html -->
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,14 +11,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
   <!-- 引入官方主题 -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css"></head>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 
   <!-- 图标设置 -->
   <link rel="icon" href="./res/doraemon.png" type="image/x-icon">
 
+  <!-- gittalk评论 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+
+  <!-- gittalk评论框样式，包括大小xx -->
+  <style>
+    #gitalk-container {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eaeaea;
+      max-width: 800px;
+      min-height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
 <body>
   <div id="app"></div>
+  <!-- gittalk容器 -->
+  <div id="gitalk-container"></div>
+
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   
+  <!-- 搜索插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- 图片点击放大插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- 复制代码插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <!-- 侧边栏？-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- LaTeX -->
+  <!-- MathJax -->
+  <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
+  <!-- PlantUML -->
+  <script src="//unpkg.com/docsify-plantuml/dist/docsify-plantuml.min.js"></script>
+  <!-- Top Button -->
+  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+  <!--  gittalk评论 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
 
   <!-- 侧边栏配置 -->
   <script>
@@ -54,30 +100,46 @@
           right: 15,
           bottom: 15,
           offset: 500
-      }
+      },
+      
+      // 设置评论区在文章尾部再渲染
+      // Docsify 提供了一个 plugins 配置项（数组），
+      // 你可以在其中注册自己的插件函数：
+      plugins: [
+        function (hook, vm) {
+          // Docsfiy官方提供的钩子函数，代表页面渲染完毕。
+          // 开始加载评论组件
+          hook.doneEach(function() {
+            // 清理旧的评论容器
+            const old = document.getElementById('gitalk-container')
+            if (!old) return
+            
+            // 清空
+            // container.innerHTML = ''
+
+            // 新建容器并插入页面底部
+            const container = document.createElement('div')
+            container.id = 'gitalk-container'
+            container.style = 'margin-top: 40px;'
+            const main = document.querySelector('.content')
+            if (main) main.appendChild(container)
+
+            // 渲染 Gitalk
+            const gitalk = new Gitalk({
+              clientID: 'Ov23li0j0ufY2Mh2OpcT',
+              clientSecret: '96313e715632b6a82e51941f2df40c0a5168601b',
+              repo: 'DOCSIFY_DOC',  // 存放评论的仓库
+              owner: 'doraemon-hub-art',  // 仓库的创建者，
+              admin: ['doraemon-hub-art'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+              title: `Document comment ${location.hash.match(/#(.*?)([?]|$)/)[1]}`,
+              id: location.hash.match(/#(.*?)([?]|$)/)[1],  // 可以取到正常的pathname，也可以作为页面的唯一标识
+              distractionFreeMode: false  // Facebook-like distraction free mode
+            })
+            gitalk.render('gitalk-container')
+          })
+        }
+      ]
     }
-
   </script>
-
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- 搜索插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-
-  <!-- 图片点击放大插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-  
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-
-  <!-- LaTeX -->
-  <!-- MathJax -->
-  <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
-  <!-- PlantUML -->
-  <script src="//unpkg.com/docsify-plantuml/dist/docsify-plantuml.min.js"></script>
-  <!-- Top Button -->
-  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
 </body>
 </html>
