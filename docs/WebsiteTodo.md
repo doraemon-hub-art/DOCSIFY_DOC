@@ -9,4 +9,46 @@
     - 空的文件会NOT FOUND;
 - 有没有插件可以在markdown代码块中运行代码？
 - 记录一些在linux下有关的好用的小技巧 (类似于 rm 命令也将文件放到回收站)；
-- 
+- vscode安装todo插件，这样方便在文档中添加代办，并在左侧目录树可以很直观的看到哪里需要补充；
+
+---
+
+> 修改提交格式表 Conventional Commits
+
+为了规范一下这个仓库的提交格式，保持一个良好的Git提交习惯，如下为提交说明。
+
+- 示例:
+  
+```bash
+
+update/add/...(目录): 一句话概括
+
+- 一些说明
+- 另一些说明
+- ......
+```
+
+```bash
+update(tools): 更新多篇工具类笔记内容
+
+- 更新了 AWSCloud.md、Git.md、WebsiteTodo.md，
+- 补充了相关配置与使用说明。
+
+```
+
+- 说明
+
+| 类型 | 用途说明 | 示例 |
+|------|-----------|------|
+| **feat** | 新增内容（文章、模块） | `feat(note): 新增 AWS Lambda 教程` |
+| **fix** | 修复问题（链接错误、错别字、格式） | `fix(blog): 修复图片加载失败` |
+| **docs** | 修改说明文档、README、项目介绍 | `docs(readme): 更新博客部署命令` |
+| **style** | 排版调整，不涉及内容修改 | `style(markdown): 调整标题层级与间距` |
+| **refactor** | 重构结构（如分类、标签调整） | `refactor(structure): 拆分前端与后端笔记` |
+| **chore** | 维护性改动（配置、构建、依赖） | `chore(config): 更新 gitignore` |
+| **ci** | CI/CD 相关配置修改 | `ci(hugo): 修复自动构建失败` |
+| **perf** | 性能优化（少见于博客） | `perf(build): 减少静态资源加载体积` |
+| **update** | 通用的内容更新（笔记修改、补充） | `update(tools): 更新 AWSCloud、Git 笔记内容` |
+| **add** | 新增文章或章节 | `add(blog): 新增 Alexa 技能集成笔记` |
+| **remove** | 删除旧内容 | `remove(note): 删除过时的配置章节` |
+
