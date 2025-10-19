@@ -4,6 +4,8 @@
 
 > [PlantUML中文文档](https://plantuml.com/zh/)
 
+> PlantUML 为创建序列图提供了一种强大而高效的方法。它强调简洁和精确，对于任何希望轻松制作清晰准确图表的人来说，都是一笔宝贵的财富。 —— From PLantUML官方文档
+
 > [Ubuntu PlantUML VsCode配置]
 
 - https://blog.csdn.net/yinhezhanshen/article/details/147940372
@@ -37,7 +39,7 @@ sudo apt-get install graphviz
 - 注释，在交互行下 note left(riht): some info；
 - 消息注释/换行，消息中添加 \n ；
 - 
-> test case
+> test 时序图
 
 文件扩展名 .puml
 
@@ -56,11 +58,25 @@ Alice <-- Bob: another authentication Response
 > test 活动图
 
 ```plantuml
+@startuml
 
+start
+
+:input number;
+
+if (number > 10) then (yes)
+  :process all diagrams;
+else (no)
+  :process only <<sequence>> and <<activity>> diagrams;
+endif
+
+stop
+
+@enduml
 ```
 
 ---
 
 > TODO: 整理出第二篇文章，同样为 《入门指北》系列，要不要想个新名字？这太普遍了......
 
-不过这篇文章在短时间内不会出来，我需要多画一些，从而用熟练，用法不用全讲，一个活动图，一个时序图？即可。
+不过这篇文章在短时间内不会出来，我需要多画一些，从而用熟练，用法不用全讲，一个活动图，一个时序图？+ 类图即可。
