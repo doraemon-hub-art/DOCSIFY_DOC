@@ -13,5 +13,5 @@
 * [WebVscode](Tools/WebVscode)
 * [MarkDown](Tools/MarkDown)
 * [VSCodeTips](Tools/VSCodeTips)
-* [AWSCloud](Tools/AWSCloud)
+* [AWS](Tools/AWS)
 * [Docsify](Tools/Docsify)

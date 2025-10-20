@@ -61,3 +61,29 @@ done
 ```bash
 pmap -x <pid> | sort -k3 -n | tail -10
 ```
+
+---
+
+## lsof
+
+> list open files
+
+用于显示当前系统中所有打开的文件和与之相关的进程信息。
+
+> 常用功能
+
+- 查看端口占用
+
+```bash
+lsof -i:port
+```
+
+- 查看进程打开的文件
+
+```bash
+lsof -p process_id
+```
+
+......
+
+---
