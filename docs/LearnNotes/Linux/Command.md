@@ -1,3 +1,7 @@
+> 记录一些开发&调试过程中会用到的一些命令。
+
+---
+
 # memory
 
 ## /proc 目录
@@ -63,6 +67,8 @@ pmap -x <pid> | sort -k3 -n | tail -10
 ```
 
 ---
+
+# process
 
 ## lsof
 
