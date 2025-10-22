@@ -20,9 +20,7 @@ JavaScript 是基于 ECMAScript 标准的，ES6 是这个标准的一个版本�
 
 ---
 
-
-
-> JS 版本查看
+##  JS 版本查看
 
 可以根据Node.js的版本和浏览器支持的ECMAScrip标准来查看JS版本
 
@@ -156,16 +154,62 @@ fcuntion testFunc(a, b) {
 
 > .mjs 和 .js 的区别 ？
 
-> 本地编译检查语法错误
-
+> 本地编译检查语法错误 ？ 
 
 ```bash
 node xxx.mjs
 ```
 
-......
+---
+
+## request 和 axios
+
+都是用于发送 HTTP 请求的 Java式库。
+
+> axios
+
+目前 axios 是一个活跃的项目，得到社区的广泛支持和维护。它是一个基于 Promise 的 HTTP 客户端，提供了很多现代化的功能。
+
+基于 Promise 的，这意味着它原生支持 async/await 语法，使得处理异步请求时更加简洁和易读。Promise 使得链式调用变得容易，且与现代 JavaScript 语法更加兼容。
+
+```js
+// 使用 axios 的 async/await 示例
+const response = await axios.get('https://api.example.com');
+```
+
+> request
+
+request 库曾经非常流行，但官方已经宣布从 2020 年 2 月开始不再维护，并建议用户迁移到其他库（如 axios）。
+
+基于 回调函数（callback），虽然它也支持 Promise 通过 request-promise 库，但原生是基于回调的。这在现代 JavaScript 开发中显得有些过时，且回调函数容易导致 回调地狱。
+
+```js
+// 使用 request 的回调函数示例
+request.get('https://api.example.com', (err, response, body) => {
+  if (err) { console.error(err); return; }
+  console.log(body);
+});
+```
 
  ---
+
+ ## fast-fuzzy
+
+ 模糊匹配
+ 
+ 官方文档 —— https://www.npmjs.com/package/fast-fuzzy
+
+ > demo
+
+ ```js
+import { fuzzy } from "fast-fuzzy";
+
+const similarityScore = fuzzy("front yard", "Bacj Yard");
+
+console.log(similarityScore);
+ ```
+
+---
 
 
 
