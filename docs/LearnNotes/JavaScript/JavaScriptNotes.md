@@ -211,6 +211,68 @@ console.log(similarityScore);
 
 ---
 
+## package.json
+
+package.json 是 Node.js 项目的配置文件，用于定义项目的元数据、依赖项、脚本、版本信息等。
+
+它是 npm（Node.js 包管理工具）和其他构建工具的重要部分。
+
+```json
+{
+  "name": "my-awesome-project",  // 项目名称，npm 包的名称，必须是唯一的
+  "version": "1.0.0",  // 项目版本，遵循语义版本控制（semver）
+  "description": "A project to manage tasks.",  // 简短的项目描述
+  "main": "src/index.js",  // 项目入口文件，通常是应用的启动文件
+  "scripts": {  // 定义可通过 npm run 执行的脚本
+    "start": "node app.js",  // 启动项目的脚本
+    "test": "mocha"  // 测试脚本
+  },
+  "dependencies": {  // 生产环境依赖，项目运行时需要的库
+    "express": "^4.17.1",  // Web 框架
+    "axios": "^0.21.1"  // HTTP 请求库
+  },
+  "devDependencies": {  // 开发环境依赖，仅用于开发和构建
+    "webpack": "^5.38.1",  // 打包工具
+    "jest": "^27.0.6"  // 测试框架
+  },
+  "peerDependencies": {  // 对其他包的兼容版本要求，通常用于插件或库
+    "react": "^16.0.0"  // 项目需要与特定版本的 React 配合使用
+  },
+  "optionalDependencies": {  // 可选依赖，不会阻止安装失败
+    "fsevents": "^2.3.2"  // 用于 MacOS 的文件系统事件监控
+  },
+  "engines": {  // 指定支持的 Node.js 和 npm 版本
+    "node": ">=14.0.0",  // 支持的 Node.js 最低版本
+    "npm": "^6.0.0"  // 支持的 npm 最低版本
+  },
+  "repository": {  // 项目的代码仓库地址
+    "type": "git",
+    "url": "https://github.com/username/project.git"  // Git 仓库 URL
+  },
+  "keywords": [  // 关键字，有助于在 npm 上搜索
+    "node", "express", "api"
+  ],
+  "author": "John Doe",  // 项目的作者
+  "license": "MIT",  // 项目的开源许可证
+  "bugs": {  // 项目的 Bug 跟踪系统
+    "url": "https://github.com/username/project/issues"  // Bug 提交页面
+  },
+  "homepage": "https://github.com/username/project",  // 项目的主页 URL
+  "config": {  // 自定义配置项，npm 或其他工具可以使用
+    "port": "8080"  // 配置项示例，项目所需端口
+  },
+  "private": true,  // 如果为 true，禁止将项目发布到 npm registry
+  "publishConfig": {  // 配置项目发布时的 registry URL
+    "registry": "https://npm.example.com"  // 指定发布到的 npm registry
+  },
+  "dependenciesMeta": {  // 关于依赖项的额外元数据
+    "express": {
+      "optional": true  // 指定某个依赖项为可选
+    }
+  }
+}
+```
+ 
 
 
 
