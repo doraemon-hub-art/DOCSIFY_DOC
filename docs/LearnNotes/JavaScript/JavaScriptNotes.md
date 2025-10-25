@@ -272,8 +272,22 @@ package.json 是 Node.js 项目的配置文件，用于定义项目的元数据�
   }
 }
 ```
- 
 
+---
+
+## 格式化
+
+```bash
+npm i -g prettier
+# package.json中配置
+  "scripts": {
+    "fmt": "prettier --write lambda/**/*.mjs"
+  },
+# 运行
+npm run fmt
+```
+
+---
 
 
 

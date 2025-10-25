@@ -101,3 +101,16 @@ sudo apt install appimagelauncher
 
 ---
 
+# Redshift设置屏幕色温
+
+> 安装
+
+```bash
+sudo apt install redshift
+```
+
+> 例如:
+
+```bash
+redshift -O 5000  # 例如设置色温为 5000K
+```
