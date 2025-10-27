@@ -54,6 +54,12 @@ CloudFormation 允许你通过模板（JSON 或 YAML 格式）来描述所需的
 
 它使得设备能够与云端应用程序进行安全、可靠的数据传输，并实现设备之间的通信。
 
+AWS IoT Core 是一个 MQTT broker（消息中间件），它允许设备与云端的服务进行高效的通信。
+
+AWS IoT Core 允许设备通过 MQTT、HTTP 或 WebSockets 等协议连接到云端，以进行双向通信。
+
+因此，Lambda 函数和 IoT Core 之间的通信方式涉及使用 MQTT 协议，通常通过 IoT Core 的消息主题（topic） 进行交互。
+
 ---
 
 ## Alexa
