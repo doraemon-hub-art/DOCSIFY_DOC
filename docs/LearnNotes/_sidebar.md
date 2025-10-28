@@ -9,5 +9,5 @@
 * [Other](LearnNotes/Other/)
 * [JavaScript](LearnNotes/JavaScript/)
 * [MQTT](LearnNotes/MQTT/)
-* [机器人与自动驾驶](LearnNotes/RobotAndAutoPilot)
-* [软件开发](LearnNotes/SoftWareDev)
+* [机器人与自动驾驶](LearnNotes/RobotAndAutoPilot/)
+* [软件开发指南](LearnNotes/DevGuides/)

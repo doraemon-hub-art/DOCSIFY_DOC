@@ -30,7 +30,7 @@ Amazon Web Services，即亚马逊提供的云计算服务平台，包含了广�
 
 ---
 
-## API Geteway
+## API Gateway
 
 一个托管的 API 服务。用于创建、发布、维护、监控和保护 API。
 
