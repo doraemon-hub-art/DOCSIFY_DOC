@@ -100,11 +100,16 @@ Markdown 是一种轻量级标记语言（Lightweight Markup Language）。
 而且相对于本地文章，你可以更方便的迁移到多个平台。
 
 图片链接都能直接通用，不用再担心路径出错或者图片丢失。
+
 > 配置图床相关设置即可开始使用，例如: 
 
 ![](https://oss.banshengua.top/blogimages/20251005232119.png)
 
 ![](https://oss.banshengua.top/blogimages/20251007173832.png)
+
+> 手机版本的PicGo —— flutter-picgo
+
+仓库地址 —— https://github.com/PicGo/flutter-picgo
 
 ---
 
