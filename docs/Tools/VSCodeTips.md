@@ -16,4 +16,17 @@
 
 ---
 
+> 光标移动效果
+
+来源——[VSCode深度配置 - settings.json](https://juejin.cn/post/7369029201579343887#heading-3)
+
+确实用起来不错，不知道结合VIM插件用起来怎么样？
+不过NEOVIM插件配置本身好像就有光标移动的配置。
+
+```bash
+"editor.smoothScrolling": true,
+"editor.cursorBlinking": "expand",
+"editor.cursorSmoothCaretAnimation": "on",
+"workbench.list.smoothScrolling": true,
+```
 

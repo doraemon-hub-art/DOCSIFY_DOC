@@ -114,3 +114,8 @@ sudo apt install redshift
 ```bash
 redshift -O 5000  # 例如设置色温为 5000K
 ```
+
+---
+
+# 将 rm 命令重定向到回收站中
+
