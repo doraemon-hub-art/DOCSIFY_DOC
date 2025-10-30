@@ -120,6 +120,6 @@ AWS SAM 是基于 AWS CloudFormation 的，并且专门为无服务器应用程�
 
 SAM支持本地调试，使用 sam local invoke 和 sam local start-api 来模拟 Lambda 函数和 API Gateway。
 
-CDK 支持更多的AWS服务源，定义基础设施资源更加灵活
+CDK 支持更多的AWS服务源，定义基础设施资源更加灵活。
 
 ---

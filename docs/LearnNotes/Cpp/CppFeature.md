@@ -804,6 +804,56 @@ int main(void) {
 
 ---
 
-#
+# TODO: 这是啥？继续下方的补充，回顾下这要写啥来着？
+
 
 在录音线程里调用回调（比如 callback(buffer, size)）时，建议用局部拷贝方式：
+
+---
+
+# promise + future 做线程同步
+
+> 示例: 
+
+```c++
+#include <iostream>
+#include <thread>
+#include <future>
+#include <chrono>
+
+
+void doWork(std::promise<int>&& prom) {
+    std::this_thread::sleep_for(std::chrono::seconds(2));  // 模拟耗时操作
+    int result = 42;
+    prom.set_value(result);
+    std::cout << "Task completed and result set." << std::endl;
+}
+
+int main() {
+    // 创建一个 promise 对象，它将在工作线程完成时传递一个整数结果
+    std::promise<int> prom;
+
+    // 从 promise 获取 future，另一个线程会使用它来获取结果
+    std::future<int> fut = prom.get_future();
+
+    // 创建并启动工作线程
+    std::thread worker(doWork, std::move(prom));
+
+    // 主线程等待工作线程完成并获取结果
+    std::cout << "Main thread waiting for result..." << std::endl;
+    int result = fut.get();  // 等待并获取线程的结果
+    std::cout << "Received result: " << result << std::endl;
+
+    // 等待工作线程结束
+    worker.join();
+
+    return 0;
+}
+```
+
+类似于用条件变量+锁的方式来等待某个条件到达，不过pormise + future 的等待方式没有那么多，但是有一点不错。
+就是，不会像光用cv.wait()那样，notify在wait前到达，从而错过消息。
+cv还需要加一个flag用于双重检查。
+
+而当 future.get() 执行时，如果值已经被设置后，则会终止等待。不会错过消息。
+否则，在此阻塞，当值被设置，终止阻塞。

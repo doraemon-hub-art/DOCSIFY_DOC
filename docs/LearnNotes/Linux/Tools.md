@@ -117,5 +117,13 @@ redshift -O 5000  # 例如设置色温为 5000K
 
 ---
 
-# 将 rm 命令重定向到回收站中
+# 带有回收站的删除操作 trash-cli
 
+https://github.com/andreafrancia/trash-cli/blob/master/README_zh-CN.rst
+
+```bash
+#  安装
+sudo apt install trash-cli
+# 文件移动到回收站
+transh-put 
+```
