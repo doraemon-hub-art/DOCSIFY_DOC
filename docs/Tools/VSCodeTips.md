@@ -30,3 +30,15 @@
 "workbench.list.smoothScrolling": true,
 ```
 
+---
+
+> 打开setting.json
+
+```bash
+ctrl + p 
+# 输入 > user setting
+```
+
+![](https://oss.banshengua.top//blogimages/20251102233110433.png)
+
+---
