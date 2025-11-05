@@ -127,3 +127,16 @@ sudo apt install trash-cli
 # 文件移动到回收站
 transh-put 
 ```
+
+---
+
+# 多仓库管理工具 myrepos
+
+https://myrepos.branchable.com/
+
+> 指定某个配置文件进行mr的操作
+
+```bash
+mr -c .mrconfig_test update
+```
+
