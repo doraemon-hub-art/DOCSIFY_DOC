@@ -42,3 +42,12 @@ ctrl + p
 ![](https://oss.banshengua.top//blogimages/20251102233110433.png)
 
 ---
+
+> 文件搜索设置，搜索 use ignore 取消勾选
+
+否则只能搜到打开过的文件
+
+![](https://oss.banshengua.top/blogimages/202511061748923.png)
+
+---
+
