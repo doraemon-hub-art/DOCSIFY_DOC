@@ -71,7 +71,7 @@ Linux下的一种便捷性软件，不用把应用程序安装在文件系统相
 
 ```bash
 # 权限
-chmod + X xx.appimage 
+chmod +x xx.appimage  # 注意小写x，+ 跟chmod空格隔开
 # 安装 fuse 允许非特权用户创建自己的文件系统，对于一些Appimage文件是必须的
 sudo apt update
 sudo apt install fuse
