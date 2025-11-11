@@ -134,9 +134,51 @@ transh-put
 
 https://myrepos.branchable.com/
 
-> 指定某个配置文件进行mr的操作
+> 将myrepos配置文件，添加到信任中，之后mr才能执行.mrconfig中的动作
 
 ```bash
+echo "/home/xuan/workspace/code/test/.mrconfig" >> ~/.mrtrust
+```
+
+> 基本格式
+
+```bash
+# 当前所在文件夹就是一个目录
+[.] 
+checkout = git checkout 
+
+# 指定路径，在此文件夹中执行对应的git操作
+[common_tools]
+checkout = git clone https://github.com/doraemon-hub-art/DOCSIFY_DOC.git
+```
+
+> 指定某个配置文件进行mr的操作 
+
+> mr update
+
+```bash
+# 当执行，mr update时
+# 路径存在，则执行 pull 操作；
+# 路径不存在，则自动回退到 mr checkout 操作，即上面自己配置的拉取操作，如果也没有自定义checkout 配置，则报错；
 mr -c .mrconfig_test update
 ```
 
+> 
+
+
+---
+
+# cache 缓存编译工具
+
+> 安装
+
+```bash
+sudo apt install ccache      # Debian/Ubuntu
+```
+
+> 缓存C/C++ 编译结果，显著加速反复编译的场景。
+
+概述: 第一次编译后，将结果缓存起来，如果源码没变，直接把缓存拿出来用。
+
+
+---
