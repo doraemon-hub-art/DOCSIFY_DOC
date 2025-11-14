@@ -860,3 +860,24 @@ cv还需要加一个flag用于双重检查。
 
 ---
 
+# 一个无聊的话题，抽象类私有化纯虚函数
+
+override 不看访问权限，只看声明可见性。
+
+```C++
+class A {
+private:
+    virtual void foo() = 0;
+};
+
+class B : public A {
+    virtual void foo() override {  /* 可以写实现 */ }
+};
+
+```
+
+但是如果，子类private继承父类，会看不到父类的私有纯虚函数，也就无法继承。
+
+---
+
+
