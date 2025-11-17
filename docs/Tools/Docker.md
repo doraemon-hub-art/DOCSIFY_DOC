@@ -79,3 +79,16 @@ docker rename my-old-container my-new-container
 docker network inspect lambda-network
 ```
 
+---
+
+> 创建容器，并映射本地目录
+
+```bash
+# 宿主机目录:docker内目录
+docker run -it --rm -v /home/xuan/workspace/code/test_project:/workspace ubuntu:20.04
+
+```
+
+---
+
+
