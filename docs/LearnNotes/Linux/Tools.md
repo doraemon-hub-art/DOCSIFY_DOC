@@ -182,3 +182,11 @@ sudo apt install ccache      # Debian/Ubuntu
 
 
 ---
+
+# tar解压命令
+
+> tar.gz
+
+```bash
+tar -xzvf xx.tar.gz -C /target_path
+```

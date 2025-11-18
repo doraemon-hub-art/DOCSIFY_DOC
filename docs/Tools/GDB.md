@@ -160,4 +160,8 @@ coredumpctl list #
 
  # 交叉编译源码在aarch64系统上运行
 
+ 以 gdb-16.3 为例。
+
+ 
+
  
