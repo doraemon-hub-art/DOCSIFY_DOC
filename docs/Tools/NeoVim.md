@@ -7,4 +7,5 @@
 ## 参考
 
 - https://www.cnblogs.com/YunyaSir/p/15523927.html
+- [Install](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 - 

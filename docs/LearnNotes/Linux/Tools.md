@@ -113,6 +113,8 @@ sudo apt install redshift
 
 ```bash
 redshift -O 5000  # 例如设置色温为 5000K
+
+redshift -x # 重置
 ```
 
 ---
