@@ -13,7 +13,6 @@
 * [WebVscode](Tools/WebVscode)
 * [MarkDown](Tools/MarkDown)
 * [VSCodeTips](Tools/VSCodeTips)
-* [AWS](Tools/AWS)
 * [Docsify](Tools/Docsify)
 * [Docker](Tools/Docker)
 * [TOML](Tools/TOML)
