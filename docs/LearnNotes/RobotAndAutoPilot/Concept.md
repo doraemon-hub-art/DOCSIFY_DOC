@@ -164,4 +164,14 @@ Microcontroller Unit —— `微控制单元`的缩写，通常指一种集成�
 - 划分层级命名空间
 - 模糊订阅，例: /robot/sensor/* 
 - 历史传承 —— Unix 把一些都抽象成文件
+
 ---
+
+# GNSS
+
+GNSS 全称是 Global Navigation Satellite System——“全球导航卫星系统”的缩写。
+
+它不是一个单一系统，而是所有全球卫星定位系统的统称。
+
+---
+
