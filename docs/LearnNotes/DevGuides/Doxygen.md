@@ -11,12 +11,11 @@
 > 参考资料
 
 官方文档: 
-—— https://www.doxygen.nl/
-—— https://doxygen.cn/manual/index.html (中文)
+- https://www.doxygen.nl/
+- https://doxygen.cn/manual/index.html (中文)
 
-程序员的自我修养Doxygen (这个网站结构不错) 
-—— https://www.midlane.top/wiki/pages/viewpage.action?pageId=10060993
-
+- 程序员的自我修养Doxygen (这个网站结构不错) —— https://www.midlane.top/wiki/pages/viewpage.action?pageId=10060993
+- 一些Doxygen分享，有一些高级用法 https://mp.weixin.qq.com/s?__biz=Mzg2NjIzMjg2OA==&mid=2247486534&idx=1&sn=e921b167f7fb172d092ae69856b4f990&poc_token=HJqPIWmjbcVFe280asaO-pKN6JORFic6qrpQF5sj
 ---
 
 
