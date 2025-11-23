@@ -27,10 +27,36 @@ sudo apt-get install graphviz
 - 例如:
 
 ```bash
-# download rom github.com/plantuml/plantuml/releases/
+# download from https://plantuml.com/zh/download
 
 /home/xuan/workspace/package/plantuml/plantuml-1.2025.8.jar
 ```
+
+---
+
+> windows？
+
+- 安装 https://www.graphviz.org/download/ ，并添加到环境变量
+- 
+
+---
+
+# 环境配置总结
+
+
+- Java JDK 
+  - PlantUML依赖Java运行时环境来解析和生成UML图；
+    - 必须配置环境变量JAVA_HOME，PlantUML 插件必须读取 JAVA_HOME 来定位 Java 安装目录；
+    - 参考: [](https://www.cnblogs.com/JerryCans/articles/18828364)
+- Graphviz
+  - 渲染图像
+    - 下载: https://graphviz.org/download/
+- PlantUML JAR
+  - 单独使用Plantuml
+    - 下载: https://plantuml.com/zh/download
+- vscode 安装 Plantuml插件，用来 alt + d 快速渲染
+
+---
 
 > tips
 
@@ -88,3 +114,5 @@ stop
 > vscode 复制图片的清晰度
 
 可以多次放大后，然后再点击复制，这样粘贴出来的图片会清晰很多。
+
+---
