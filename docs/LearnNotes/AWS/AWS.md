@@ -22,6 +22,15 @@ Amazon Web Services，即亚马逊提供的云计算服务平台，包含了广�
 
 ---
 
+### 并发场景
+
+> 如何处理？
+
+TODO
+
+
+---
+
 ## Amazon Cognito
 
 `身份和访问管理服务`，专门用于用户身份验证、授权以及用户资料管理。
@@ -85,6 +94,16 @@ Alexa 通过语音识别技术允许用户与设备进行互动，执行各种�
 S3 (Simple Storage Service) 是亚马逊提供的一项 对象存储服务。
 
 它提供了一个高度可扩展、可靠且低成本的方式来存储和检索任何量的数据。S3 允许用户通过互联网上传、下载和管理大量的数据文件（对象），例如文档、图片、视频、备份文件等。
+
+---
+
+## AWS KVS
+
+Amazon KVS是Amazon Kinesis Video Streams的简称, 是亚马逊云科技2017年推出的面向物联网视频领域的全托管服务。
+
+- [官方demo](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c)
+
+---
 
 # 相关工具
 
