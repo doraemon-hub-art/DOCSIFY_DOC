@@ -103,6 +103,8 @@ Amazon KVS是Amazon Kinesis Video Streams的简称, 是亚马逊云科技2017年
 
 - [官方demo](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c)
 
+- https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/getting-started-ingestion.html
+
 ---
 
 # 相关工具
