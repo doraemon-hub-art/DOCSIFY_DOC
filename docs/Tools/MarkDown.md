@@ -248,3 +248,31 @@ $$
 
 ---
 
+> 全局图片格式
+
+方法1: 
+居中，缩放。
+放到md文件开头。
+但是有的编辑器不支持，可选择使用。
+
+```markdown
+<style>
+img {
+    width: 30%;
+    padding-left: 0;       
+    zoom: 50%;
+    position: relative;     /* 或 absolute，看布局 */
+    left: 50%;
+    transform: translateX(-50%);
+}
+</style>
+```
+
+方法2: 
+
+```markdown
+<img src="https://oss.banshengua.top/blogimages/IMG_20251120_222241.jpg"
+     alt="截图"
+     width="30%"
+     style="display:block;margin:0 auto;">
+```
