@@ -6,5 +6,5 @@
 * [工具文档](Tools/)
 * [嵌入式工坊](EmbeddedAtelier/)
 * [网站规划](WebsiteTodo)
-* [其他](PlayGround)
+* [玩耍广场](PlayGround/)
 * [一些有趣项目的分享](SandBox/)

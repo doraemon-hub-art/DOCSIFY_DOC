@@ -85,10 +85,101 @@ CPU直接控制IO引脚。
 
 ![](https://oss.banshengua.top/blogimages/20251129205829.png)
 
-> 四种输入模式
+> 什么是IO引脚的最大输出速度？
+
+向IO引脚交替写0 1 且输出不失帧的最快速度。
+
+> 上升时间 下降时间 保持时间
+
+![](https://oss.banshengua.top/blogimages/20251130161118.png)
+
+保持时间: 输出有效电压的时间。
+
+> 什么限制了IO的最大输出速度？
+
+上升时间，下降时间的长段，影响IO引脚输出速度。
+
+> 最大输出速度应如何选择？
+
+选取满足要求的最小值，过于陡峭得边沿，会增加耗电，并引入EMI问题。
+
+---
+
+### LED 闪灯实验
+
+> 接法
+
+![](https://oss.banshengua.top/blogimages/20251130163559.png)
+
+> 测试代码
+
+```C
+#include "stm32f10x.h"
+#include "delay.h"
+
+int main(void)
+{
+	// open gpioc clock
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+	// 初始化引脚，通用输出开漏模式 2MHz
+	GPIO_InitTypeDef gpio_init_struct = {0};
+	
+	gpio_init_struct.GPIO_Pin = GPIO_Pin_13;
+	gpio_init_struct.GPIO_Mode = GPIO_Mode_Out_OD;
+	gpio_init_struct.GPIO_Speed = GPIO_Speed_2MHz;
+	
+	GPIO_Init(GPIOC, &gpio_init_struct);
+
+	while(1){
+		GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET);
+		Delay(100);
+		GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
+		Delay(100);
+	}
+}
+```
+
+---
+
+## 四种输入模式
 
 - 输入上拉
 - 输入下拉
 - 输入浮空
 - 模拟模式
 
+电流从高电压流向低电压。
+
+施密特触发器，将IO输入进来的高低电压，转换成数组 0 or 1，保存在输入输出寄存器中。
+
+![](https://oss.banshengua.top/blogimages/20251130195042.png)
+
+### 按钮亮灯实验
+
+```C
+#include "stm32f10x.h"
+#include "delay.h"
+
+int main(void)
+{
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+	
+	GPIO_InitTypeDef gpio_init_struct = {0};
+	
+	gpio_init_struct.GPIO_Pin = GPIO_Pin_1;
+	gpio_init_struct.GPIO_Mode = GPIO_Mode_IPU;
+	// 最大输出速度只对输出模式有效
+	// gpio_init_struct.GPIO_Speed = GPIO_Speed_2MHz;
+	 
+	GPIO_Init(GPIOA, &gpio_init_struct);
+	GPIO_WriteBit(GPIOA, GPIO_Pin_0, Bit_SET);
+	while (1) {
+			if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_1) == Bit_RESET) {
+				GPIO_WriteBit(GPIOA,GPIO_Pin_0, Bit_SET);
+			} else {
+				GPIO_WriteBit(GPIOA,GPIO_Pin_0, Bit_RESET);
+			}
+	}
+}
+```
