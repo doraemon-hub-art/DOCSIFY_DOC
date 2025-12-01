@@ -651,6 +651,8 @@ public:
 
 # 单例模式实现
 
+> 经典懒汉模式
+
 ```c++
 class A {
 public:
@@ -673,6 +675,25 @@ private:
 A* A::m_a = nullptr;
 
 ```
+
+> 现代C++写法
+
+```C++
+
+```
+
+## 成员变量必须为指针的情况
+
+如下图所示:
+
+![](https://oss.banshengua.top/blogimages/202512011619655.png)
+
+Class KVSController的成员变量没有默认构造，在调用获取单例类对象，GetInstance时，编译器无法构造成员KVSSignaling，所以可以改成指针成员变量。
+
+以推迟成员变量构造实际，例如放到Init()函数中，对成员变量完成初始化。
+
+指针（包括 std::shared_ptr）默认初始化是 nullptr（空指针），不需要参数，这样 KVSController 就可以被无参构造了。具体的对象创建推迟到 Init 函数里去做。
+
 
 ---
 
@@ -880,4 +901,18 @@ class B : public A {
 
 ---
 
+# bind 和 lambda 
 
+> 使用场景
+
+TODO
+
+---
+
+# 同一个命名空间，区分同名变量
+
+> 例如: 打印日志的logger
+
+TODO
+
+---
