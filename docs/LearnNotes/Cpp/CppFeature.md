@@ -913,7 +913,15 @@ TODO
 
 > 例如: 打印日志的logger
 
-TODO
+在.cpp 文件中，添加匿名空间。
+
+```c++
+namespace test{
+namespace {
+    constexpr const char* LOGGER_ID = "kvs";
+}
+}
+```
 
 ---
 
@@ -925,3 +933,51 @@ strlen 的工作原理是：从传入的内存地址开始，一个字节一个�
 
 ---
 
+# C 语言处理 “未知长度数据” 的标准 “两步走（Two-Pass）” 模式
+
+> 来源: AWS KVS WebRTC C SDK, 格式化数据时的 两次 serializeSessionDescriptionInit 调用
+
+```C++
+RtcSessionDescriptionInit local_sdp_info;
+MEMSET(&local_sdp_info, 0x00, SIZEOF(RtcSessionDescriptionInit));
+
+setLocalDescription(rtc_peer_conn_pointer_, &local_sdp_info);
+ret_status = createAnswer(rtc_peer_conn_pointer_, &local_sdp_info);
+
+UINT32 serializedLen = 0;
+// 第一次调用
+serializeSessionDescriptionInit(&local_sdp_info, NULL, &serializedLen);
+
+char* json_buf = (char*)malloc(serializedLen + 1);
+if (json_buf != NULL) {
+    // 第二次调用
+    serializeSessionDescriptionInit(&local_sdp_info, json_buf, &serializedLen);
+```
+
+其中：
+- 第一次调用，获取吧这个数据，转成JSON所需要的空间大小；
+- 第二次调用，在用第一次获取的长度够，开辟buffer，给SDK调用传递下去，SDK会将格式化后的结果，写入到这个buffer中；
+
+或者直接给最大长度 MAX_SIGNALING_MESSAGE_LEN ，一次调用即可。
+
+---
+
+# 宏不是函数，不会被命名空间限定
+
+> 例如: 在另一个头文件，的同一个命名空间中，再添加一层命名空间，定义一个LOG宏；
+
+调用这个宏的时候，不需要指明任何命名空间，因为命名空间不被空间限定。
+
+```C++
+namespace A {
+    #define MAGIC 42
+}
+
+namespace B {
+    int x = MAGIC;   // 啪！直接展开成 42
+}
+```
+
+像一只藏在角落乖乖睡觉的小猫。
+
+---
