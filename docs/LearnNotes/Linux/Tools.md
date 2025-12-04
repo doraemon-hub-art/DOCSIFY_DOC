@@ -192,3 +192,16 @@ sudo apt install ccache      # Debian/Ubuntu
 ```bash
 tar -xzvf xx.tar.gz -C /target_path
 ```
+
+---
+
+# 统计文件行数
+
+```bash
+wc -l file_name 
+# or multi-file
+wc -l ./* 
+```
+
+---
+

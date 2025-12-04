@@ -1,5 +1,7 @@
 > 本文，我们将遵循着上来就用的原则，直接找一个现成的拉下来，然后学会使用，之后完善自己的配置。
 
+> 总是间接性地想用一下vim，总是用鼠标太麻烦了，编码一点都不连贯。
+
 ---
 
 # VSCode NeoVim
@@ -8,4 +10,4 @@
 
 - https://www.cnblogs.com/YunyaSir/p/15523927.html
 - [Install](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-- 
+  
