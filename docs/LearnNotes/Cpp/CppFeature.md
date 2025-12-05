@@ -1003,3 +1003,78 @@ t1.detach();
 t1.join();
 
 ```
+
+---
+
+# 强弱作用域枚举
+
+> 非强作用域枚举（C++98/03 风格）
+
+```C++
+enum RTC_PEER_CONNECTION_STATE {
+    CONNECTING,
+    CONNECTED,
+    ...
+};
+```
+
+枚举值直接暴露在定义枚举的作用域中，无需指明作用域。
+
+> 强作用域枚举（C++11 起）
+
+```C++
+enum class RTC_PEER_CONNECTION_STATE {
+    CONNECTING,
+    CONNECTED,
+    ...
+};
+```
+
+枚举值被限制在枚举类的作用域内，必须加前缀xx::。
+
+---
+
+# 多线程处理观察者/客户端列表
+
+```C++
+bool PushVideoFrames4AllClient(const Frame& frame, bool cache_flag) {
+  std::vector<std::shared_ptr<KVSPeerConnection>> peers_copy;
+
+  {
+    std::lock_guard<std::mutex> lock(mtx_);
+    for (auto& [_, client_instance] : kvs_peers_) {
+      peers_copy.push_back(client_instance);
+    }
+  }
+
+  for (auto& client_instance : peers_copy) {
+    client_instance->DirectlyWriteVideoFrame(frame);
+  }
+
+  return true;
+}
+```
+
+> 好处
+
+- 避免长时间锁住kvs_peers_,其他线程可以自由增删连接；
+- 极大的减小锁的粒度；
+- 防止死锁；
+  - 如果 DirectlyWriteVideoFrame 引起某些内部操作也会获取锁，从而会引起死锁；
+- 利用shard_ptr，保证对象声明周期的安全；
+
+![](https://oss.banshengua.top/blogimages/202512051507679.png)
+
+---
+
+# 结构化绑定声明，忽略不关心的对象
+
+> 如下示例，在遍历一个pair的时候
+
+```C++
+for (auto& [_, client_instance] : kvs_peers_) {
+    peers_snapshot.emplace_back(client_instance);
+}
+```
+
+可以使用 _ 来表明自己不关心的变量，并非官方语法，只是一种人们的写法。

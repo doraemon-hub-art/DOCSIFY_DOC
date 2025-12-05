@@ -33,6 +33,14 @@ git config core.ignorecase false
 
 ---
 
+> 将指定仓库clone到指定文件夹，不创建文件夹
+
+```bash
+git clone <your-repo-url> ~/.config/lvim
+```
+
+---
+
 # 概念补充
 
 ## 常见的代码提交平台
@@ -61,3 +69,5 @@ PR 和 MR 只是不同平台的不同命名，功能上没有本质区别。
 
 - Bitbucket 使用 MR（Merge Request）；
 - GitLab 和 GitHub 使用 PR（Pull Request）。
+
+---

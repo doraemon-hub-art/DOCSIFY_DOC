@@ -28,6 +28,25 @@ info threads
   3    Thread 0x7ffff6c006c0 (LWP 1947449) "deadlock_exampl" futex_wait (private=0, expected=2, futex_word=0x555555559160 <mtx1>) at ../sysdeps/nptl/futex-internal.h:146
 ```
 
+or
+
+```bash
+  21   Thread 0x7ffff1ce9640 (LWP 34371) "queue0:src"      futex_wait (private=0, expected=2, 
+    futex_word=0x55555556f640 <AWSKVS::KVSController::mtx_>) at ../sysdeps/nptl/futex-internal.h:146
+  22   Thread 0x7ffff0df0640 (LWP 34372) "videotestsrc0:s" syscall ()
+    at ../sysdeps/unix/sysv/linux/x86_64/syscall.S:38
+  23   Thread 0x7fffd7fff640 (LWP 34373) "queue0:src"      __futex_abstimed_wait_common64 (private=0, 
+    cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x7fffd8034058) at ./nptl/futex-internal.c:57
+  24   Thread 0x7fffd77fe640 (LWP 34374) "queue0:src"      __futex_abstimed_wait_common64 (private=0, 
+    cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x7fffd8034058) at ./nptl/futex-internal.c:57
+  25   Thread 0x7fffd6ffd640 (LWP 34375) "queue0:src"      __futex_abstimed_wait_common64 (private=0, 
+    cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x7fffd8034058) at ./nptl/futex-internal.c:57
+  26   Thread 0x7fffd67fc640 (LWP 34376) "queue0:src"      __futex_abstimed_wait_common64 (private=0, 
+    cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x7fffd8034058) at ./nptl/futex-internal.c:57
+  27   Thread 0x7fffd5ffb640 (LWP 34377) "queue0:src"      __futex_abstimed_wait_common64 (private=0, 
+--Type <RET> for more, q to quit, c to continue without paging--
+```
+
 - 切换到可疑线程
 
 ```
