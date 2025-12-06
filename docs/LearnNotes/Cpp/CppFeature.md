@@ -988,7 +988,7 @@ namespace B {
 
 ---
 
-# std::thread操作一览
+# std::thread 操作概览
 
 ```C++
 // 定义直接初始化，或者定义后，单独赋值，都会直接启动线程
@@ -1002,6 +1002,14 @@ t1.detach();
 // 阻塞，等待子线程结束
 t1.join();
 
+```
+
+# std::condition_variable 操作概览
+
+```C++
+// 唤醒后，会再次检查后面的状态，这两天误以为notify后，会直接略过这个wait， :)
+
+cv_.wait(lock, [&] { return !deq_.empty() || !is_running_.load(); });
 ```
 
 ---
@@ -1078,3 +1086,11 @@ for (auto& [_, client_instance] : kvs_peers_) {
 ```
 
 可以使用 _ 来表明自己不关心的变量，并非官方语法，只是一种人们的写法。
+
+---
+
+# std::shard_ptr 析构时机
+
+> 由最后一个持有引用计数的线程，做析构处理。
+
+---
