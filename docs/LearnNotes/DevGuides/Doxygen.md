@@ -198,3 +198,49 @@ https://github.com/zeromq/zmqpp
 ## 概念补充
 
 
+
+---
+
+# 实际使用 (补充)
+
+> 避免过度注释产生噪音
+
+- 如果参数名很明确了，不需要写 @param；
+  - 如有特殊说明，可以写，没有特殊说明，去掉即可；
+
+> 学会写好的注释，不要指停留在字面意思 —— **用蹩脚英语写出的废话**
+
+- 一个好注释，应该至少回答一个“隐藏问题”；
+- 不要陷于，给Doxygen写注释，你的注释是给人看的，不要为了写而写；
+
+```C++
+  /**
+   * @brief
+   * @param [out] data  
+   * @details blocking call guidance with data or Stop
+   * @return whether the data in the queue has been successfully obtained
+   */
+
+// ================================ TO ========================================
+
+/**
+ * @brief Blocking pop operation for the queue.
+ *
+ * @details
+ * This call blocks the caller thread until one of the following happens:
+ *  - data becomes available in the queue, or
+ *  - Stop() is called, signaling queue shutdown.
+ *
+ * If the queue is stopped before data is available, the function returns false
+ * and @p data is left unmodified.
+ *
+ * @param[out] data  Output parameter to receive the popped element.
+ *
+ * @return
+ *  - true  if an element was successfully retrieved from the queue
+ *  - false if the queue was stopped before any data became available
+ *
+ * @note
+ * This function is thread-safe and may be called concurrently by multiple consumers.
+ */
+```

@@ -679,8 +679,31 @@ A* A::m_a = nullptr;
 > 现代C++写法
 
 ```C++
+static KVSController& GetInstance() {
+    static KVSController instance; 
+    return instance;
+}
 
+// 不需要外部初始化
+// 用法
+auto& g_kvs_controller = AWSKVS::KVSController::GetInstance();
 ```
+
+> 为什么要引用？
+
+1. 编译器认为你要创建一个 新的局部变量（新对象）。
+   
+- 创建时：它试图调用拷贝构造函数 —— ❌ 报错：禁止拷贝。
+- 销毁时：它试图在函数结束时调用析构函数 —— ❌ 报错：禁止私有析构。
+  -  结论：路被堵死了。
+
+2. 如果你加了引用 (auto& ctrl = ...)
+
+编译器认为你只是给那个唯一的单例起了一个 外号（别名）。
+- 创建时：不需要创建新对象，只是指过去 —— ✅ 通过。
+- 销毁时：引用只是个外号，外号消失不需要销毁对象本身 —— ✅ 通过。
+
+---
 
 ## 成员变量必须为指针的情况
 
@@ -1093,4 +1116,108 @@ for (auto& [_, client_instance] : kvs_peers_) {
 
 > 由最后一个持有引用计数的线程，做析构处理。
 
+---
+
+# explicit
+
+> 禁止，隐式构造，避免编译器帮倒忙。
+
+---
+
+# 最小作用域原则
+
+如果一个类（SmartFrame）只是某个特定模块（KVSPeerConnection）的“私有实现细节”，那么它确实不应该暴露在全局通用的 common.h 中，以免污染全局命名空间，或者增加不必要的编译依赖。
+
+---
+
+# 常量引用传参
+
+```C++
+// 例如
+const SmartFrame&
+```
+
+1. & (引用 / Reference) —— 省去拷贝，高性能
+
+- 含义：它不是创建一个新的对象，而是给原来的对象起了一个“别名”。函数内部使用的 sf，本质上就是调用者手里的那个 sf。
+- 作用：避免拷贝。
+
+如果不加 &（即 SmartFrame sf），函数调用时会触发拷贝构造函数。虽然 SmartFrame 拷贝很轻（只是增加引用计数），但这涉及到原子操作（Atomic Operation），在高频调用下依然有微小的开销。
+加上 &，完全没有拷贝动作，开销为 0。
+
+2. const (常量 / Constant) —— 只读，安全
+   
+- 含义：函数承诺 “我只看，我不改”。
+- 作用：
+  - 安全性：函数内部不能修改 sf 指向的地址，也不能重置它。调用者可以放心地把数据传进来，不用担心被改坏。
+  - 通用性：允许你传入临时对象（R-value）。比如 Func(SmartFrame(...))。如果不加 const，C++ 规则不允许把临时对象绑定到非 const 引用上。
+
+---
+
+# C++ 封装 C no-cost API 接口
+
+```C++
+    // safe control - copy a temp object for no-cost C API
+    // (PS: In such a project, there seems to be some overdesign :)
+    const Frame* source_data = frame.GetRawData();
+    Frame mutable_temp = *source_data;
+    AWS_KVS_FUNC_CALL(
+        writeFrame(video_transceiver_, &mutable_temp));  // send frame
+```
+
+- const 安全的C++接口，但是需要调用C no const 的接口，可以像这样，做一层临时浅拷贝。
+
+---
+
+#  C++ RAII 封装接管 C 语言裸指针资源
+
+```C++
+class DeepCopyFrame {
+ public:
+  DeepCopyFrame() { MEMSET(&frame_, 0x00, SIZEOF(Frame)); }
+
+  DeepCopyFrame(const Frame* frame) : DeepCopyFrame() {
+    if (!frame) return;
+    CopyFrom(frame);
+  }
+
+  DeepCopyFrame(const DeepCopyFrame&) = default;
+  DeepCopyFrame& operator=(const DeepCopyFrame&) = default;
+  ~DeepCopyFrame() = default;
+
+  const Frame* GetRawData() const { return &frame_; }
+
+ private:
+  void CopyFrom(const Frame* frame) {
+    // copy base data
+    frame_ = *frame;
+    // copy byte data
+    if (frame->size && frame->frameData) {
+      data_ = std::shared_ptr<BYTE>(new BYTE[frame->size],
+                                    std::default_delete<BYTE[]>());
+      MEMCPY(data_.get(), frame->frameData, frame->size);
+      frame_.frameData = data_.get();
+    } else {
+      frame_.frameData = nullptr;
+      frame_.size = 0;
+    }
+  }
+
+ private:
+  Frame frame_;
+  std::shared_ptr<BYTE> data_;
+};
+```
+
+> 核心思想
+
+- 深拷贝；
+- std::shared_ptr 管理堆内存 ；
+- C 结构体管理元数据；
+
+> 补充说明
+
+- 使用默认的拷贝构造函数（Default Copy Constructor），目的就是为了实现“数据的浅拷贝”和“引用计数的增加”;
+  - 默认拷贝构造 = 浅拷贝数据 + 共享所有权。
+    - 这就是我们想要的效果：数据只有一份，大家都持有钥匙（shared_ptr），最后一个离开房间的人负责关灯（free）。
 ---
