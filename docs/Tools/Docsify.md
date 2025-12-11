@@ -71,3 +71,8 @@
 
 ![](https://oss.banshengua.top//blogimages/20251019160817129.png)
 
+---
+
+# 内嵌抖音视频
+
+TODO:  https://dujun.io/embed-a-douyin-video-in-an-iframe-player.html
