@@ -35,6 +35,7 @@ else
 fi
 
 # 是否存在第N个参数
+# 空串和没传，都是 false
 if [ -n "$N" ]; then
 
 else 

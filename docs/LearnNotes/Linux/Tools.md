@@ -205,3 +205,19 @@ wc -l ./*
 
 ---
 
+# Ubuntu窗口切换工具
+
+ALT + TAB 用于多窗口之间快速切换，如果问题，可以重新设置。
+
+1. 打开 Settings（设置）
+2. 进入 Keyboard → Keyboard Shortcuts
+3. 找到：Switch windows把它绑定成：Alt + Tab
+4. 同时把：Switch applications 的 Alt + Tab 解绑或改成别的
+
+注意: 同时也可以确定下，是不是键盘开成MAC模式了，导致左下角的win键和alt键调换了位置，从而因为按错了产生的问题；
+
+---
+
+
+
+  
