@@ -30,6 +30,18 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/find_submodule.cmake)
 message(STATUS "TOP: Submodule path is ${SUBMODULE_PATH}")
 ```
 
+> include_directories 
+
+- 添加头文件路径，省的引入的时候再指明路径
+
+但是请注意，这个命令不会递归，只会到指定的路径，其中的子目录中的文件并不会被引入；
+
+> target_link_libraries 
+
+- 解决静态库依赖的时候，(myprog PRIVATE A B) ， A 确实的未定义，会从右边开始寻找；
+
+
+
 ---
 
 > 
