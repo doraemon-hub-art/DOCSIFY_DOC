@@ -61,6 +61,15 @@ sudo apt install font-manager
 unzip file.zip -d /path
 ```
 
+> 压缩
+
+```bash
+zip -r ./test_dir.zip test_dir
+```
+
+- -r 在这里就是 递归（recursive） 的意思。
+  - 它告诉 zip 把 test_dir 目录及其所有子目录和文件一起打包进 test_dir.zip，否则默认只会打包一个空目录壳子。
+
 ---
 
 # Appimage

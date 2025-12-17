@@ -41,6 +41,12 @@ message(STATUS "TOP: Submodule path is ${SUBMODULE_PATH}")
 - 解决静态库依赖的时候，(myprog PRIVATE A B) ， A 确实的未定义，会从右边开始寻找；
 
 
+> 编译选项
+
+- CMAKE_*：CMake 原生自带
+  - BUILD_SHARED_LIBS / BUILD_TESTING：官方生态级约定 也是原生自带
+- 其他为开发自定义；
+
 
 ---
 

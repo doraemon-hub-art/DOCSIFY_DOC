@@ -51,3 +51,15 @@ ctrl + p
 
 ---
 
+> 选中高亮
+
+```bash
+"workbench.colorCustomizations": {
+    "editor.wordHighlightBackground": "#FFD70033",   // 选中词语的高亮背景
+    "editor.wordHighlightStrongBackground": "#FFA50055", // 更强烈的高亮
+    "editor.wordHighlightBorder": "#FF8C0033"        // 可选：边框增强对比
+}
+```
+
+---
+
