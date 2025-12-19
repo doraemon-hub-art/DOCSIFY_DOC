@@ -115,6 +115,14 @@ LunarVim 的安装脚本里会尝试用 **Cargo** 安装两个常用的搜索工
 
 ---
 
+### treesitter报错
+
+详见: [TreeSitter error with Neovim 0.11.2: "attempt to call method 'type'/'parent' (a nil value)" in query_predicates.lua #4656](https://github.com/LunarVim/LunarVim/issues/4656)
+
+![](https://oss.banshengua.top/blogimages/202512191109248.png)
+
+---
+
 # 常用命令
 
 - 参考键位: [键位总览](https://www.lunarvim.org/zh-Hans/docs/master/beginners-guide/keybinds-overview)
