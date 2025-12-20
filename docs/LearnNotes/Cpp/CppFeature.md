@@ -1221,3 +1221,54 @@ class DeepCopyFrame {
   - 默认拷贝构造 = 浅拷贝数据 + 共享所有权。
     - 这就是我们想要的效果：数据只有一份，大家都持有钥匙（shared_ptr），最后一个离开房间的人负责关灯（free）。
 ---
+
+# inline 修饰的全局变量重复包含问题
+
+> 例如: 取消下方公共头文件中的这个开关的inline修饰，在C++17以下就会报警告
+
+```C++
+inline bool g_local_debug_enabled = false;
+```
+
+因为，如果这个头文件被多个.cpp include
+
+- 每个翻译单元都会定义一个全局变量；
+- 链接阶段触发 multiple definition of symbol；
+- 属于典型的 ODR（One Definition Rule）违规；
+
+> C++ 14及以下解决方法:
+
+- 头文件加extern声明，源文件中唯一一次定义；
+
+如果是Header Only 则无法解决。
+
+> C++ 17 解决：
+
+inline修饰即可。
+
+---
+
+> 补充哪些东西允许多重定义
+
+- inline函数，从C++98起；
+  - 每个翻译单元一份，由链接器合并；
+- 模板；
+  - 本质上只按需生成；
+- inline变量；
+  - 
+- static全局；
+  - 内部链接；
+
+---
+
+# 一些编译时的名词
+
+TODO: 
+
+- 链接器：
+- 翻译单元：
+
+...
+
+---
+
