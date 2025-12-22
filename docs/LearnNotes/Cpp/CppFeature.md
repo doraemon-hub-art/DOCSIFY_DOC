@@ -1272,3 +1272,22 @@ TODO:
 
 ---
 
+# wait_for 谓词判定时机
+
+```C++
+bool ret = cv_.wait_for(lock, 30ms, [&] {
+    return !deq_.empty();
+});
+```
+
+1. 代码刚刚执行到这行；
+2. notify后；
+3. 超时后；
+
+都会多一次谓词的判断，谓词的结果为wait_for的返回值。
+
+---
+
+# 单例模式的类作为类成员
+
+TODO:
