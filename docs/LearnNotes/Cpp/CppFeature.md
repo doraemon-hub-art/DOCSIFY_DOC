@@ -1224,6 +1224,8 @@ class DeepCopyFrame {
 
 # inline 修饰的全局变量重复包含问题
 
+(全局变量的 ODR 问题)
+
 > 例如: 取消下方公共头文件中的这个开关的inline修饰，在C++17以下就会报警告
 
 ```C++
@@ -1295,3 +1297,69 @@ TODO:
 ---
 
 # TODO: 加上昨天的几个内容
+
+
+---
+
+# 头文件重复包含
+
+如果对应的头文件没有重复展开限制，则会发生重定义问题，例如:
+
+```bash
+/home/xuan/workspace/code/aws_kvs_demo/impl/amazon-kinesis-video-streams-webrtc-sdk-c/demo/aws_kvs_types.hpp:23:12: error: multiple definition of ‘enum class AWSKVS::types::SignalingRecvMsgType’
+   23 | enum class SignalingRecvMsgType { OFFER = 0, ANSWER, ICE_CANDIDATE, UNKNOWN };
+      |            ^~~~~~~~~~~~~~~~~~~~
+```
+
+```c++
+#pragma once
+```
+**所有头文件都必须自带 include guard / #pragma once。**
+
+---
+
+# make_shared  和 shared_ptr 
+
+- std::make_shared<T>(args...) 的作用是：申请一块内存存放 T，并在上面用 args... 构造 T。
+  - 如果你写 make_shared<uint8_t>(ptr, deleter)，它会尝试构造一个 uint8_t 字符，把 ptr 和 deleter 强行转成字符赋值给它，这当然会报错。
+
+- std::shared_ptr<T>(ptr, deleter) 的作用是：接管你已经 new 出来的 ptr，并在析构时调用 deleter。这是两个完全不同的机制。
+
+```c++
+    data_ = std::shared_ptr<uint8_t>(new uint8_t[size], std::default_delete<uint8_t[]>());
+```
+
+---
+
+# header only的.hpp工具函数 “multiple definition”
+
+问题发生在被多个.cpp包含，链接器发现同一批函数，被两个cpp各自定义了一遍，且他们不是 inline or static。
+
+其中，头文件中的 #pragma once，只保证“一个 .cpp 内部”不重复展开。
+**不能阻止，不同 .cpp 各自生成一份同名函数。**
+
+> 解决方法 1
+
+- 头文件拆分，将定义放到.cpp中；
+  
+> 解决方法 2
+
+- 添加 inline修饰；
+  - 告诉链接器，允许多个定义，只要他们完全一致；
+
+> 解决方法 3
+
+- static 修饰；
+  - 会让函数变成内部链接，每个.cpp一份，互不冲突；
+  
+但代价是：
+
+- 符号只在当前翻译单元可见；
+- 不利于复用；
+- 不利于调试和结构清晰；
+
+一般只适合 .cpp 内部 helper，不适合公共 utils。
+
+**（ODR / include / linkage 问题，只有在模块化时才会出现。）**
+
+---
