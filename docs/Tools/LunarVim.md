@@ -1,5 +1,13 @@
 > 本文，我们将遵循着上来就用的原则，NeoVim还需要自己熟悉配置，不如先使用现成配置好的IDE,然后熟悉使用，之后摸索NeoVim完善自己的配置。
 
+---
+
+# 引言
+
+我是如何从VSCode切换到LunarVIM上的。
+
+---
+
 # 安装
 
 - 详见:  [安装 | LunarVim](https://www.lunarvim.org/zh-Hans/docs/installation)
