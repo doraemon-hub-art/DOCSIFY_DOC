@@ -1,6 +1,7 @@
 > 用于记录一些工作上遇到的一些C++特性，作为简单积累。
 
-TODO: 可以定期整理几条内容，拿出来出一期视频做一做分享；
+TODO: **可以定期整理几条内容，拿出来出一期视频做一做分享**；
+例如: 每月C++分享？
 (但是，感觉我得首先在哔哩哔哩上开始看一些技术的内容，要不只单纯的输出，有些无法从观众视角出发。)
 
 ---
@@ -1413,5 +1414,122 @@ void UpdateState(const types::ControllerState new_state);
 
 - 如果传递引用，底层维护的是指针，在64位操作系统上，指针占8个字节，而枚举实际上本身才占用4字节。
 
+---
+
+# wait wait_for添加谓词
+
+> 作用
+
+- 防止误唤醒；
+  防止信号丢失；
+  - wait之前先检查一下谓词条件，条件不满足才阻塞； 
+
+> wait_for 
+
+```c++
+bool wait_ret = state_cv_.wait_for(lock, std::chrono::seconds(idle_loop_sec_),[&](){
+    return !is_alive_.load() || state_ != types::ControllerState::READY_IDLE;
+});
+```
+
+- 未超时时间内收到notify,检查谓词;
+  - 为真则返回True立即结束;
+  - 为假则返回False等待时间继续；
+- 超时了，最后检查一次谓词；
+  - 仍为假，返回False，纯粹的超时；
+  - 正好在超时结束时谓词结果为真，返回True；
+
+---
+
+# 多线程环境下对Map的清理操作
+
+最大的问题，多线程环境下，对map的[]操作，是有风险的。
+
+std::unordered_map 的 operator[] 在找不到 peer_id 时，会自动创建一个空的 shared_ptr 插入 Map 中。
+
+- 原实现
+
+```C++
+    bool already_connect = impl_->HasTargetPeerId(peer_id);
+    if (already_connect) {  // repeat connection
+        common::KVS_LOG_INFO(
+            LOGGER_ID, "Reviewer {} already connected, clean and rebuild it.",
+            peer_id);
+        // clean same name old connect
+        { 
+        std::lock_guard<std::mutex> lock(impl_->peers_mtx_);
+        impl_->clean_connect_que_.PushData(impl_->kvs_peers_[peer_id]);
+        }
+        impl_->RemoveTargetPeerId(peer_id);
+```
+
+- 优化
+
+```C++
+// 原子弹出
+std::shared_ptr<KVSPeerConnection>  KVSController::Impl::PopTargetPeerId(const std::string& peer_id) {
+  common::KVS_LOG_INFO(LOGGER_ID, "{} start.", __func__);
+  std::lock_guard<std::mutex> lock(peers_mtx_);
+  auto it = kvs_peers_.find(peer_id);
+    if (it != kvs_peers_.end()) {
+        auto peer = it->second;
+        kvs_peers_.erase(it);
+        return peer;
+    }
+  common::KVS_LOG_INFO(LOGGER_ID, "{} end.", __func__);
+  return nullptr;
+}
+
+// 调用处 将原本的三次锁，简化为了一次锁
+// repeat connect check
+auto old_peer = impl_->PopTargetPeerId(peer_id);
+if (old_peer) {
+    common::KVS_LOG_INFO(LOGGER_ID, "Repeat connect, peer id is: {}.", peer_id);
+    impl_->clean_connect_que_.PushData(old_peer);
+}
+
+```
+
+在多线程编程中，最好的做法是**“尝试执行操作，并根据操作结果来决定后续逻辑”**。
+
+通过将 Has（检查）、Get（获取）和 Remove（删除）合并为一个原子函数（如 PopTargetPeerId），该函数的返回值本身就充当了判断标志。
+
+同理，这里的[]操作都要极其敏感。
+
+```C++
+  impl_->kvs_signaling_->RegisterOnICECandidateCallBack(
+      [this](const types::SignalingRecvMsg& signaling_msg) {
+
+        const std::string peer_id = signaling_msg.peer_id_;
+        if (!impl_->HasTargetPeerId(peer_id)) {
+          return;
+        }
+        if (!impl_->kvs_peers_[peer_id]->HandleRemoteIceCandidate(
+                signaling_msg)) {
+          common::KVS_LOG_ERROR(LOGGER_ID, "HandleRemoteIceCandidate failed.");
+          return;
+        }
+
+      });
+```
+
+**优化**
+
+```C++
+// 这里省略Get实现
+  impl_->kvs_signaling_->RegisterOnICECandidateCallBack(
+      [this](const types::SignalingRecvMsg& signaling_msg) {
+
+        const std::string peer_id = signaling_msg.peer_id_;
+
+        auto peer_instance = impl_->GetTargetPeerInstance(peer_id);
+        if (!(peer_instance &&
+              peer_instance->HandleRemoteIceCandidate(signaling_msg))) {
+          common::KVS_LOG_ERROR(LOGGER_ID, "HandleRemoteIceCandidate failed.");
+          return;
+        }
+
+      });
+```
 ---
 
