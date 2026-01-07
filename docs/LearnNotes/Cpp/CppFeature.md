@@ -1533,3 +1533,30 @@ if (old_peer) {
 ```
 ---
 
+# 原子操作返回旧值
+
+fetch_sub操作会返回旧值，起到 确认身份 和 保证操作的原子性作用。
+
+```C++
+int remaining = peer_count_.fetch_sub(1, std::memory_order_relaxed) - 1;
+if (remaining <= 0) {
+    peer_count_.store(0);
+    UpdateLastActiveTime();
+    // initiate hibernation waiting
+    UpdateState(types::ControllerState::READY_IDLE);
+}   
+```
+
+- 确定谁是最后一个关灯的人；
+  - 如果 fetch_sub(1) 返回的是 1，那么 1 - 1 = 0。这意味着当前线程是那个把计数器从 1 减到 0 的线程。
+- 减少总线开销；
+  - fetch_sub 在一次硬件指令周期内既完成了“减法” 又返回了“数值”，如果不用返回值，可能需要这样写:
+
+```C++
+peer_count_.fetch_sub(1);       // 第一次原子操作
+if (peer_count_.load() == 0) {  // 第二次原子操作
+    // ...
+}
+```
+
+---
