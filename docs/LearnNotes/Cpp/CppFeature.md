@@ -1560,3 +1560,7 @@ if (peer_count_.load() == 0) {  // 第二次原子操作
 ```
 
 ---
+
+# std::atomic 内存序参数
+
+TODO
