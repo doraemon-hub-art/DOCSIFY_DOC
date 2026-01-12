@@ -1564,3 +1564,36 @@ if (peer_count_.load() == 0) {  // 第二次原子操作
 # std::atomic 内存序参数
 
 TODO
+
+
+---
+
+# 初始值列表 {} () 的区别？
+
+相比 (), {} 更加严格。
+
+
+---
+
+# size_t 和 int 的使用
+
+
+
+---
+
+# const 成员函数，mutable std::mutex
+
+```C++
+public:
+    bool IsEmpty() const {
+        std::lock_guard<std::mutex> lock(mtx_);
+        return deq_.empty();
+    }
+
+private:
+    mutable std::mutex mtx_; // 必须是 mutable
+    std::deque<T> deq_;
+
+```
+
+---
