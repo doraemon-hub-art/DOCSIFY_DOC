@@ -1596,4 +1596,65 @@ private:
 
 ```
 
+# 局部捕获，悬垂引用
+
+```C++
+void KVSPeerConnection::Impl::OnConnectionStateChange(
+    UINT64 custom_data, RTC_PEER_CONNECTION_STATE state) {
+  KVSPeerConnection* self = (KVSPeerConnection*)custom_data;
+  // if (!self || !self->IsRunning()) {
+  //   common::KVS_LOG_INFO(LOGGER_ID,
+  //                        "{} has been dead, but also receive kvs callback.",
+  //                        __func__);
+  //   return;
+  // }
+  std::string state_str = internal::RTCPeerState2String(state);
+  common::KVS_LOG_INFO(LOGGER_ID, "Current RTC state is: {} peer id: {}.",
+                       state_str, self->impl_->peer_id_);
+  switch (state) {
+    case RTC_PEER_CONNECTION_STATE_CONNECTING:
+      break;
+    case RTC_PEER_CONNECTION_STATE_CONNECTED: {
+      self->impl_->is_running_.store(true);
+      self->impl_->connect_cb_(self->impl_->peer_id_);
+
+      // save current timestamp
+      self->impl_->connected_timestamp_ = std::chrono::steady_clock::now();
+
+      // check connect info
+      CheckConnectionInfo(self);
+
+      // bind and start sender thread
+      common::KVS_LOG_INFO(LOGGER_ID, "Cache queue flag is: {}.",
+                           self->impl_->cache_flag_);
+      if (self->impl_->cache_flag_) {
+        self->impl_->video_frame_sender_ = std::thread([&]() {
+          common::KVS_LOG_INFO(LOGGER_ID, "Client {} sender thread start.",
+                               self->impl_->peer_id_);
+          self->impl_->Sender();
+        });
+      }
+      break;
+    }
+    case RTC_PEER_CONNECTION_STATE_CLOSED:
+    case RTC_PEER_CONNECTION_STATE_FAILED: {
+      self->impl_->is_running_.store(false);
+      self->impl_->close_cb_(self->impl_->peer_id_);
+      break;
+    }
+    default:
+      break;
+  }
+}
+```
+
+>  致命错误：Lambda 捕获方式导致的悬垂引用 (Dangling Reference)
+
+- 引用捕获，保存的局部变量self的地址；
+  - 当OnConnectionStateChange执行完毕，他已经成为一个未定义值；
+    - 后续Sender线程启动，当运气不好时，就会产生非法访问；
+      - 当然，如果运气好那个地址还没被覆盖，不会导致崩溃，这就是为啥时崩时不崩；
+
+修改为[self]按值捕获，将对象的真实地址拷贝一份。
+
 ---
