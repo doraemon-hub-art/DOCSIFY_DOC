@@ -13,3 +13,4 @@
 * [软件开发指南](LearnNotes/DevGuides/)
 * [AWS](LearnNotes/AWS/)
 * [音视频相关](LearnNotes/AudioVideo/)
+* [Rust](LearnNotes/Rust/)
