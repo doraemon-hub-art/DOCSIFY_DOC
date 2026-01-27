@@ -1658,3 +1658,19 @@ void KVSPeerConnection::Impl::OnConnectionStateChange(
 修改为[self]按值捕获，将对象的真实地址拷贝一份。
 
 ---
+
+# std::call_once
+
+```C++
+// 第一个参数必须是once_flag类型，内部用于判断是否调用过
+// std::once_flag flag 不应该放在可能被重复创建的作用域里，否则每次执行都会是一个新的 once_flag，std::call_once 就会认为“还没执行过”
+// 第二个参数是任意可调用的对象，函数指针、对象、甚至是lambda
+std::call_once(flag, call());
+```
+
+- 示例
+
+```C++
+
+```
+---
