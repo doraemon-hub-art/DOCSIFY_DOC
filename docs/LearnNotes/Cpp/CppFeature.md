@@ -1673,4 +1673,13 @@ std::call_once(flag, call());
 ```C++
 
 ```
+
+---
+
+# 多线程访问加锁的必要性
+
+不是“数据逻辑”问题，而是“程序生死”问题。
+
+在 C++ 的世界里，多线程操作 std::unordered_set（或 map、vector）如果不加锁，后果不是“数据读错”，而是 内存损坏（Memory Corruption），通常表现为直接崩溃（Segmentation Fault）。
+
 ---
