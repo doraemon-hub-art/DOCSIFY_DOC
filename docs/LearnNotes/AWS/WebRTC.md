@@ -175,4 +175,16 @@ https://github.com/paullouisageneau/libdatachannel/tree/master
 # AWS KVS
 
 
+
+---
+
+# WebRTC失败场景
+
+TODO: 总结失败场景
+
+- 代理；
+- 同一热点下无法穿透；
+- 网络；
+......
+
 ---
