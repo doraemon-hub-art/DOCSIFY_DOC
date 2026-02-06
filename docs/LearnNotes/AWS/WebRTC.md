@@ -19,7 +19,8 @@
 - https://webrtcforthecurious.com/zh/docs/10-history-of-webrtc/
 - https://medium.com/@mtayyipyetis/understanding-webrtc-history-purpose-and-features-0c0992ec299e
 - 
-
+- https://getstream.io/resources/projects/webrtc/basics/ice-candidates/
+- https://www.cloudbees.com/blog/webrtc-issues-and-how-to-debug-them#asynchronous
 - 
 
 ---
@@ -37,9 +38,32 @@
 
 Web Real-Time Communication（网页即时通信）。
 
-WebRTC 是一项让两个设备（浏览器、手机、摄像头）在不需要安装插件的情况下，建立点对点（P2P）连接，进行毫秒级低延迟音视频通话或数据传输的技术。
+WebRTC 是一项让两个设备（浏览器、手机、摄像头）在不需要安装插件的情况下，尽量建立点对点（P2P）连接，进行毫秒级低延迟音视频通话或数据传输的技术。
+
+是一个集合，而非单一的协议。
 
 - **核心在于，尽量在传输数据时，P2P直连。**
+
+> 组成
+
+- ICE： 用来建立连接的协议框架，用来对抗NAT、防火墙；
+  - STUN (Session Traversal Utilities for NAT)；
+    - 用于获取设备公网IP，用于跟对等实体建立P2P连接；
+  - TURN (Traversal Using Relays around NAT)；
+    - 当无法使用STUN直连时，使用TURN作为中介，为通信双方建立通路；
+  - 内部进行智能协调，使用他们来适配各种网络环境，有限使用直连；
+- 信令服务 (signaling server)；
+  - 用于交换通信双方的ICE信息，确定最佳通信路径；
+
+- ICE 格式如下:
+
+```
+a=candidate:7344997325 1 udp 2043216322 192.168.0.42 44323 typ host
+```
+
+
+
+- 
 
 ---
 
@@ -163,6 +187,12 @@ TURN（Traversal Using Relays around NAT）是 WebRTC 和其他实时通信中�
 > 在有些模式中，ICE 包不会放到 SDP 中，而是与 SDP 并行发送；
 
 - 网络信息：IP、端口、候选的 ICE 路径
+
+---
+
+## NAT
+
+
 
 ---
 
