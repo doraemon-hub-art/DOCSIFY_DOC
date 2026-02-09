@@ -21,13 +21,8 @@
 - 
 - https://getstream.io/resources/projects/webrtc/basics/ice-candidates/
 - https://www.cloudbees.com/blog/webrtc-issues-and-how-to-debug-them#asynchronous
+- https://webrtchacks.com/sdp-anatomy/
 - 
-
----
-
-# 通讯流程
-
-![](https://oss.banshengua.top/blogimages/202511261949664.png)
 
 ---
 
@@ -51,17 +46,19 @@ WebRTC 是一项让两个设备（浏览器、手机、摄像头）在不需要�
     - 用于获取设备公网IP，用于跟对等实体建立P2P连接；
   - TURN (Traversal Using Relays around NAT)；
     - 当无法使用STUN直连时，使用TURN作为中介，为通信双方建立通路；
-  - 内部进行智能协调，使用他们来适配各种网络环境，有限使用直连；
+  - 内部进行智能协调，使用他们来适配各种网络环境，优先使用直连；
 - 信令服务 (signaling server)；
   - 用于交换通信双方的ICE信息，确定最佳通信路径；
 
-- ICE 格式如下:
+- ICE地址交换数据格式如下: 它其实是一个完整SDP消息中的部分内容；
 
 ```
 a=candidate:7344997325 1 udp 2043216322 192.168.0.42 44323 typ host
 ```
 
-
+- SDP (Session Description Protocol)
+  - 完整的SDP消息包括发起建立请求一方的OFFER，和被动一方回复的ANSWER；
+    - 其中包含双方支持的音视频参数等信息，有关IP地址的信息可能为空，或者不全；
 
 - 
 
