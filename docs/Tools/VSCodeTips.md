@@ -63,3 +63,29 @@ ctrl + p
 
 ---
 
+# NeoVim插件
+
+一直断断续续地想讲开发环境从VSCode迁移至NeoVim，但是上手陡峭，总是无法坚持，索性将VSCode也试着改造下，兴许转变路径能够平缓些。
+
+> 插件安装
+
+
+> 环境要求
+
+- nvim安装
+
+```BASH
+# 安装 
+
+# 查看
+nvim --version
+# 查看安装位置
+whitch nvim
+```
+
+> vscode-nvim 配置
+
+- 为了避免不必要的冲突，有些nvim配置并不完全适配vscode-nvim，所以还是建议从一个空的init.lua (~/.config/nvim/init.lua)文件开始；
+- 
+---
+
