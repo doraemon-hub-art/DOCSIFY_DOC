@@ -7,15 +7,27 @@
 
 # 环境配置
 
+- linux
+
 ```bash
 # 安装Rust + 编译器
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 # 安装编译时依赖的链接器
 sudo apt install build-essential
-
-
 ```
+
+- windows安装
+
+按照这个即可 —— https://rust-lang.org/zh-CN/tools/install/
+
+- 查看安装是否成功
+  
+```
+rustc --version
+```
+
+---
 
 # 基本语法
 
