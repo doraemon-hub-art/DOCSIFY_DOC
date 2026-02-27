@@ -1671,7 +1671,34 @@ std::call_once(flag, call());
 - 示例
 
 ```C++
+#include <iostream>
+#include <thread>
+#include <mutex> // 包含 std::call_once 和 std::once_flag
 
+std::once_flag resource_flag; // 必须是全局或静态的，以便多线程共享
+
+void initialize_resource() {
+    std::cout << "资源初始化中... (仅应出现一次)" << std::endl;
+}
+
+void worker_thread(int id) {
+    // 即使多个线程同时运行到这里，也只有一个会成功执行函数
+    std::call_once(resource_flag, initialize_resource);
+    
+    std::cout << "线程 " << id << " 正在运行" << std::endl;
+}
+
+int main() {
+    std::thread t1(worker_thread, 1);
+    std::thread t2(worker_thread, 2);
+    std::thread t3(worker_thread, 3);
+
+    t1.join();
+    t2.join();
+    t3.join();
+
+    return 0;
+}
 ```
 
 ---
@@ -1681,5 +1708,19 @@ std::call_once(flag, call());
 不是“数据逻辑”问题，而是“程序生死”问题。
 
 在 C++ 的世界里，多线程操作 std::unordered_set（或 map、vector）如果不加锁，后果不是“数据读错”，而是 内存损坏（Memory Corruption），通常表现为直接崩溃（Segmentation Fault）。
+
+---
+
+# 交叉编译工具链切换C++版本，对于第三方库的影响
+
+当某些大型C++项目中，在外层CMake将C++版本 CMAKE_CXX_STANDARD 从14 改到17，重新交叉编译后，发现只有个别的文件发生了变化。
+
+- C 实现；
+  - 有些依赖的工程为C实现，修改C++版本，只对g++编译的.cpp源文件有效；
+- CMake变量作用域限制；
+  - 只有add_subdirectory的目录，能继承当前CMake设置的CMAKE_CXX_STANDARD；
+    - 即便子目录有也会被覆盖，除非使用set_target_properties强制说明；
+  - 非add_sub子目录，则无法继承或检测到外层工程的CXX_STANDARD；
+    - 但是使用 include() 引入 .cmake 文件，.cmake文件中有设置，则引入此文件的CMake工程都可以检测到；
 
 ---
