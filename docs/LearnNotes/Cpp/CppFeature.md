@@ -1724,3 +1724,31 @@ int main() {
     - 但是使用 include() 引入 .cmake 文件，.cmake文件中有设置，则引入此文件的CMake工程都可以检测到；
 
 ---
+
+# long long 和 int64_t
+
+> 参考
+
+- https://stackoverflow.com/questions/12468281/should-i-use-long-long-or-int64-t-for-portable-code
+- https://developer.aliyun.com/article/1244333
+
+都是64位有符号整型，但是:
+
+long long
+
+- c99规定，long long至少是64位，标准并不规定必须是64位，某些平台可能会更大；
+
+int64_t
+
+- 被定义必须为64位，任何架构下都一样，具有更好的可移植性；
+
+格式化输入
+
+```C++
+// long long
+printf("Value: %lld\n", value);
+
+// int64_t
+#include <inttypes.h>
+printf("Value: %" PRId64 "\n", value);
+```
