@@ -1725,7 +1725,15 @@ int main() {
 
 ---
 
-# long long 和 int64_t
+# ====== 新篇章 ======
+
+从这里开始，进行相关专题的内容分享。
+
+加入MarkDown相关PPT语法，在梳理笔记的同时，直接产出对应的幻灯片。
+
+---
+
+# 1. long long 和 int64_t
 
 > 参考
 
@@ -1752,3 +1760,58 @@ printf("Value: %lld\n", value);
 #include <inttypes.h>
 printf("Value: %" PRId64 "\n", value);
 ```
+
+---
+
+# 指针初始化的必要性
+
+指针定义后未初始化，可能指向一个垃圾值，清理的时候，可能判断为非空，然后错误地释放了一个非法地址delete-->free，引起 “free(): invalid pointer” 错误。
+
+```C++
+// ！！！需要初始化！！！
+void* custom_ptr_ {nullptr}
+
+~TestClass() {
+  if (custom_ptr_) {
+    delete custom_ptr_;
+    custom_ptr = nullptr;
+  }
+}
+```
+
+---
+
+# map的错误[]调用
+
+- operator[] = "Get or Create"：它不仅仅是获取，还隐含了“创建”的行为。
+  - 它会自动插入一个新的键值对；
+  - 并调用默认构造函数；
+  - 返回这个对象的引用；
+  - 在这个对象上执行你的调用操作；
+
+- 只读访问请用 find()：如果你只是想查询数据而不希望修改容器，请永远使用 find() 或 at()。
+
+```C++
+struct Info;
+std::map<std::string, Info> mp_;
+
+std::vector<std::string> names = {"zzz", "zzx"};
+for (auto name : names) {
+    // 假设结构体Info有这个方法
+    std::cout << mp_[name].GetAge() << std::endl;
+
+    if (mp_.find(name) != mp_.end()) {
+        // xx
+    }
+}
+```
+
+# map对象的插入
+
+todo: 从 [] = xx,到 insert -> emplace，再到try_emplace 终极方案；
+
+c++14不支持只能用 std::piecewise_construct
+
+---
+
+# 类赋值 = 
