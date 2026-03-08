@@ -1,6 +1,8 @@
 ---
 
 marp : true
+paginate: true
+
 
 ---
 
@@ -9,6 +11,14 @@ marp : true
 # Item 0
 
 这是一段测试文字
+
+
+
+---
+
+# Item 1
+
+
 
 
 
