@@ -1754,7 +1754,7 @@ int64_t
 
 - 被定义必须为64位，任何架构下都一样，具有更好的可移植性；
 
-格式化输入
+格式化输出的不同:
 
 ```C++
 // long long
@@ -1776,7 +1776,7 @@ printf("Value: %" PRId64 "\n", value);
 void* custom_ptr_ {nullptr}
 
 ~TestClass() {
-  if (custom_ptr_) {
+  if (custom_ptr_) { // 如果未初始化，这里可能是个垃圾值，导致错误的进入，调用delete
     delete custom_ptr_;
     custom_ptr = nullptr;
   }
@@ -1807,10 +1807,14 @@ for (auto name : names) {
     if (mp_.find(name) != mp_.end()) {
         // xx
     }
+    
+    // 如何直接调用，则会 --- 如上所述:
 }
 ```
 
-# map对象的插入
+---
+
+## map对象的插入
 
 todo: 从 [] = xx,到 insert -> emplace，再到try_emplace 终极方案；
 
