@@ -52,7 +52,17 @@ git clone <your-repo-url> ~/.config/lvim
 ```bash
 git rebase -i dev
 ```
-  
+
+> 设置局部文件夹git config配置
+
+```bash
+git config user.name "你的名字"
+git config user.email "你的邮箱"
+
+# 写入当前仓库下
+./git/config
+```
+
 执行这个命令后：
 
 - Git 会把所有“属于你这个分支、但不属于 dev”的提交全部列出来;

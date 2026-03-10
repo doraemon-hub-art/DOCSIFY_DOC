@@ -1737,6 +1737,10 @@ int main() {
 
 加入MarkDown相关PPT语法，在梳理笔记的同时，直接产出对应的幻灯片。
 
+优先给出代码，然后根据代码讲解，之后给出结论页PPT；
+
+---
+
 # 1. long long 和 int64_t
 
 > 参考
@@ -1744,11 +1748,11 @@ int main() {
 - https://stackoverflow.com/questions/12468281/should-i-use-long-long-or-int64-t-for-portable-code
 - https://developer.aliyun.com/article/1244333
 
-都是64位有符号整型，但是:
+一般来说它们都是64位有符号整型，但是:
 
 long long
 
-- c99规定，long long至少是64位，标准并不规定必须是64位，某些平台可能会更大；
+- c99规定，long long必须至少是64位，标准并不规定必须是64位，某些平台可能会更大；
 
 int64_t
 
@@ -1769,19 +1773,31 @@ printf("Value: %" PRId64 "\n", value);
 
 # 指针初始化的必要性
 
-指针定义后未初始化，可能指向一个垃圾值，清理的时候，可能判断为非空，然后错误地释放了一个非法地址delete-->free，引起 “free(): invalid pointer” 错误。
+> 案例
 
 ```C++
-// ！！！需要初始化！！！
-void* custom_ptr_ {nullptr}
+#include <iostream>
 
-~TestClass() {
-  if (custom_ptr_) { // 如果未初始化，这里可能是个垃圾值，导致错误的进入，调用delete
+int main(void) {
+
+  void* custom_ptr_;
+//   void* custom_ptr_ {nullptr};
+  if (custom_ptr_) {
     delete custom_ptr_;
-    custom_ptr = nullptr;
+    custom_ptr_ = nullptr;
   }
+
+  return 0;
 }
 ```
+
+---
+
+> 结论
+
+指针定义后未初始化，可能指向一个垃圾值，清理的时候，可能判断为非空，然后错误地释放了一个非法地址delete-->free，引起 “free(): invalid pointer” 错误。
+
+所以在定义成员的时候，需要直接进行初始化，不只是指针成员，防止引起未定义的错误。
 
 ---
 
