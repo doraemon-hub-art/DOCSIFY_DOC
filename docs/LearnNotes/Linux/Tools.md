@@ -97,7 +97,9 @@ sudo add-apt-repository ppa:appimagelauncher-team/stable
 sudo apt update
 # 安装
 sudo apt install appimagelauncher
-# 再次启动你的appimage文件
+# 或者手动从github下载deb安装包
+https://github.com/TheAssas sin/AppImageLauncher/releases
+# 再次启动你的appimage文件 
 ./xxx.appimage
 # 此时AppimageLauncher会提示你是不是要集成到系统菜单，如下图所示
 # ok 、integrate and run
