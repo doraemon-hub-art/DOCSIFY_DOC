@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频专栏分享预览</title>
+    <style>
+        :root {
+            --vp-c-brand: #3eaf7c; /* VitePress 经典绿，也可以换成蓝 #3451b2 */
+            --vp-c-bg: #ffffff;
+            --vp-c-bg-soft: #f6f6f7;
+            --vp-c-text-1: #2c3e50;
+            --vp-c-text-2: #476582;
+            --vp-c-divider: rgba(60, 60, 67, .12);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--vp-c-bg);
+            color: var(--vp-c-text-1);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--vp-c-divider); padding-bottom: 1rem; }
+
+        /* 专栏区块 */
+        .column-section {
+            margin-bottom: 50px;
+        }
+
+        .column-header {
+            margin-bottom: 20px;
+        }
+
+        .column-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--vp-c-text-1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .column-header h2::before {
+            content: "📂";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .column-header p {
+            color: var(--vp-c-text-2);
+            margin: 5px 0 0 0;
+            font-size: 0.95rem;
+        }
+
+        /* 视频栅格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        /* 视频卡片 */
+        .video-card {
+            background: var(--vp-c-bg-soft);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--vp-c-divider);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            border-color: var(--vp-c-brand);
+        }
+
+        /* 封面图区域 */
+        .cover-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .cover-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+
+        /* 悬浮播放按钮 */
+        .play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            color: white !important;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .cover-wrapper:hover .play-overlay { opacity: 1; }
+        .cover-wrapper:hover img { opacity: 0.7; }
+
+        /* 内容区域 */
+        .card-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.05rem;
+            color: var(--vp-c-text-1);
+            line-height: 1.4;
+        }
+
+        .card-content p {
+            font-size: 0.85rem;
+            color: var(--vp-c-text-2);
+            margin: 0 0 16px 0;
+            flex-grow: 1;
+        }
+
+        /* 底部链接 */
+        .card-footer {
+            border-top: 1px solid var(--vp-c-divider);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-note {
+            color: var(--vp-c-brand);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-note:hover { text-decoration: underline; }
+
+        .tag {
+            font-size: 0.7rem;
+            background: rgba(62, 175, 124, 0.1);
+            color: var(--vp-c-brand);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>我的视频专栏</h1>
+
+    <!-- 专栏 1 -->
+    <section class="column-section">
+        <div class="column-header">
+            <h2>VitePress 实战系列</h2>
+            <p>手把手教你从零构建高性能静态文档站</p>
+        </div>
+        
+        <div class="video-grid">
+            <!-- 视频卡片 1 -->
+            <div class="video-card">
+                <div class="cover-wrapper">
+                    <!-- 这里换成你的B站封面图地址 -->
+                    <img src="https://img.js.design/assets/img/646db43e49e001f308827725.png" alt="封面">
+                    <a href="https://www.bilibili.com/video/BV1xxxxxx" target="_blank" class="play-overlay">
+                        ▶ 在 B 站播放
+                    </a>
+                </div>
+                <div class="card-content">
+                    <h4>P1：VitePress 环境搭建与配置核心原理</h4>
+                    <p>快速了解 VitePress 的文件结构和基础配置项。</p>
+                    <div class="card-footer">
+                        <a href="/notes/p1-setup.html" class="btn-note">📄 查看图文笔记</a>
+                        <span class="tag">Bilibili</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频卡片 2 -->
+            <div class="video-card">
+                <div class="cover-wrapper">
+                    <img src="https://img.js.design/assets/img/6422961d564871e8633364f9.png" alt="封面">
+                    <a href="https://www.bilibili.com/video/BV1yyyyyy" target="_blank" class="play-overlay">
+                        ▶ 在 B 站播放
+                    </a>
+                </div>
+                <div class="card-content">
+                    <h4>P2：自定义组件与主题美化</h4>
+                    <p>如何编写 Vue 组件并将其无缝集成到 Markdown 中。</p>
+                    <div class="card-footer">
+                        <a href="/notes/p2-theme.html" class="btn-note">📄 查看图文笔记</a>
+                        <span class="tag">Bilibili</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专栏 2：展示扩展性 -->
+    <section class="column-section">
+        <div class="column-header">
+            <h2>前端工程化思考</h2>
+            <p>关于工具链、CI/CD 与自动化部署的深度分享</p>
+        </div>
+        
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="cover-wrapper">
+                    <img src="https://img.js.design/assets/img/642295fb2987179040375a32.png" alt="封面">
+                    <a href="https://www.bilibili.com/video/BV1zzzzzz" target="_blank" class="play-overlay">
+                        ▶ 在 B 站播放
+                    </a>
+                </div>
+                <div class="card-content">
+                    <h4>自动化部署：从 Github Actions 到服务器</h4>
+                    <p>如何实现代码提交后自动更新你的文档网站。</p>
+                    <div class="card-footer">
+                        <a href="/notes/cicd-guide.html" class="btn-note">📄 查看图文笔记</a>
+                        <span class="tag">Bilibili</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
