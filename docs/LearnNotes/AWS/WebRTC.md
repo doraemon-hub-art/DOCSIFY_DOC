@@ -207,7 +207,7 @@ https://github.com/paullouisageneau/libdatachannel/tree/master
 
 # WebRTC失败场景
 
-TODO: 总结失败场景
+TODO: 总结失败场景,细化一下这里的问题。
 
 - 代理；
 - 同一热点下无法穿透；
