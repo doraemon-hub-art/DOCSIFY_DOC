@@ -86,6 +86,23 @@ git restore .
 git clean -fd
 ```
 
+- 去掉某笔提交
+
+```bash
+# 需要指定对应提交的上一笔提交
+# 而且有时候还需要解决后面的冲突，不断git base --continue
+# 删除较远的提交不建议这样
+git rebase -i xx
+git rebase --continue
+# 终止
+git base --abort
+
+# =============================
+# 推荐使用revert，但是会多一笔revert提交
+# 不过用于测试分支，不影响
+git revert xx
+```
+
 ---
 
 # 概念补充
