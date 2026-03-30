@@ -184,9 +184,15 @@ shell clear
 # 直接用clear是gdb语法，清理断点的
 ```
 
+> 带参数
+
+```bash
+gdb --args ./file arg1 arg2
+```
+
  ---
 
- # 交叉编译源码在aarch64系统上运行
+# 交叉编译源码在aarch64系统上运行
 
  以 gdb-16.3 为例。
 
