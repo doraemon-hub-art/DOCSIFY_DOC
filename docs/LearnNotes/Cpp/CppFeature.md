@@ -1914,3 +1914,6 @@ int main() {
 
 ---
 
+# 6. CMake 缓存污染问题
+
+TODO
