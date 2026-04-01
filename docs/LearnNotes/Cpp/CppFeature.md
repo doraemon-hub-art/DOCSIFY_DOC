@@ -1916,4 +1916,44 @@ int main() {
 
 # 6. CMake 缓存污染问题
 
-TODO
+> 问题场景
+
+在Jenkin流水线编译工程的时候，莫名奇妙的编译失败，提示找不到交叉编译工具链环境。
+
+```bash
+CMake Error: CMake was unable to find a build program corresponding to "Unix Makefiles".  
+CMAKE_MAKE_PROGRAM is not set.  
+You probably need to select a different build tool. 
+CMake Error: CMAKE_C_COMPILER not set
+CMAKE_CXX_COMPILER not set
+```
+
+ReBuild后问题解决。
+
+一个偶现的缓存污染问题。
+
+---
+
+> 原因
+
+CMake 在构建目录里会生成 CMakeCache.txt，里面缓存了上一次构建的所有变量值。
+
+当某些条件变了（比如切换分支、修改了 cmake 变量、Jenkins workspace 路径变化），旧缓存里的路径或变量值和当前环境对不上，就会出现这种"找不到文件"但路径看起来正确的诡异问题。
+
+ReBuild后Jenkin会触发清理操作，清空编译目录然后重新触发编译流程。
+
+---
+
+> 补充
+
+全量构建
+
+  - 删掉所有的中间产物，从零开始编译所有文件；
+
+增量构建
+
+  - 只是重新编译有变化的部分，没变化的部分直接复用上次的结果；
+
+CMakeCache.txt 就是增量构建的一部分，它缓存了上次 configure 的结果，下次 cmake 不用重新探测编译器、路径等信息，直接读缓存。好处是快，坏处就是你遇到的这个，缓存过期了但没被清掉。
+
+---
