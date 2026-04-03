@@ -58,7 +58,7 @@ fn main() {
   - 如果开始没有用cargo创建项目，但是后来想用cargo来管理，可以调整为这个格式；
 
 ```bash
-# 变异运行
+# 编译运行
 cargo builld
 cargo run
 # 可以简写为b r
@@ -168,6 +168,7 @@ let c = 2;
 - Rust是静态类型语言，在编译的时候必须指定所有变量的类型；
   - 根据值及其使用方式，编译器通常可以推断出我们想用的类型；
     - 当多种类型均有可能时，需要我们显式指名对应的类型，否则编译器就会报错；
+      - 可以理解为，默认就是C++的AUTO，但是具有多种可能的时候需要我们显式声明；
 
 ```Rust
 let guess: u32 = "42".parse().expect("Not a number!");
@@ -202,7 +203,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
   - char 是Rust中最原始的字母类型；
   - Rust中用单引号声明字符，一个字符大小为4字节，代表一个Unicode标量值；
 
-### 复合类型；
+### 复合类型
 
 - 复合类型；
   - 可以将多个值组合成一个类型；
@@ -263,7 +264,7 @@ fn another_function() {
 - Rust不关心函数定义所在的位置，只要函数被调用时出现在调用处可见的作用域内即可；
 
 - 参数；
-  - 参数时特殊变量，是函数签名的一部分；
+  - 参数是特殊变量，是函数签名的一部分；
 
 ```Rust
 fn another_function(x: i32) {
@@ -446,8 +447,59 @@ fn main() {
 
 # 所有权
 
-Rust最与众不同的特性，是其无需垃圾回收机制，即可保障内存安全。
+Rust最与众不同的特性，使其无需垃圾回收机制(GC)，即可保障内存安全。
 
 通过所有权系统管理内存，编译器在编译时根据一系列的规则进行检查。如果违反了任何这些规则，程序都不能编译。
 
 运行时，所有权系统的任何功能都不会减慢程序的运行。
+
+> 总结
+
+- 对于编译器已知大小的变量，即在栈上开辟空间的变量；
+  - 对其进行的同类型变量赋值操作，为正常的值拷贝；
+- 对于需要再堆上开辟的变量，例如String；
+  - 一个String类型变量，赋值给另一个时，会进行C++的移动(std::move),详见下方；
+    - 原本的String变量不在有效，不能对其进行任何操作；
+    - 离开作用域后，编译器会默认调用其drop方法，释放掉堆上的内存；
+  - 如果需要进行深拷贝，需要调用.clone()方法；
+
+与C++ std::move的对比
+
+- Rust：编译期强制，move 后原变量不可用；
+- C++：运行期约定，move 后原对象处于"合法但不确定"状态，程序员自己保证不误用；
+
+调用函数传参，与上述所说的赋值同理。
+
+示例:
+
+```rust
+fn main() {
+    let s1 = gives_ownership();        // gives_ownership 将它的返回值传递给 s1
+
+    let s2 = String::from("hello");    // s2 进入作用域
+
+    let s3 = takes_and_gives_back(s2); // s2 被传入 takes_and_gives_back, 
+                                       // 它的返回值又传递给 s3
+} // 此处，s3 移出作用域并被丢弃。s2 被 move，所以无事发生
+  // s1 移出作用域并被丢弃
+
+fn gives_ownership() -> String {       // gives_ownership 将会把返回值传入
+                                       // 调用它的函数
+
+    let some_string = String::from("yours"); // some_string 进入作用域
+
+    some_string                        // 返回 some_string 并将其移至调用函数
+}
+
+// 该函数将传入字符串并返回该值
+fn takes_and_gives_back(a_string: String) -> String {
+    // a_string 进入作用域
+
+    a_string  // 返回 a_string 并移出给调用的函数
+}
+```
+
+---
+
+## 引用
+
