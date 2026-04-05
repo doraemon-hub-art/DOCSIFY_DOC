@@ -470,7 +470,7 @@ Rust最与众不同的特性，使其无需垃圾回收机制(GC)，即可保障
 
 调用函数传参，与上述所说的赋值同理。
 
-示例:
+> 示例
 
 ```rust
 fn main() {
@@ -501,5 +501,226 @@ fn takes_and_gives_back(a_string: String) -> String {
 
 ---
 
-## 引用
+## 引用和借用
+
+& 符号表示 引用，它们让你引用某个值而不取得它的所有权。
+
+引用变量离开作用域后什么也不会发生。
+
+创建一个引用的行为称为借用。
+
+变量默认是不可变的，引用默认也是不可变的。
+
+- 可以添加mut修饰即可修改，即 —— 可变引用，但是同一个作用域内:
+  - 对于同一个变量，只能存在一个可变引用；
+    - 可变引用和不可变引用，会根据使用范围进行限制；
+    - 不可变引用在最后一次使用之前，不可以出现可变引用；
+  - 可以同时存在多个不可变引用；
+    - 例如只读不需要加锁，**这是RUST控制数据安全的一种方式；**
+    - 
+
+> 示例
+
+```C++
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{s1}' is {len}.");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+可变引用
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s); // 创建可变引用
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+可变引用不可变引用混用错误
+
+```rust
+    let mut s = String::from("hello");
+
+    let r1 = &s; // 没问题
+    let r2 = &s; // 没问题
+    let r3 = &mut s; // 大问题
+
+    println!("{r1}, {r2}, and {r3}");
+```
+
+可变引用不可变引用正确同时使用
+
+```rust
+   let mut s = String::from("hello");
+
+    let r1 = &s; // 没问题
+    let r2 = &s; // 没问题
+    println!("{r1} and {r2}");
+    // 此位置之后 r1 和 r2 不再使用
+
+    let r3 = &mut s; // 没问题
+    println!("{r3}");
+```
+
+---
+
+### 悬垂引用
+
+悬垂引用，即类似于C++中的悬垂指针，即，指针只指向一个已经释放了的一块内存。
+
+如下示例所示，函数内部返回变量引用是无效的，因为离开函数作用域后变量已经无效，即悬垂引用。
+
+rust会在编译期就发现这个问题。
+
+```rust
+fn dangle() -> &String { // dangle 返回一个字符串的引用
+
+    let s = String::from("hello"); // s 是一个新字符串
+
+    &s // 返回字符串 s 的引用
+} // 这里 s 离开作用域并被丢弃。其内存被释放。
+  // 危险！
+```
+
+---
+
+## 切片
+
+切片（slice）允许你引用集合中一段连续的元素序列，而不用引用整个集合。slice 是一种引用，所以它不拥有所有权。
+
+字符串切片是String中一部分值的引用。
+
+字符串字面值就是 slice，如下所示，s为指向二进制程序中特定位置的slice，不可变引用。
+
+```rust
+let s = "Hello, world!";
+```
+
+获取字符串切片后，后续使用该切片时必须保证其有效的。
+
+> 示例
+
+一个返回字符串切片的函数
+
+```rust
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+```
+
+rust中，拥有数据的所有者，在离开作用域后，自动清除其数据的功能意味着你无需额外编写和调试相关控制代码。
+
+**所有权系统系统，贯穿余下的内容。**
+
+---
+
+# 结构体
+
+结构体是一个自定义数据，通过组装多个变量，从而形成一个有意义的组合类型。
+
+结构体中的数据的名字类型，称为字段。
+
+实例时的赋值顺序不需要和在结构体定义中的声明顺序一致。
+
+  - 如果结构体实例是可变的，可以通过.来给其中某个字段赋值；
+    - 可变，只能时整个实例，而不是其中的某个字段；
+  - 为函数参数使用与结构体字段相同的名字是很合理的，例如: username : username;
+    - 更简洁的写法，如果外部参数与结构体内部关键字名字相同，可以直接写成 username；
+    - 为了复用，可以直接使用结构体更新语法来创建新的结构体实例；
+      - 会发生数据移动，具体数据变化，需要根据具体的类型来定，例如:
+        - 原本的栈空间上的变量，Copy trait类型，仍可以使用；
+        - 堆空间上的，例如: String类型变量发生了复用，则旧的实例无法使用；
+          - 发生了所有权转移；
+
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn main() {
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+    user1.email = String::from("anotheremail@example.com");
+    // 使用 结构更新语法 通过已有的User实例创建新的实例
+    let user2 = User {
+        email: String::from("another@example.com"),
+        ..user1
+    };
+}
+```
+
+---
+
+## 元组结构体
+
+类似于元祖的结构体，即，省略结构体的成员变量名。
+
+```rust
+struct Color(i32, i32, i32);
+
+fn main() {
+  let black = Color(0, 0, 0);
+}
+```
+
+---
+
+## 类单元结构体
+
+
+即没有任何字段的结构体，被称为类单元结构体。
+
+---
+
+## 方法
+
+使用 fn 关键字 + 名称声明，可以拥有参数和返回值。第一个参数为self，代表调用该方法的结构体实例。
+
+- self 实际上是 selft : &Self 的缩写；
+
+### impl块
+
+impl块中，可以定义与你类型相互关联的函数，方法是一种相关联的函数，让指定结构体的实例所具有的行为。
+- 每个结构体都允许拥有多个impl块；
+- impl块中的方法，通过::方法；
+
+```rust
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+```
+
+---
+
+# 枚举和模式匹配
 
