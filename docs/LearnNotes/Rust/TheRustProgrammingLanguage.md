@@ -724,3 +724,146 @@ impl Rectangle {
 
 # 枚举和模式匹配
 
+列举某个类型所有可能的变体来定义这个类型。
+
+## 枚举
+
+一般定义，可以不指定默认的第一个起始值。
+
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+
+进一步，与C++不同的是，枚举中的可选值，可被附加数据，例如:
+
+  - 并且每个变体可以处理不同类型和数量的数据；
+  - 和结构体一样，可以使用impl来为枚举定义方法；
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {
+        // 在这里定义方法体
+    }
+}
+
+let m = Message::Write(String::from("hello"));
+m.call();
+
+enum IpAddr {
+  V4(String),
+  V6(String),
+  v41(u8, u8, u8, u8),
+}
+
+let home = IpAddr::V4(String::from("127.0.0.1"));
+```
+
+---
+
+### Option
+
+在 C++ 或 Java 中，一个变量可以是 null，这经常导致“空指针异常”。
+
+Rust 为了安全，规定如果你觉得一个变量可能为空，你必须把它包在 Option 容器里：
+
+- 如果你确定有值，用 Some(数据)。
+- 如果你确定没值，用 None。
+
+---
+
+## match 控制流结构
+
+不同于 C++ ，rust不允许"贯穿",不必写break来终止case的执行。
+
+=> 来进入执行分支，可写可不写 {}。
+
+可以根据根据枚举绑定值的定义，获取对应的绑定值。
+
+match的分支，必须覆盖了所有的可能性，即满足穷尽性要求。
+
+  - 没有显式指定的可选值，可用other来表明其他情况；
+    - 或者使用 _ 来匹配这些情况；
+      - 这是一个特殊的模式，匹配任意值而不绑定到该值，即不使用这个值，可以做其他处理；
+      - 在次基础上使用()，不做任何处理；
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(u8),
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => {
+            println!("Lucky penny!");
+            1
+        }
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(value) => {
+          println!("{value}");
+          25
+        }
+    }
+}
+fn main() {
+    value_in_cents(Coin::Penny);
+    value_in_cents(Coin::Quarter(10));
+}
+```
+
+---
+
+## if let 和 let else 简洁控制流
+
+if let 语法让我们以一种不那么冗长的方式结合 if 和 let，来处理只匹配一个模式的值而忽略其他模式
+的情况。
+
+使用 if let 意味着更少的输入、更少的缩进，也更少的样板代码。然而，这样也会失去 match 所强制的穷尽性检查。
+
+```rust
+let config_max = Some(3u8);
+// max绑定为Some中的值
+if let Some(max) = config_max {
+    println!("The maximum is configured to be {max}");
+}
+```
+
+### let...else
+
+这种写法能让函数主体沿着“愉快路径”（“Happy Path”）继续向下，而不必像 if let 那样让两个分支具有明显不同的控制流。
+
+```rust
+let Coin::Quarter(state) = coin else {
+      return None;
+};
+```
+
+---
+
+# 包、Crates 与模块
+
+- 包(Packages): Cargo的功能，它允许你构建、测和分享Crate;
+- Crates: 一个模块树，可以产生一个库或可执行文件；
+- 模块(Modules) 和 use: 允许你控制作用域和路径的私有性；
+- 路径(path): 一个为，例如: 结构体、函数或模块等项命名的方式；
+
+
+
+
+
+
+
+
+
