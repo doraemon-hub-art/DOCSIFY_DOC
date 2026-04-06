@@ -107,3 +107,5 @@ update(tools): 更新多篇工具类笔记内容
 | **add** | 新增文章或章节 | `add(blog): 新增 Alexa 技能集成笔记` |
 | **remove** | 删除旧内容 | `remove(note): 删除过时的配置章节` |
 
+revert 就使用Git默认生成的Commit信息即可。
+

@@ -859,6 +859,25 @@ let Coin::Quarter(state) = coin else {
 - 模块(Modules) 和 use: 允许你控制作用域和路径的私有性；
 - 路径(path): 一个为，例如: 结构体、函数或模块等项命名的方式；
 
+---
+
+## 包和Crate
+
+- crate 是 Rust编译器每次处理的最小代码单位；
+- crate 可以包含模块，而这些模块也可以定义在其他文件中，并与该 crate 一起编译；
+- crate 有两种形式，二进制crate和库crate（C++ lib）;
+
+- 包是提供一系列功能的一个或者多个crate的捆绑；
+  - 一个包会包含一个Cargo.toml问及那，其中会阐述如何去构建这些crate；
+  - crate实际上就是一包，它包含了用于构建你代码的命令行工具的二进制crate；
+
+---
+
+## 作用域与私有性
+
+TODO: 模块相关。
+
+---
 
 
 
