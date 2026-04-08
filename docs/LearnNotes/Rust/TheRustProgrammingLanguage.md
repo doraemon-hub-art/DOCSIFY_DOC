@@ -890,7 +890,97 @@ TODO: 模块相关。
 
 - 在堆空间存储数据；
 - 连续的内存，存储多个同一类型的数据；
-- 
+- 同样默认是不可更改的，需要再创建的时候mut修饰；
+- 元素访问:
+  - 可通过[]索引，或者get方法，主要&，防止掠夺所有权；
+    - get方法返回Option，指定的所有超过作用域后不会抛异常，只会返回None;
+    - []访问超过范围的索引直接抛异常 panic 终止程序；
+- 注意: 同一个作用域内仍不可同时存在可变引用和不可变引用；
+  - vector会把元素放到相邻的内存空间中，当当前存放的位置，内存空间不够了，就会将原本的vector搬走，找到更大的一块连续空间放下，这时原来元素的引用，指向的就是一块已经释放的内存；
+  - **借用规则，就是为了防止这个问题**；
+- 存储多个类型的值:
+  - 可以在Vector中存储枚举以实现；
+  - 同时仍要注意，**编码时，要考虑到所有可能的类型；**
+
+```rust
+// 空vector
+let v: Vec<i32> = Vec::new();
+
+// 初始值 + 自动推导
+let v = vec![1, 2, 3];
+
+// 可修改 + 创建后添加变量
+let mut v = Vec::new();
+v.push(5);
+
+// 遍历
+let v = vec![100, 32, 57];
+for i in &v {
+    println!("{i}");
+}
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+---
+
+## 字符串
+
+- String 是一个 Vec<u8> 的封装；
+  - 无法使用index索引[xx]访问；
+    - 以utf-8编码存储，每个unicode标量需要值需要两个字节存储，索引访问返回的并不是第一个字符，会有误会，所有Rust为了杜绝这种误会，禁止索引访问字符串；
+    - 有效的 Unicode 标量值可能会由不止一个字节组成;
+    - 并且，索引操作预期的时间复杂度通常是常数时间O(1)，但是String无法保证这样的性能，因为Rust必须从开头到索引为止遍历来确定有多少有效字符；
+- 操作字符串的最好办法，是明表示需要字符还是直接；
+
+```rust
+let hello = String::from("Hola");
+let hello1 = String::from("Здравствуйте");
+let hello2 = "Здравствуйте";
+
+for c in "Зд".chars() {
+    println!("{c}");
+}
+for b in "Зд".bytes() {
+    println!("{b}");
+}
+```
+
+---
+
+## Hash Map
+
+- 通过哈希函数来实现映射，用于存储键值对 HashMap<K, V>；
+- 遍历哈希 map 会以任意顺序进行;
+- 存储在栈空间的元素，会被拷贝进Map，堆空间上的元素，会被移动进Map;
+  - 一旦键值对被插入后就为哈希 Map 所拥有;
+  - 将键值对引用插入Map，该键值对需要在Map有效的那段时间中一直有效；
+- entry方法， 传入一个指定的key，返回一个Entry，它表示一个可能存在也可能不存在的值；
+  - entry 上的 or_insert 方法被定义为：如果对应 Entry 的键已经存在，就返回该值的可变引用；如果不存在，就把参数作为这个键的新值插入，并返回这个新值的可变引用;
+- 可以自定义Hash函数，以实现更快的性能；
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+
+let team_name = String::from("Blue");
+let score = scores.get(&team_name).copied().unwrap_or(0);
+
+// 依旧引用访问 key 和 value 已经是引用了
+for (key, value) in &scores {
+  // println 自动会解引用，当然也可以手动显式解引用
+  println!("{key}: {value}");
+}
+
+scores.entry(String::from("Yellow")).or_insert(50);
+scores.entry(String::from("Blue")).or_insert(50);
+```
+
 
 
 
