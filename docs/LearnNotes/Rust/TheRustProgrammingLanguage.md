@@ -980,10 +980,90 @@ for (key, value) in &scores {
 scores.entry(String::from("Yellow")).or_insert(50);
 scores.entry(String::from("Blue")).or_insert(50);
 ```
+---
+
+# 错误处理
+
+- Rust 没有异常；
+  - 它使用 Result<T, E> 类型来处理可恢复错误；
+  - 使用 panic! 宏在程序遇到不可恢复错误时停止执行；
+
+---
+
+## painic! 处理不可恢复的错误
+
+(TODO: 在编译阶段RUST编译器可以很大程度上减少错误，为什么仍会发生类似于数组越界访问的问题?)
+
+- painic时，有两种动作，可通过toml [profile.release] 配置其行为；
+  - 展开，清理所有资源；
+  - 直接终止；
+- 可以根据触发 panic! 的函数 backtrace，来分析问题；
+  - backtrace 是一份到达当前执行点之前所有被调用函数的列表；
+  - 要获取带有详细信息的backtrace，需要再debug模式下,即不带 --release 参数运行cargo build；
+
+```rust
+RUST_BACKTRACE=1 cargo run
+```
+
+---
+
+## Result处理可恢复的错误
+
+- 为了避免处理返回值时的过多match匹配，可以使用闭包来使其更加优雅；
+- Result<T, E> 类型定义了很多辅助方法来处理各种更为特定的任务；
+  - unwarp 如果 Result 值是变体 Ok，unwrap 会返回 Ok 中的值。如果 Result 是变体 Err，unwrap 会为我们调用 panic!；
+  - expect 方法也允许我们自定义 panic! 的错误信息；
+  - 在生产级别的代码中，大部分 Rustaceans 选择 expect 而不是 unwrap 并提供更多关于为何操作期望是一直成功的上下文；
+
+```rust
+use std::fs::File;
+
+fn main() {
+    let greeting_file_result = File::open("hello.txt");
+
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {error:?}"),
+    };
+}
+```
+
+---
+
+## 错误传播
+
+- 返回错误给调用者；
+- ？ 运算符可以进一步简化 match表达式；
+  - 如果 Result 的值是 Ok，这个表达式就会返回 Ok 中的值，程序继续执行；
+  - 如果值是 Err，Err 就会像使用了 return 关键字一样，作为整个函数的返回值提前返回；
+  - 可以在 ？ 运算符后面继续执行操作，进一步简化代码，如果？前错误，则会提前返回，否则继续执行？后的内容；
+  - ? 运算符只能被用于返回值与 ? 作用的值相兼容的函数；
+
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut username_file = File::open("hello.txt")?;
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
+}
+```
+
+---
+
+## 要不要返回painc!
+
+- 返回 Result 是定义可能会失败的函数的一个好的默认选择;
+- 在当有可能会导致有害状态（bad state）的情况下建议使用 panic!;
+
+Rust 的错误处理功能被设计为帮助你编写更加健壮的代码。
+
+---
 
 
-
-
+开始做东西了，这本书就看到这吧......
 
 
 
