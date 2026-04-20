@@ -3,6 +3,7 @@
 * [首页](/)
 * [数据结构与算法](Algorithm/)
 * [学习笔记](LearnNotes/)
+* [经验总结](ExpSummary/)
 * [工具文档](Tools/)
 * [嵌入式工坊](EmbeddedAtelier/)
 * [网站规划](WebsiteTodo)
