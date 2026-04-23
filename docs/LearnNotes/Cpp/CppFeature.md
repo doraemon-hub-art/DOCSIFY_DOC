@@ -4,6 +4,13 @@ marp: true
 
 ---
 
+<style>
+section {
+  align-content: start;
+}
+</style>
+
+
 > 用于记录一些工作上遇到的一些C++特性，作为简单积累。
 
 TODO: **可以定期整理几条内容，拿出来出一期视频做一做分享**；
@@ -1988,5 +1995,43 @@ CMakeCache.txt 就是增量构建的一部分，它缓存了上次 configure 的
 - 极端情况下如果在循环快结束时候才能被预测，那么if的影响会被进一步放大,但是:
   - CPU的分支预测器，可以提供辅助，如果条件趋于可预测，比如连续100次、1000次，条件都是false，CPU会进行“强预测”：
     - 认为后续都是这样，仍会减小if损耗，而当不成立时才会调整预测结果，降低速度；
+
+---
+
+# 9. memcpy 拷贝std::string 时
+
+> 案例
+
+```C++
+  char desc[128];
+
+  const std::string error_str = error_code.toString();
+  memcpy(desc, error_str.c_str(), (error_str.size()>128) ? 128: error_str.size() );
+```
+
+---
+
+> 问题
+
+string的size/length方法，计算的大小不包括结尾的结束符\0，如示例中所示，memcpy依此长度，最终只拷贝了数据，结尾没有字符串结束符。
+
+使用就会导致结尾出现乱码，即读取到错误的内存数据。
+
+---
+
+> 解决
+
+```C++
+  snprintf(desc, sizeof(save_err), "%s", error_str.c_str());
+```
+属于一个C C++ 混合编程的问题。
+
+这种问题有点像语法糖，或者是学校那种考试所出的题目，非常无聊。。。。。。
+
+> 注意
+
+- 优先使用C++存储字符串，它会自动处理结束符；
+- 使用C风格字符串时，注意结束符；
+- TODO: std::string_view?
 
 ---
