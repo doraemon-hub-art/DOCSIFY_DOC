@@ -52,10 +52,10 @@ https://docs.astronvim.com/#-requirements
 ```bash
 # 下载.appimage ；
 https://github.com/neovim/neovim/releases/tag/stable 
-# 重命名
-mv nvim-linux-x86_64.appimage nvim；
+# 重命名awd
+mv nvim-linux-x86_64.appimage nvim
 # 权限&全局安装
-chmod +x ./nvim；
+chmod +x ./nvim
 mv ./nvim /usr/local/bin
 nvim --version
 ```
