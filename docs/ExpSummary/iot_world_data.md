@@ -18,34 +18,43 @@ section {
 
 假定现有通信三方，云端、APP端、设备端(Linux)，的一套IOT(物联网)系统。
 
-TODO: 简约系统图
+```plantuml
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam packageStyle frame
+skinparam DatabaseBackgroundColor #E1F5FE
+skinparam ComponentBackgroundColor #F5F5F5
 
-<div class="mermaid">
-architecture-beta
-    group api(cloud)[API]
+title "一个典型的 IOT 系统链路图"
 
-    service db(database)[Database] in api
-    service disk1(disk)[Storage] in api
-    service disk2(disk)[Storage] in api
-    service server(server)[Server] in api
+' 为了让布局更美观，建议从左往右
+actor "用户" as user
 
-    db:L -- R:server
-    disk1:T -- B:server
-    disk2:T -- B:db
-</div>
+node "控制终端" {
+    [APP] as app
+}
 
-```mermaid
-architecture-beta
-    group api(cloud)[API]
+cloud "物联网云平台 (Cloud)" as cloud {
+    [MQTT Broker] as mqtt
+    [API Gateway] as api
+    database "数据库" as db
+}
 
-    service db(database)[Database] in api
-    service disk1(disk)[Storage] in api
-    service disk2(disk)[Storage] in api
-    service server(server)[Server] in api
+node "硬件设备 (Device)" {
+    [传感器/执行器] as device
+}
 
-    db:L -- R:server
-    disk1:T -- B:server
-    disk2:T -- B:db
+
+user -right-> app : 1. 操作(控制/查看)
+
+app -right-( api : 2. RESTful/WebSocket 请求
+api --> db : 存储/查询状态
+api --> mqtt : 触发指令下发
+
+mqtt <..> device : 3. MQTT 双向通讯\n(状态上报/指令接收)
+
+@enduml
 ```
 
 ---
@@ -61,6 +70,23 @@ TODO: 业务功能流程图
 2. 设备端解析云端下发的任务，进行下载&安装，之后更新job-id状态；
 
 3. APP 轮询云端接口，通过JOB-ID 来查询最终的结果，如果完成，则触发云端的更新接口，同步最终升级的版本；
+
+```plantuml
+@startuml
+
+participant APP as app
+participant Device as device
+participant Cloud as cloud
+
+app -> cloud : request
+cloud -> device : 创建任务&下发
+device -> cloud : 更新状态
+app -> cloud : 检查状态
+app -> cloud : 更新
+
+
+@enduml
+```
 
 ---
 
