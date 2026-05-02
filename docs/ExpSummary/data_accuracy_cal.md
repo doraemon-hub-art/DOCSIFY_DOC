@@ -1,3 +1,13 @@
+---
+marp: true
+---
+
+<style>
+section {
+  align-content: start;
+}
+</style>
+
 > 一个精度计算问题
 
 # 
