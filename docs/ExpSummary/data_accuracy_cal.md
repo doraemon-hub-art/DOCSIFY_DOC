@@ -10,9 +10,7 @@ section {
 
 > 一个精度计算问题
 
-# 
-
-AWS KVS 中，调用延迟的单位是 100ns，为什么？
+AWS KVS WebRTC C SDK 中，调用延迟的单位是 100ns，为什么？
 
 详见源码 —— [amazon-kinesis-video-streams-webrtc-sdk-c/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c/blob/ef4649473b2d1dc25215eca9d21cda6c802c06f2/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h#L605)
 
@@ -20,6 +18,8 @@ AWS KVS 中，调用延迟的单位是 100ns，为什么？
 UINT64 cpApiCallLatency;         //!< Latency (in 100 ns) incurred per backend API call for the control plane APIs
 UINT64 dpApiCallLatency;         //!< Latency (in 100 ns) incurred per backend API call for the data plane APIs
 ```
+
+---
 
 > 可能的原因
 
@@ -59,3 +59,7 @@ UINT64为无符号整数，无法表示小数。
 精度: 测量值离真实值有多近。
 
 ---
+
+> 小结
+
+一个小单位引起的思考，主要涉及值表示范围，以及跨平台兼容性的思考。
