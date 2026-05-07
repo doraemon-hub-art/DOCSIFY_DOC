@@ -122,8 +122,16 @@ stop
 隐藏类细节，强调连线含义。对于一张用来表达架构（尤其是系统级架构）的图来说，“简单”往往意味着更好，
 
 
+> 补充
 
-箭头 ->/--> -的数量代表长度，可以在其中使用方向(right/left/down)来控制布局。
+- 箭头 ->/--> -的数量代表长度，可以在其中使用方向(right/left/down)来控制布局；
+- note right语法的注释，会因为布局问题，被布置的很远，可以用 note on link；
+
+```puml
+note on link #Blue
+  <color:white><b>[Bind Flow Start]</b></color>
+end note
+```
 
 
 ## 类图
@@ -149,5 +157,35 @@ stop
 > vscode 复制图片的清晰度
 
 可以多次放大后，然后再点击复制，这样粘贴出来的图片会清晰很多。
+
+> 内置图形
+
+PlantUML 支持多种内置形状（shapes），主要用于组件图、部署图和活动图中。
+
+```puml
+@startuml
+component "组件" as comp
+node "节点" as node
+interface "接口" as iface
+database "数据库" as db
+file "文件" as file
+folder "文件夹" as folder
+frame "框架" as frame
+package "包" as pkg
+cloud "云" as cloud
+actor "角色" as actor
+usecase "用例" as uc
+rectangle "矩形" as rect
+card "卡片" as card
+queue "队列" as queue
+storage "存储" as storage
+@enduml
+```
+
+> 对于一些图的命名我总是分不清
+
+- 架构组件 + 业务数据流 ---> 系统交互流程图
+
+TODO: 拆分多个内容，做成系列视频
 
 ---
