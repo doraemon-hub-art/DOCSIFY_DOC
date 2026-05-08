@@ -39,6 +39,7 @@ cloud "物联网云平台 (Cloud)" as cloud {
     [MQTT Broker] as mqtt
     [API Gateway] as api
     database "数据库" as db
+    [DEVUCE SHADOW] as device_shadow
 }
 
 node "硬件设备 (Device)" {
@@ -154,7 +155,9 @@ TODO:
 
 ---
 
-> 如何设计架构？
+> 如何设计IOT架构？
+
+TODO: 是否要局限于IOT？ 还是泛化的通信系统？
 
 区分角色，思考结果。
 
@@ -185,4 +188,4 @@ AI辅助开发，需要工程师根据业务需求，翻译成一套技术上自
 ---
 
 
-TODO: Device Shadow
+TODO: Device Shadow，可用于之后的IOT扩展内容；

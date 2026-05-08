@@ -188,4 +188,9 @@ storage "存储" as storage
 
 TODO: 拆分多个内容，做成系列视频
 
+> VSCode小技巧
+
+- 光标防灾Markdown中的puml代码块，Ctrl+D可以直接只渲染对应的puml图；
+- 移动光标到其他puml代码块，直接可以渲染；
+
 ---
