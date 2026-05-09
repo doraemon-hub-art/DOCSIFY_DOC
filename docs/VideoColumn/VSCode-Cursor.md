@@ -33,4 +33,8 @@ astronvim 接入 neovim对应的插件；
 
 貌似当一个文件超过850行，就会发生截断。
 
+- 有时候会卡主；
+
+![](https://oss.banshengua.top/blogimages/202605091518541.png)
+
 ---
