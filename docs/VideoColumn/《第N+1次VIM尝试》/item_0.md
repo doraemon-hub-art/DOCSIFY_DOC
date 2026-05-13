@@ -133,6 +133,10 @@ https://astronvim.github.io/astrocommunity/
 
 或者直接输入 Lazy update。
 
+如果你要在社区的默认配置上修改，仍然需要像原生NeoVim方式引入那样，创建对应的lua文件，自己配置。
+
+同样的，删除插件时，仅仅删除community.lua中对应插件的引入是不够的，如果你有自定义配置，同样要删除对应的lua文件，或者让他提前return。
+
 ---
 
 ## 快捷键
