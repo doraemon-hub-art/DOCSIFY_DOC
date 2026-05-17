@@ -10,7 +10,7 @@ section {
 
 > 一个精度计算问题
 
-AWS KVS WebRTC C SDK 中，调用延迟的单位是 100ns，为什么？
+AWS KVS WebRTC C SDK 中，调用延迟的单位是 100ns（纳秒），为什么？
 
 详见源码 —— [amazon-kinesis-video-streams-webrtc-sdk-c/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c/blob/ef4649473b2d1dc25215eca9d21cda6c802c06f2/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h#L605)
 
