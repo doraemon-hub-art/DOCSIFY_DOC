@@ -160,6 +160,21 @@ git tag -a v2.3.1 HEAD -m "修复登录Bug，优化性能"
 # 指定commit
 git tag -a v2.3.0 a1b2c3d -m "补打标签"
 
+# 推送到远程
+git push origin --tags 
+
+# 显示差异
+# 文件
+git diff <tag_name_1> <tag_name_2>
+# commit列表
+git log <tag_name_1>..<tag_name_2>
 ```
+
+> 补充
+
+- Git 是基于“图（Graph）”而不是“分支（Branch）”;
+- Git 的 git log A..B 命令实际上是在进行集合运算：
+  - 计算逻辑：找到所有“能从 B 到达，但不能从 A 到达”的提交;
+  - 物理前提：A 和 B 在 Git 的对象数据库中必须有祖先-后代关系;
 
 ---
