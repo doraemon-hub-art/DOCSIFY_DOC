@@ -40,5 +40,6 @@ astronvim 接入 neovim对应的插件；
 
 - 会吞对话，这个巨烦人，你他妈编辑了半天，发出去就没了；
 - 无法渲染Markdown表格；
+- Chat和Aigent不会自动区分；
 
 ---
