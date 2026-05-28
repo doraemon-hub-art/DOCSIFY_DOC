@@ -39,4 +39,24 @@ candidate:1 1 UDP ... abcdef.local 54321 typ host ...
 
 ---
 
+> 需要后续从此开始整理
+
+---
+
+# 概念 
+
+## 双栈（Dual Stack）
+
+双栈指的是设备同时支持 IPv4 和 IPv6。当程序调用 getaddrinfo() 解析域名时，glibc 默认同时发出 A（IPv4）和 AAAA（IPv6）两种 
+DNS 查询。
+
+在你抓包中看到的：
+
+设备 → 8.8.8.8:  A? m-f3e86af6...     (查 IPv4)
+设备 → 8.8.8.8:  AAAA? m-f3e86af6...  (查 IPv6)
+
+---
+
+# 调试&问题排查
+
 
