@@ -18,3 +18,10 @@ cargo fmt --check
 ```
 
 - 基于上述 Rust 官方风格进行格式化；
+
+> 注释风格
+
+Rust同样有类似于Doxygen的统一风格注释工具，可以用于生成Api文档。
+
+- Rustdoc；
+
