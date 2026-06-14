@@ -8,7 +8,7 @@ section {
 }
 </style>
 
-> 一个精度计算问题
+# 一个精度计算问题
 
 AWS KVS WebRTC C SDK 中，调用延迟的单位是 100ns（纳秒），为什么？
 
@@ -21,7 +21,9 @@ UINT64 dpApiCallLatency;         //!< Latency (in 100 ns) incurred per backend A
 
 ---
 
-> 可能的原因
+# 可能的原因
+
+> 跨平台设计
 
 - 与 Windows FILETIME 对齐，即SDK跨平台兼容设计/历史原因；
   - 避免单位转换，以减少精度丢失；
@@ -38,16 +40,14 @@ typedef struct _FILETIME {
   DWORD dwHighDateTime;
 } FILETIME, *PFILETIME, *LPFILETIME;
 ```
-
+ 阿达阿瓦的
 ---
 
-- 那 Unix(Linux) 中呢？
+- 那 Linux(Unx)中呢？
 
 在 Unix 系列系统（Linux, macOS, BSD 等）中，时间单位的设计与 Windows 有所不同，它主要经历了从微秒（μs）到纳秒（ns）的演进。
 
-在早期的 Unix 系统和经典的 BSD 接口中，最常用的结构体是 struct timeval。
-
-1. 传统标准：微秒 (Microseconds, 1,000ns)
+1. 传统标准：微秒级 (Microseconds, 1,000ns)
 
 ```C++
 struct timeval {
@@ -56,9 +56,7 @@ struct timeval {
 };
 ```
 
----
-
-2. 现代标准：纳秒 (Nanoseconds, 1ns)
+2. 现代标准：纳秒级 (Nanoseconds, 1ns)
 
 ```C++
 struct timespec {
@@ -67,21 +65,20 @@ struct timespec {
 };
 ```
 
-总结: 
+---
 
-| 系统/标准 |	最小单位 |	备注 |
-| --- | --- | --- |
-| Unix (Legacy) |	1,000 ns (1μs) |	精度比 Windows 低 10 倍 |
-| Windows	| 100 ns |	处于中间位置 |
-| Unix (Modern)	| 1 ns | 精度比 Windows 高 100 倍 |
+- 总结: 
+
+| 特性 | `struct timeval` (Unix) | `struct timespec` (Unix) | `FILETIME` (Windows) |
+| :--- | :--- | :--- | :--- |
+| **最小单位(粒度)** | 1 微秒 ($10^{-6}$s) | 1 纳秒 ($10^{-9}$s) | **100 纳秒** ($10^{-7}$s) |
+| **数值“1”代表** | 1 微秒 | 1 纳秒 | 100 纳秒 |
+| **起始时间** | 1970-01-01 | 1970-01-01 | 1601-01-01 |
+| **数据布局** | 秒 + 微秒 (两个成员) | 秒 + 纳秒 (两个成员) | 64位整数 (拆分为高低位) |
 
 ---
 
-TODO: 
-1. 进一步引出来，时间单位的取舍；
-2. 调整标题&格式；
-
----
+## 选择的取舍
 
 - 时间单位选择的取舍;
 
