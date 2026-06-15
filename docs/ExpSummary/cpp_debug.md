@@ -46,3 +46,19 @@ stack dump [6]  /path/to/your_bin+0x16dw54 [0x52318be54]
 # 注意strip了，无法解析 去掉-s 添加-g,或者显式CMKAE指定
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type -O2 -s")
 ```
+
+
+---
+
+# Traffic Control
+
+在 Linux 环境下，最常用的网络模拟工具是内核自带的 tc (Traffic Control) 工具，配合 netem (Network Emulator) 模块。它可以模拟延迟、丢包、抖动、重复包及包乱序等多种网络状况。
+
+
+TODO: 补充
+
+> 延迟验证
+
+```bash
+ping -c 5 <目标IP>
+```
