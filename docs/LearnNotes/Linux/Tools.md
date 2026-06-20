@@ -90,6 +90,8 @@ sudo apt install fuse
 
 ## 集成到系统快速搜索中
 
+> 方法一
+
 ```bash
 # 官方的PPA
 sudo add-apt-repository ppa:appimagelauncher-team/stable
@@ -109,6 +111,15 @@ https://github.com/TheAssas sin/AppImageLauncher/releases
 ![](https://oss.banshengua.top/blogimages/202510212032565.png)
 
 ![](https://oss.banshengua.top/blogimages/202510212033122.png)
+
+---
+
+> 方法二
+
+```bash
+chmod +x xx.appimage
+sudo mv xx.appimage /usr/local/bin/xx
+```
 
 ---
 
