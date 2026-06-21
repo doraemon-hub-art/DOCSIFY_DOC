@@ -216,3 +216,77 @@ module.func3()
 
 ......
 
+> 元表
+
+给table自定义一些方法。
+
+---
+
+> Coroutines 协程
+
+其实就类似于在普通函数中，通过全局变量来控制每次的执行，只不过那样的话，需要很多else if。
+
+示例: 在游戏开发中，某个 NPC 的行为控制。
+
+......
+
+```lua
+-- 1. 创建一个协程
+local co = coroutine.create(function()
+    for i = 1, 2 do
+        print("协程运行中", i)
+        -- 2. 暂停执行，并交回控制权
+        coroutine.yield() 
+    end
+    print("协程结束")
+end)
+
+-- 3. 启动/恢复执行
+coroutine.resume(co) -- 输出：协程运行中 1
+print("回到主线程")
+coroutine.resume(co) -- 输出：协程运行中 2
+coroutine.resume(co) -- 输出：协程结束
+```
+
+---
+
+> 垃圾回收
+
+Lua采用自动内存管理，运行了了一个垃圾收集器来收集所有的死对象。
+
+---
+
+> 面向对象
+
+Lua 语言中并没有原生（Native）的 class 关键字。Lua 的面向对象（OOP）是基于 原型（Prototype） 的模式实现的，这与 JavaScript 类似。
+
+```lua
+-- 1. 定义一个表作为“类”的原型
+Shape = { area = 0 }
+
+-- 2. 定义“构造函数”
+function Shape:new(o)
+    o = o or {}       -- 如果用户没传表，就新建一个
+    setmetatable(o, self) -- 将新表的元表设为 Shape
+    self.__index = self   -- 关键：找不到属性时，回 Shape 找
+    return o
+end
+
+-- 3. 定义“成员方法”
+function Shape:printArea()
+    print("面积为: ", self.area)
+end
+
+-- 4. 实例化对象
+local myShape = Shape:new({area = 100})
+myShape:printArea() -- 输出 100
+```
+
+---
+
+# 应用场景
+
+- 游戏开发脚本；
+- 软件配置与扩展;
+
+......
