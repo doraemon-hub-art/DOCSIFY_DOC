@@ -134,3 +134,21 @@ ln -s target_file source_file
 查看当前所有ssh用户。
 
 ---
+
+# 网络
+
+## /etc/hosts
+
+/etc/hosts 是 Linux/Unix 系统上的本地静态 DNS 解析文件。
+
+> 作用
+
+当程序通过域名访问一个地址（如 kinesisvideo.ap-east-1.amazonaws.com）时，系统会按以下顺序查找域名对应的 IP：
+
+1. /etc/hosts ← 最先检查（本地静态）；
+2. DNS 缓存（nscd/systemd-resolved）；
+3. 网络 DNS 服务器（如 8.8.8.8）；
+
+**如果 /etc/hosts 中匹配到了域名，就直接使用文件中的 IP，不再去查网络 DNS。**
+
+---
