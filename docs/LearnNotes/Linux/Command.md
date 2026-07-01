@@ -152,3 +152,18 @@ ln -s target_file source_file
 **如果 /etc/hosts 中匹配到了域名，就直接使用文件中的 IP，不再去查网络 DNS。**
 
 ---
+
+# Grep
+
+> 过滤你需要的内容
+
+TODO: 常用的内容用不用总结到开发文档中？
+
+支持多个正则条件这个老是记不住。
+
+```bash
+grep "xx"
+
+grep -E "xx|xx"
+```
+---
