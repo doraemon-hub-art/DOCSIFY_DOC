@@ -117,3 +117,12 @@ update(tools): 更新多篇工具类笔记内容
 
 revert 就使用Git默认生成的Commit信息即可。
 
+补充一个这里不涉及到的分支命名:
+
+- **fix/xx-xx-xx-xx、feat/、chore/、docs/ 这种斜杠风格**;
+  - 需要拥抱这个命名格式;
+- fix_、feat_、......;
+  - 长久以来我都是这种风格；
+
+---
+
