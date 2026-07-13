@@ -51,6 +51,9 @@ git clone <your-repo-url> ~/.config/lvim
 
 ```bash
 git rebase -i dev
+
+git rebase -i HEAD~X
+# 要合并的提交前缀改成 f
 ```
 
 > 设置局部文件夹git config配置
@@ -196,5 +199,14 @@ git log <tag_name_1>..<tag_name_2>
 
 - 创建.gitingore文件；
 - 填入相关类型、目录；
+
+---
+
+# 提交拆分
+
+一大笔提交，可以根据修改内容，拆成多笔小提交。
+
+- 不一定要保持每笔提交独立性，因为依赖无法避免；
+  - 可以根据修改内容，进行改动点的拆分；
 
 ---
