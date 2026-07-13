@@ -5,6 +5,14 @@
 
 ---
 
+# 常用软件安装
+
+## 搜狗输入法
+
+TODO： zhengli yi xia 
+
+---
+
 # terminator 超级终端
 
 > 参考文章 
