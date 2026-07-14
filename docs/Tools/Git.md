@@ -108,6 +108,45 @@ git revert xx
 
 ---
 
+# SSH 密钥认证
+
+> 1. 生成 SSH 密钥对
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+- 会生成两个文件：
+  - ~/.ssh/id_ed25519（私钥，自己保管）
+  - ~/.ssh/id_ed25519.pub（公钥，放到 GitHub）
+
+> 2. 将公钥添加到 GitHub
+
+- 复制公钥内容：cat ~/.ssh/id_ed25519.pub
+- 打开 https://github.com/settings/keys
+- 点击 New SSH Key
+- 粘贴公钥，命名保存
+
+> 3. 验证
+
+```bash
+ssh -T git@github.com
+```
+
+输出：Hi xxx! You've successfully authenticated...
+
+> 4. 使用
+
+clone 仓库时用 SSH 地址：
+
+```bash
+git clone git@github.com:用户名/仓库名.git
+```
+
+之后 git push、git pull 都不需要输密码了。
+
+---
+
 # 概念补充
 
 ## 常见的代码提交平台
