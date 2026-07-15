@@ -313,6 +313,15 @@ cloc .
 
 ---
 
+# SSH 密钥登录配置
+
+```bash
+ssh-keygen -t ed25519          # 客户端生成密钥
+ssh-copy-id user@server        # 复制公钥到服务端（需一次密码）
+ssh user@server                # 之后免密登录 ✓
+```
+---
+
 # 系统时间
 
 > 硬件时钟和软件时钟
