@@ -13,7 +13,7 @@ TODO： zhengli yi xia
 
 ---
 
-# terminator 超级终端
+## terminator 超级终端
 
 > 参考文章 
 
