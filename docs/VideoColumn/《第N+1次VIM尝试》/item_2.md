@@ -5,3 +5,8 @@
 
 - https://www.youtube.com/watch?v=m8C0Cq9Uv9o
 - https://github.com/nvim-lua/kickstart.nvim
+
+> reference
+
+- https://wsdjeg.net/neovim-config-best-practices
+
