@@ -47,6 +47,15 @@ message(STATUS "TOP: Submodule path is ${SUBMODULE_PATH}")
   - BUILD_SHARED_LIBS / BUILD_TESTING：官方生态级约定 也是原生自带
 - 其他为开发自定义；
 
+> LSP 依赖
+
+```bash
+# 导出
+cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+# 软连接
+ln -sf ../../build/compile_commands.json compile_commands.json 
+
+```
 
 ---
 
