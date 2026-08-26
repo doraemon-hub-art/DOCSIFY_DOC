@@ -2047,3 +2047,27 @@ string的size/length方法，计算的大小不包括结尾的结束符\0，只�
 
 ---
 
+# 11. 条件变量的提前检查
+
+> wait 和 wait_for
+
+- wait(lock) —— 没条件，没法检查，直接等；
+- wait(lock, pred) —— 有条件，进来先看一眼，不用等就不等；
+- wait_for(lock, dur, pred) —— 同上 + 超时；
+
+> 提前唤醒检查: 把条件放进 pred 就是替代了那个手动 flag。
+ 
+```cpp
+  // 消费者自己先检查 flag，防止提前到达
+  if (!data_ready) {
+      cv.wait(lock);
+  }
+``` 
+    
+有 predicate 重载就不用手动自己写这一步了。
+
+```cpp
+cv.wait(lock, [&]{ return data_ready; }) 
+```
+
+---
