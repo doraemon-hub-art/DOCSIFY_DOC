@@ -158,4 +158,35 @@ ssh -p 6000 内网用户名@ssh.yourdomain.com
 
 ---
 
+# 问题参考
+
+## ssh访问卡顿
+
+> 排查所处网络环境问题
+
+根因链路：
+    
+```bash
+SSH 请求 → DNS 解析域名
+          ↓
+resolvectl → 192.168.1.250（旁路由）
+          ↓
+旁路由 Clash 拦截 → 返回 fake-ip（198.18.x.x）
+          ↓
+SSH 连 fake-ip → 流量走 tun0 代理 → 多跳转发 → 延迟高+不稳定
+```
+
+两条 DNS 路径都断了：
+- /etc/resolv.conf 是普通文件写死 114.114.114.114 → glibc 拿 fake-ip
+- cscotun0 (Cisco VPN) 挂着 DNS Domain: ~. → 所有域名走 VPN DNS → 也是 fake-ip
+
+修复（三件事）：
+1. sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf → glibc 走 systemd-resolved
+2. sudo resolvectl domain cscotun0 "" → 去掉 VPN DNS 劫持（VPN 断了所以这步没实际跑成）
+3. /etc/hosts 写死 → 暴力绕过所有 DNS 层面
+
+最终效果：SSH 直接直连真实 IP，不走代理不绕路，不卡了。
+
+---
+
 Thanks.
