@@ -39,7 +39,7 @@ def is_article(rel_path: Path) -> bool:
         return False
     if rel_path.name.startswith("_"):               # _sidebar.md / _navbar.md 等配置文件
         return False
-    if str(rel_path) == "README.md":                # 根目录主站首页不计
+    if rel_path.name == "README.md":                # 各目录首页 README 不计（含根目录）
         return False
     if rel_path.parts[0] == "WebsiteInfo":          # 网站信息区自身不计
         return False

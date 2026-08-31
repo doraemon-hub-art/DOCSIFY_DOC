@@ -1,18 +1,17 @@
 # 文件信息
 
-> 按最后更新时间倒序，共 136 篇。数据由 collect_info.py 自动生成（2026-08-30 22:08:09），请勿手写编辑。
+> 按最后更新时间倒序，共 104 篇。数据由 collect_info.py 自动生成（2026-08-31 23:42:06），请勿手写编辑。
 
 | 文件 | 字数 | 创建时间 | 最后更新 |
 |---|---|---|---|
+| [ExpSummary/code_summary.md](../ExpSummary/code_summary.md) | 2,632 | 2026-05-15 18:26:37 | 2026-08-31 23:37:45 |
 | [Tools/FRP.md](../Tools/FRP.md) | 819 | 2026-07-12 23:33:20 | 2026-08-28 23:59:09 |
-| [ExpSummary/code_summary.md](../ExpSummary/code_summary.md) | 2,518 | 2026-05-15 18:26:37 | 2026-08-28 23:59:09 |
 | [EmbeddedAtelier/concept.md](../EmbeddedAtelier/concept.md) | 12 | 2026-08-28 23:59:09 | 2026-08-28 23:59:09 |
 | [AI/Agent/hermes.md](../AI/Agent/hermes.md) | 16 | 2026-08-28 23:59:09 | 2026-08-28 23:59:09 |
 | [LearnNotes/Cpp/CppFeature.md](../LearnNotes/Cpp/CppFeature.md) | 10,644 | 2025-09-10 01:13:33 | 2026-08-26 11:33:38 |
 | [ExpSummary/split_control_data.md](../ExpSummary/split_control_data.md) | 27 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
 | [ExpSummary/serial_common.md](../ExpSummary/serial_common.md) | 299 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
 | [EmbeddedAtelier/serial_common_concept.md](../EmbeddedAtelier/serial_common_concept.md) | 31 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
-| [ExpSummary/README.md](../ExpSummary/README.md) | 288 | 2026-04-18 12:38:14 | 2026-08-11 21:24:26 |
 | [Tools/CMake.md](../Tools/CMake.md) | 232 | 2025-09-09 11:29:16 | 2026-08-10 21:27:30 |
 | [ExpSummary/iot_world_data.md](../ExpSummary/iot_world_data.md) | 1,163 | 2026-04-20 21:27:45 | 2026-07-31 21:28:05 |
 | [VideoColumn/《第N+1次VIM尝试》/item_2.md](../VideoColumn/《第N+1次VIM尝试》/item_2.md) | 24 | 2026-06-20 23:27:30 | 2026-07-25 18:25:51 |
@@ -24,33 +23,26 @@
 | [Tools/Git.md](../Tools/Git.md) | 1,309 | 2025-09-13 22:56:27 | 2026-07-14 23:58:28 |
 | [LearnNotes/Cpp/CustomDevGuide.md](../LearnNotes/Cpp/CustomDevGuide.md) | 84 | 2026-06-20 23:27:30 | 2026-07-14 21:25:39 |
 | [WebsiteTodo.md](../WebsiteTodo.md) | 2,065 | 2025-09-10 01:13:33 | 2026-07-08 21:24:33 |
-| [LearnNotes/RobotAndAutoPilot/README.md](../LearnNotes/RobotAndAutoPilot/README.md) | 13 | 2025-10-25 18:30:11 | 2026-07-08 21:24:33 |
 | [PlayGround/Posts/AI 下的思考.md](../PlayGround/Posts/AI 下的思考.md) | 8 | 2026-06-26 21:01:53 | 2026-07-01 21:25:21 |
 | [LearnNotes/Linux/Command.md](../LearnNotes/Linux/Command.md) | 800 | 2025-09-28 14:32:28 | 2026-07-01 21:25:21 |
 | [LearnNotes/Lua/HelloWorld.md](../LearnNotes/Lua/HelloWorld.md) | 1,086 | 2026-06-20 23:27:30 | 2026-06-21 22:55:58 |
 | [LearnNotes/Rust/CustomDevGuide.md](../LearnNotes/Rust/CustomDevGuide.md) | 40 | 2026-06-20 23:27:30 | 2026-06-20 23:27:30 |
-| [LearnNotes/Lua/README.md](../LearnNotes/Lua/README.md) | 5 | 2026-06-20 23:27:30 | 2026-06-20 23:27:30 |
-| [VideoColumn/《第N+1次VIM尝试》/README.md](../VideoColumn/《第N+1次VIM尝试》/README.md) | 37 | 2026-06-16 21:13:22 | 2026-06-16 21:13:22 |
 | [ExpSummary/cpp_debug.md](../ExpSummary/cpp_debug.md) | 290 | 2026-06-05 18:19:37 | 2026-06-15 21:09:54 |
 | [ExpSummary/data_accuracy_cal.md](../ExpSummary/data_accuracy_cal.md) | 647 | 2026-04-20 21:27:45 | 2026-06-14 23:09:26 |
 | [AI/Agent/Skill.md](../AI/Agent/Skill.md) | 53 | 2026-06-12 18:19:30 | 2026-06-12 18:19:30 |
-| [AI/Agent/README.md](../AI/Agent/README.md) | 9 | 2026-06-12 18:19:30 | 2026-06-12 18:19:30 |
 | [AI/Agent/Concept.md](../AI/Agent/Concept.md) | 2,653 | 2026-06-12 18:19:30 | 2026-06-12 18:19:30 |
 | [LearnNotes/Rust/FormatAndStyle.md](../LearnNotes/Rust/FormatAndStyle.md) | 114 | 2026-06-05 18:19:37 | 2026-06-09 21:27:11 |
 | [ExpSummary/websocket_wss_error.md](../ExpSummary/websocket_wss_error.md) | 59 | 2026-05-21 21:25:07 | 2026-06-04 21:25:27 |
 | [LearnNotes/Network/Concept.md](../LearnNotes/Network/Concept.md) | 400 | 2025-11-17 00:59:38 | 2026-05-28 21:26:46 |
 | [LearnNotes/Linux/OS.md](../LearnNotes/Linux/OS.md) | 925 | 2025-09-28 14:32:28 | 2026-05-28 21:26:46 |
-| [VideoColumn/README.md](../VideoColumn/README.md) | 159 | 2026-01-11 21:22:47 | 2026-05-23 23:46:59 |
 | [VideoColumn/VSCode-Cursor.md](../VideoColumn/VSCode-Cursor.md) | 445 | 2026-04-25 21:13:45 | 2026-05-22 18:32:22 |
 | [LearnNotes/RobotAndAutoPilot/MiddleWare.md](../LearnNotes/RobotAndAutoPilot/MiddleWare.md) | 216 | 2026-05-22 18:32:22 | 2026-05-22 18:32:22 |
 | [LearnNotes/RobotAndAutoPilot/ROS2/ethercat.md](../LearnNotes/RobotAndAutoPilot/ROS2/ethercat.md) | 94 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [LearnNotes/RobotAndAutoPilot/ROS2/TSN.md](../LearnNotes/RobotAndAutoPilot/ROS2/TSN.md) | 0 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [LearnNotes/RobotAndAutoPilot/ROS2/ROS2FirstTouch.md](../LearnNotes/RobotAndAutoPilot/ROS2/ROS2FirstTouch.md) | 2,911 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
-| [LearnNotes/RobotAndAutoPilot/ROS2/README.md](../LearnNotes/RobotAndAutoPilot/ROS2/README.md) | 27 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [LearnNotes/RobotAndAutoPilot/ROS2/EtherCAT.md](../LearnNotes/RobotAndAutoPilot/ROS2/EtherCAT.md) | 94 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [LearnNotes/RobotAndAutoPilot/ROS2/DDS.md](../LearnNotes/RobotAndAutoPilot/ROS2/DDS.md) | 1,269 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [LearnNotes/RobotAndAutoPilot/ROS/Reference.md](../LearnNotes/RobotAndAutoPilot/ROS/Reference.md) | 75 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
-| [LearnNotes/RobotAndAutoPilot/ROS/README.md](../LearnNotes/RobotAndAutoPilot/ROS/README.md) | 19 | 2026-05-22 11:16:15 | 2026-05-22 11:16:15 |
 | [Tools/Marp.md](../Tools/Marp.md) | 194 | 2026-03-06 21:20:00 | 2026-05-20 21:28:01 |
 | [ExpSummary/git_version_diff.md](../ExpSummary/git_version_diff.md) | 150 | 2026-05-20 21:28:01 | 2026-05-20 21:28:01 |
 | [VideoColumn/《第N+1次VIM尝试》/item_0.md](../VideoColumn/《第N+1次VIM尝试》/item_0.md) | 1,981 | 2026-03-22 23:22:21 | 2026-05-14 21:22:30 |
@@ -63,67 +55,49 @@
 | [LearnNotes/Rust/TheRustProgrammingLanguage.md](../LearnNotes/Rust/TheRustProgrammingLanguage.md) | 6,750 | 2026-01-25 20:29:45 | 2026-04-09 21:22:13 |
 | [Tools/GDB.md](../Tools/GDB.md) | 873 | 2025-09-05 14:09:10 | 2026-03-30 21:18:28 |
 | [LearnNotes/AWS/WebRTC.md](../LearnNotes/AWS/WebRTC.md) | 1,465 | 2025-11-26 20:59:32 | 2026-03-26 21:17:07 |
-| [PlayGround/modeling/README.md](../PlayGround/modeling/README.md) | 4 | 2026-03-09 21:25:52 | 2026-03-09 21:25:52 |
 | [PlayGround/modeling/OpenSCAD.md](../PlayGround/modeling/OpenSCAD.md) | 6 | 2026-03-09 21:25:52 | 2026-03-09 21:25:52 |
 | [Tools/VSCodeTips.md](../Tools/VSCodeTips.md) | 407 | 2025-10-16 20:59:27 | 2026-03-05 21:20:50 |
 | [PlayGround/Posts/【2025年终总结】我没有翻过那座山，但也并非空手而归。.md](../PlayGround/Posts/【2025年终总结】我没有翻过那座山，但也并非空手而归。.md) | 3,458 | 2026-01-03 23:48:13 | 2026-02-28 22:32:47 |
 | [LearnNotes/SourceCode/OpenSourceLicense.md](../LearnNotes/SourceCode/OpenSourceLicense.md) | 110 | 2026-02-25 21:04:37 | 2026-02-27 21:12:43 |
 | [LearnNotes/SourceCode/g3log.md](../LearnNotes/SourceCode/g3log.md) | 328 | 2026-02-25 21:04:37 | 2026-02-26 20:51:40 |
-| [LearnNotes/SourceCode/README.md](../LearnNotes/SourceCode/README.md) | 6 | 2026-02-25 21:04:37 | 2026-02-25 21:04:37 |
 | [PlayGround/Posts/【捡垃圾】8500+Z370P DIY NAS.md](../PlayGround/Posts/【捡垃圾】8500+Z370P DIY NAS.md) | 772 | 2026-02-23 23:30:46 | 2026-02-23 23:30:46 |
 | [PlayGround/Posts/【捡垃圾】5700x+6750GRE ITX装机.md](../PlayGround/Posts/【捡垃圾】5700x+6750GRE ITX装机.md) | 1,065 | 2026-02-23 23:30:46 | 2026-02-23 23:30:46 |
 | [PlayGround/Posts/Picgo+阿里云OSS图床配置.md](../PlayGround/Posts/Picgo+阿里云OSS图床配置.md) | 131 | 2026-02-23 23:30:46 | 2026-02-23 23:30:46 |
 | [LearnNotes/JavaScript/JavaScriptNotes.md](../LearnNotes/JavaScript/JavaScriptNotes.md) | 2,364 | 2025-10-16 20:59:27 | 2026-01-26 21:00:23 |
 | [SandBox/UbuntuWorkSpace.md](../SandBox/UbuntuWorkSpace.md) | 21 | 2026-01-25 20:26:16 | 2026-01-25 20:26:16 |
-| [LearnNotes/Rust/README.md](../LearnNotes/Rust/README.md) | 13 | 2026-01-25 20:26:16 | 2026-01-25 20:26:16 |
 | [LearnNotes/AudioVideo/VideoConcept.md](../LearnNotes/AudioVideo/VideoConcept.md) | 397 | 2025-12-10 21:16:47 | 2026-01-13 20:52:40 |
 | [Tools/LunarVim.md](../Tools/LunarVim.md) | 1,061 | 2025-09-12 20:11:54 | 2025-12-29 20:57:28 |
 | [LearnNotes/DevGuides/NameStyle.md](../LearnNotes/DevGuides/NameStyle.md) | 41 | 2025-12-29 20:57:28 | 2025-12-29 20:57:28 |
 | [PlayGround/Guitar/新手入门歌曲.md](../PlayGround/Guitar/新手入门歌曲.md) | 166 | 2025-12-12 00:16:20 | 2025-12-28 21:58:23 |
 | [EmbeddedAtelier/STM32/Concept.md](../EmbeddedAtelier/STM32/Concept.md) | 70 | 2025-12-28 21:58:23 | 2025-12-28 21:58:23 |
 | [PlayGround/Posts/【捡垃圾】KeychronQ11.md](../PlayGround/Posts/【捡垃圾】KeychronQ11.md) | 1,660 | 2025-12-21 19:20:06 | 2025-12-21 19:20:06 |
-| [PlayGround/Posts/README.md](../PlayGround/Posts/README.md) | 216 | 2025-11-30 15:33:45 | 2025-12-21 19:20:06 |
 | [LearnNotes/Other/Car.md](../LearnNotes/Other/Car.md) | 726 | 2025-09-22 20:26:08 | 2025-12-17 21:05:41 |
 | [LearnNotes/Cpp/ImportThirdLib.md](../LearnNotes/Cpp/ImportThirdLib.md) | 190 | 2025-12-11 21:19:12 | 2025-12-16 21:21:15 |
 | [Tools/Shell.md](../Tools/Shell.md) | 168 | 2025-11-05 21:04:34 | 2025-12-15 21:23:21 |
 | [Tools/Docsify.md](../Tools/Docsify.md) | 440 | 2025-10-20 00:30:09 | 2025-12-12 00:16:20 |
 | [LearnNotes/AudioVideo/AWSKVSGuide.md](../LearnNotes/AudioVideo/AWSKVSGuide.md) | 8 | 2025-12-11 21:19:12 | 2025-12-11 21:19:12 |
-| [LearnNotes/AudioVideo/README.md](../LearnNotes/AudioVideo/README.md) | 5 | 2025-12-10 21:16:47 | 2025-12-10 21:16:47 |
 | [LearnNotes/DevGuides/Doxygen.md](../LearnNotes/DevGuides/Doxygen.md) | 1,494 | 2025-10-28 21:30:30 | 2025-12-08 21:24:02 |
 | [Tools/NeoVim.md](../Tools/NeoVim.md) | 90 | 2025-09-09 20:43:11 | 2025-12-04 21:17:32 |
 | [PlayGround/Guitar/和弦练习.md](../PlayGround/Guitar/和弦练习.md) | 126 | 2025-11-30 21:10:46 | 2025-11-30 21:10:46 |
 | [EmbeddedAtelier/STM32/铁头山羊STM32.md](../EmbeddedAtelier/STM32/铁头山羊STM32.md) | 662 | 2025-11-29 22:29:01 | 2025-11-30 21:10:46 |
 | [EmbeddedAtelier/STM32/Tools.md](../EmbeddedAtelier/STM32/Tools.md) | 32 | 2025-11-30 21:10:46 | 2025-11-30 21:10:46 |
 | [Tools/MarkDown.md](../Tools/MarkDown.md) | 1,659 | 2025-09-14 18:34:50 | 2025-11-30 15:33:45 |
-| [PlayGround/Guitar/README.md](../PlayGround/Guitar/README.md) | 10 | 2025-11-28 23:28:02 | 2025-11-28 23:28:02 |
 | [LearnNotes/DevGuides/SplitModule.md](../LearnNotes/DevGuides/SplitModule.md) | 217 | 2025-11-27 21:29:59 | 2025-11-27 21:29:59 |
 | [LearnNotes/AWS/AWS.md](../LearnNotes/AWS/AWS.md) | 1,295 | 2025-11-21 21:16:29 | 2025-11-27 21:29:59 |
 | [LearnNotes/AWS/AlexaCognito.md](../LearnNotes/AWS/AlexaCognito.md) | 1,495 | 2025-11-21 21:16:29 | 2025-11-24 01:39:30 |
-| [EmbeddedAtelier/STM32/README.md](../EmbeddedAtelier/STM32/README.md) | 5 | 2025-11-24 00:46:46 | 2025-11-24 00:46:46 |
-| [LearnNotes/AWS/README.md](../LearnNotes/AWS/README.md) | 8 | 2025-11-21 21:16:29 | 2025-11-21 21:16:29 |
-| [AI/README.md](../AI/README.md) | 13 | 2025-11-21 01:30:48 | 2025-11-21 01:30:48 |
-| [EmbeddedAtelier/README.md](../EmbeddedAtelier/README.md) | 56 | 2025-11-21 01:27:27 | 2025-11-21 01:27:27 |
 | [LearnNotes/Cpp/GNUBinutils.md](../LearnNotes/Cpp/GNUBinutils.md) | 170 | 2025-11-18 21:32:29 | 2025-11-19 21:22:46 |
 | [Tools/Protobuf.md](../Tools/Protobuf.md) | 398 | 2025-11-12 20:43:44 | 2025-11-18 21:32:29 |
-| [SandBox/README.md](../SandBox/README.md) | 10 | 2025-11-18 01:08:18 | 2025-11-18 01:08:18 |
-| [PlayGround/README.md](../PlayGround/README.md) | 57 | 2025-11-18 01:08:18 | 2025-11-18 01:08:18 |
 | [Tools/Docker.md](../Tools/Docker.md) | 301 | 2025-10-22 20:50:01 | 2025-11-17 21:18:35 |
 | [LearnNotes/DevGuides/GoogleCppFormat.md](../LearnNotes/DevGuides/GoogleCppFormat.md) | 114 | 2025-10-28 21:30:30 | 2025-11-13 20:50:52 |
 | [Tools/Makefiles.md](../Tools/Makefiles.md) | 41 | 2025-11-06 18:23:05 | 2025-11-06 18:23:05 |
 | [Summary.md](../Summary.md) | 14 | 2025-11-06 18:23:05 | 2025-11-06 18:23:05 |
 | [Tools/Jenkins.md](../Tools/Jenkins.md) | 64 | 2025-11-05 21:04:34 | 2025-11-05 21:04:34 |
 | [LearnNotes/DevGuides/SoftWareDev.md](../LearnNotes/DevGuides/SoftWareDev.md) | 756 | 2025-10-31 18:28:53 | 2025-10-31 18:28:53 |
-| [LearnNotes/DevGuides/README.md](../LearnNotes/DevGuides/README.md) | 69 | 2025-10-28 21:30:30 | 2025-10-30 21:06:17 |
-| [LearnNotes/DataBase/README.md](../LearnNotes/DataBase/README.md) | 5 | 2025-10-30 21:06:17 | 2025-10-30 21:06:17 |
 | [LearnNotes/DataBase/Concept.md](../LearnNotes/DataBase/Concept.md) | 16 | 2025-10-30 21:06:17 | 2025-10-30 21:06:17 |
 | [Tools/TOML.md](../Tools/TOML.md) | 76 | 2025-10-29 21:03:38 | 2025-10-29 21:03:38 |
 | [LearnNotes/MQTT/MQTT.md](../LearnNotes/MQTT/MQTT.md) | 252 | 2025-10-16 20:59:27 | 2025-10-23 21:00:54 |
-| [res/README.md](../res/README.md) | 6 | 2025-10-22 20:50:01 | 2025-10-22 20:50:01 |
-| [LearnNotes/README.md](../LearnNotes/README.md) | 67 | 2025-08-23 16:27:08 | 2025-10-22 20:50:01 |
 | [LearnNotes/Network/JWT.md](../LearnNotes/Network/JWT.md) | 549 | 2025-10-22 20:50:01 | 2025-10-22 20:50:01 |
 | [LearnNotes/Linux/IOMultiplexing.md](../LearnNotes/Linux/IOMultiplexing.md) | 838 | 2025-09-14 18:34:50 | 2025-10-16 23:57:13 |
-| [LearnNotes/MQTT/README.md](../LearnNotes/MQTT/README.md) | 1 | 2025-10-16 20:59:27 | 2025-10-16 20:59:27 |
-| [LearnNotes/JavaScript/README.md](../LearnNotes/JavaScript/README.md) | 7 | 2025-10-14 19:46:06 | 2025-10-14 19:46:06 |
 | [Tools/LaTex.md](../Tools/LaTex.md) | 197 | 2025-10-07 18:46:24 | 2025-10-07 18:46:24 |
 | [Algorithm/AlgorithmProblemNotes.md](../Algorithm/AlgorithmProblemNotes.md) | 3,294 | 2025-08-20 00:31:57 | 2025-10-05 23:15:41 |
 | [Tools/WebVscode.md](../Tools/WebVscode.md) | 101 | 2025-10-01 02:27:32 | 2025-10-01 02:27:32 |
@@ -131,12 +105,6 @@
 | [Algorithm/StdFunction.md](../Algorithm/StdFunction.md) | 729 | 2025-08-26 11:22:35 | 2025-09-30 17:31:54 |
 | [Tools/Audio.md](../Tools/Audio.md) | 294 | 2025-09-28 14:32:28 | 2025-09-28 14:32:28 |
 | [Algorithm/Sort.md](../Algorithm/Sort.md) | 34 | 2025-09-22 20:07:08 | 2025-09-22 20:07:08 |
-| [LearnNotes/Linux/README.md](../LearnNotes/Linux/README.md) | 9 | 2025-09-11 19:44:29 | 2025-09-11 19:44:29 |
-| [LearnNotes/DesignPattern/README.md](../LearnNotes/DesignPattern/README.md) | 42 | 2025-09-11 19:44:29 | 2025-09-11 19:44:29 |
-| [LearnNotes/Network/README.md](../LearnNotes/Network/README.md) | 13 | 2025-09-10 01:13:33 | 2025-09-10 01:13:33 |
-| [LearnNotes/Cpp/README.md](../LearnNotes/Cpp/README.md) | 5 | 2025-09-10 01:13:33 | 2025-09-10 01:13:33 |
-| [Algorithm/README.md](../Algorithm/README.md) | 24 | 2025-08-23 16:27:08 | 2025-09-10 01:13:33 |
 | [Algorithm/Algorithm.md](../Algorithm/Algorithm.md) | 558 | 2025-08-24 00:50:44 | 2025-09-09 20:43:11 |
 | [Tools/Json.md](../Tools/Json.md) | 16 | 2025-09-05 14:09:10 | 2025-09-05 14:09:10 |
-| [Tools/README.md](../Tools/README.md) | 8 | 2025-09-03 11:21:23 | 2025-09-03 11:21:23 |
 | [Algorithm/DataStructs.md](../Algorithm/DataStructs.md) | 284 | 2025-08-23 16:27:08 | 2025-08-28 11:25:23 |
