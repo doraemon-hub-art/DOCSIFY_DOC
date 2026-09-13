@@ -2,6 +2,13 @@
 
 ---
 
+# 补充
+
+> 命名风格
+
+- 建议 Enum 的枚举值必须全大写（CAPITALS_WITH_UNDERSCORES），且必须以 ENUM_NAME_ 作为前缀；
+
+---
 
 # 关键字
 

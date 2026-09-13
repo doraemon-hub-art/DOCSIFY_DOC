@@ -10,7 +10,7 @@ section {
 
 # 一个精度计算问题
 
-AWS KVS WebRTC C SDK 中，调用延迟的单位是 100ns（纳秒），为什么？
+AWS KVS WebRTC C SDK 中，一个结构体成员，调用延迟参数，他的单位是100ns，为什么单位粒度是100？
 
 详见源码 —— [amazon-kinesis-video-streams-webrtc-sdk-c/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h](https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c/blob/ef4649473b2d1dc25215eca9d21cda6c802c06f2/src/include/com/amazonaws/kinesis/video/webrtcclient/Stats.h#L605)
 
@@ -40,10 +40,10 @@ typedef struct _FILETIME {
   DWORD dwHighDateTime;
 } FILETIME, *PFILETIME, *LPFILETIME;
 ```
- 阿达阿瓦的
+
 ---
 
-- 那 Linux(Unx)中呢？
+- 那 Linux(Unix)中呢？
 
 在 Unix 系列系统（Linux, macOS, BSD 等）中，时间单位的设计与 Windows 有所不同，它主要经历了从微秒（μs）到纳秒（ns）的演进。
 
