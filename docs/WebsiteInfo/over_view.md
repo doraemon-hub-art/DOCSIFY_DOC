@@ -1,16 +1,23 @@
 # 文件信息
 
-> 按最后更新时间倒序，共 104 篇。数据由 collect_info.py 自动生成（2026-08-31 23:42:06），请勿手写编辑。
+> 按最后更新时间倒序，共 111 篇。数据由 collect_info.py 自动生成（2026-10-24 23:42:31），请勿手写编辑。
 
 | 文件 | 字数 | 创建时间 | 最后更新 |
 |---|---|---|---|
-| [ExpSummary/code_summary.md](../ExpSummary/code_summary.md) | 2,632 | 2026-05-15 18:26:37 | 2026-08-31 23:37:45 |
+| [ExpSummary/code_summary.md](../ExpSummary/code_summary.md) | 2,819 | 2026-05-15 18:26:37 | 2026-10-20 21:12:08 |
+| [WebsiteTodo.md](../WebsiteTodo.md) | 2,181 | 2025-09-10 01:13:33 | 2026-09-17 23:46:49 |
+| [Tools/Protobuf.md](../Tools/Protobuf.md) | 430 | 2025-11-12 20:43:44 | 2026-09-13 23:52:04 |
+| [ExpSummary/data_accuracy_cal.md](../ExpSummary/data_accuracy_cal.md) | 656 | 2026-04-20 21:27:45 | 2026-09-13 23:52:04 |
+| [PlayGround/Posts/【捡垃圾】H310T2 R2.0 MINI 主机.md](../PlayGround/Posts/【捡垃圾】H310T2 R2.0 MINI 主机.md) | 751 | 2026-09-12 23:51:28 | 2026-09-13 00:03:05 |
+| [PlayGround/Posts/【捡垃圾】雷蛇v4mini.md](../PlayGround/Posts/【捡垃圾】雷蛇v4mini.md) | 628 | 2026-09-05 21:35:50 | 2026-09-06 20:39:26 |
+| [EmbeddedAtelier/pcb_design.md](../EmbeddedAtelier/pcb_design.md) | 0 | 2026-09-05 21:35:50 | 2026-09-05 21:35:50 |
+| [AI/Agent/mcp.md](../AI/Agent/mcp.md) | 36 | 2026-09-02 23:58:14 | 2026-09-02 23:58:14 |
 | [Tools/FRP.md](../Tools/FRP.md) | 819 | 2026-07-12 23:33:20 | 2026-08-28 23:59:09 |
 | [EmbeddedAtelier/concept.md](../EmbeddedAtelier/concept.md) | 12 | 2026-08-28 23:59:09 | 2026-08-28 23:59:09 |
 | [AI/Agent/hermes.md](../AI/Agent/hermes.md) | 16 | 2026-08-28 23:59:09 | 2026-08-28 23:59:09 |
 | [LearnNotes/Cpp/CppFeature.md](../LearnNotes/Cpp/CppFeature.md) | 10,644 | 2025-09-10 01:13:33 | 2026-08-26 11:33:38 |
 | [ExpSummary/split_control_data.md](../ExpSummary/split_control_data.md) | 27 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
-| [ExpSummary/serial_common.md](../ExpSummary/serial_common.md) | 299 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
+| [ExpSummary/serial_common.md](../ExpSummary/serial_common.md) | 422 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
 | [EmbeddedAtelier/serial_common_concept.md](../EmbeddedAtelier/serial_common_concept.md) | 31 | 2026-08-26 11:33:38 | 2026-08-26 11:33:38 |
 | [Tools/CMake.md](../Tools/CMake.md) | 232 | 2025-09-09 11:29:16 | 2026-08-10 21:27:30 |
 | [ExpSummary/iot_world_data.md](../ExpSummary/iot_world_data.md) | 1,163 | 2026-04-20 21:27:45 | 2026-07-31 21:28:05 |
@@ -22,13 +29,11 @@
 | [ExpSummary/event_tracking.md](../ExpSummary/event_tracking.md) | 220 | 2026-04-20 21:27:45 | 2026-07-16 21:18:05 |
 | [Tools/Git.md](../Tools/Git.md) | 1,309 | 2025-09-13 22:56:27 | 2026-07-14 23:58:28 |
 | [LearnNotes/Cpp/CustomDevGuide.md](../LearnNotes/Cpp/CustomDevGuide.md) | 84 | 2026-06-20 23:27:30 | 2026-07-14 21:25:39 |
-| [WebsiteTodo.md](../WebsiteTodo.md) | 2,065 | 2025-09-10 01:13:33 | 2026-07-08 21:24:33 |
 | [PlayGround/Posts/AI 下的思考.md](../PlayGround/Posts/AI 下的思考.md) | 8 | 2026-06-26 21:01:53 | 2026-07-01 21:25:21 |
 | [LearnNotes/Linux/Command.md](../LearnNotes/Linux/Command.md) | 800 | 2025-09-28 14:32:28 | 2026-07-01 21:25:21 |
 | [LearnNotes/Lua/HelloWorld.md](../LearnNotes/Lua/HelloWorld.md) | 1,086 | 2026-06-20 23:27:30 | 2026-06-21 22:55:58 |
 | [LearnNotes/Rust/CustomDevGuide.md](../LearnNotes/Rust/CustomDevGuide.md) | 40 | 2026-06-20 23:27:30 | 2026-06-20 23:27:30 |
 | [ExpSummary/cpp_debug.md](../ExpSummary/cpp_debug.md) | 290 | 2026-06-05 18:19:37 | 2026-06-15 21:09:54 |
-| [ExpSummary/data_accuracy_cal.md](../ExpSummary/data_accuracy_cal.md) | 647 | 2026-04-20 21:27:45 | 2026-06-14 23:09:26 |
 | [AI/Agent/Skill.md](../AI/Agent/Skill.md) | 53 | 2026-06-12 18:19:30 | 2026-06-12 18:19:30 |
 | [AI/Agent/Concept.md](../AI/Agent/Concept.md) | 2,653 | 2026-06-12 18:19:30 | 2026-06-12 18:19:30 |
 | [LearnNotes/Rust/FormatAndStyle.md](../LearnNotes/Rust/FormatAndStyle.md) | 114 | 2026-06-05 18:19:37 | 2026-06-09 21:27:11 |
@@ -86,7 +91,6 @@
 | [LearnNotes/AWS/AWS.md](../LearnNotes/AWS/AWS.md) | 1,295 | 2025-11-21 21:16:29 | 2025-11-27 21:29:59 |
 | [LearnNotes/AWS/AlexaCognito.md](../LearnNotes/AWS/AlexaCognito.md) | 1,495 | 2025-11-21 21:16:29 | 2025-11-24 01:39:30 |
 | [LearnNotes/Cpp/GNUBinutils.md](../LearnNotes/Cpp/GNUBinutils.md) | 170 | 2025-11-18 21:32:29 | 2025-11-19 21:22:46 |
-| [Tools/Protobuf.md](../Tools/Protobuf.md) | 398 | 2025-11-12 20:43:44 | 2025-11-18 21:32:29 |
 | [Tools/Docker.md](../Tools/Docker.md) | 301 | 2025-10-22 20:50:01 | 2025-11-17 21:18:35 |
 | [LearnNotes/DevGuides/GoogleCppFormat.md](../LearnNotes/DevGuides/GoogleCppFormat.md) | 114 | 2025-10-28 21:30:30 | 2025-11-13 20:50:52 |
 | [Tools/Makefiles.md](../Tools/Makefiles.md) | 41 | 2025-11-06 18:23:05 | 2025-11-06 18:23:05 |
@@ -108,3 +112,6 @@
 | [Algorithm/Algorithm.md](../Algorithm/Algorithm.md) | 558 | 2025-08-24 00:50:44 | 2025-09-09 20:43:11 |
 | [Tools/Json.md](../Tools/Json.md) | 16 | 2025-09-05 14:09:10 | 2025-09-05 14:09:10 |
 | [Algorithm/DataStructs.md](../Algorithm/DataStructs.md) | 284 | 2025-08-23 16:27:08 | 2025-08-28 11:25:23 |
+| [PlayGround/Posts/【捡垃圾】雷蛇mini多啦A梦改无线.md](../PlayGround/Posts/【捡垃圾】雷蛇mini多啦A梦改无线.md) | 439 | - | - |
+| [PlayGround/Posts/【分享】租房经验分享.md](../PlayGround/Posts/【分享】租房经验分享.md) | 18 | - | - |
+| [EmbeddedAtelier/ESP32/reference.md](../EmbeddedAtelier/ESP32/reference.md) | 3 | - | - |

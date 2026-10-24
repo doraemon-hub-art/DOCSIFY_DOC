@@ -1,17 +1,66 @@
 {
-  "generated_at": "2026-08-31 23:42:06",
+  "generated_at": "2026-10-24 23:42:31",
   "summary": {
-    "total_files": 104,
-    "total_words": 85967,
-    "total_lines": 13786
+    "total_files": 111,
+    "total_words": 88309,
+    "total_lines": 14043
   },
   "files": [
     {
       "path": "ExpSummary/code_summary.md",
-      "words": 2632,
-      "lines": 229,
+      "words": 2819,
+      "lines": 245,
       "created": "2026-05-15 18:26:37",
-      "updated": "2026-08-31 23:37:45"
+      "updated": "2026-10-20 21:12:08"
+    },
+    {
+      "path": "WebsiteTodo.md",
+      "words": 2181,
+      "lines": 134,
+      "created": "2025-09-10 01:13:33",
+      "updated": "2026-09-17 23:46:49"
+    },
+    {
+      "path": "Tools/Protobuf.md",
+      "words": 430,
+      "lines": 73,
+      "created": "2025-11-12 20:43:44",
+      "updated": "2026-09-13 23:52:04"
+    },
+    {
+      "path": "ExpSummary/data_accuracy_cal.md",
+      "words": 656,
+      "lines": 122,
+      "created": "2026-04-20 21:27:45",
+      "updated": "2026-09-13 23:52:04"
+    },
+    {
+      "path": "PlayGround/Posts/【捡垃圾】H310T2 R2.0 MINI 主机.md",
+      "words": 751,
+      "lines": 86,
+      "created": "2026-09-12 23:51:28",
+      "updated": "2026-09-13 00:03:05"
+    },
+    {
+      "path": "PlayGround/Posts/【捡垃圾】雷蛇v4mini.md",
+      "words": 628,
+      "lines": 51,
+      "created": "2026-09-05 21:35:50",
+      "updated": "2026-09-06 20:39:26"
+    },
+    {
+      "path": "EmbeddedAtelier/pcb_design.md",
+      "words": 0,
+      "lines": 0,
+      "created": "2026-09-05 21:35:50",
+      "updated": "2026-09-05 21:35:50"
+    },
+    {
+      "path": "AI/Agent/mcp.md",
+      "words": 36,
+      "lines": 11,
+      "created": "2026-09-02 23:58:14",
+      "updated": "2026-09-02 23:58:14"
     },
     {
       "path": "Tools/FRP.md",
@@ -50,8 +99,8 @@
     },
     {
       "path": "ExpSummary/serial_common.md",
-      "words": 299,
-      "lines": 31,
+      "words": 422,
+      "lines": 67,
       "created": "2026-08-26 11:33:38",
       "updated": "2026-08-26 11:33:38"
     },
@@ -133,13 +182,6 @@
       "updated": "2026-07-14 21:25:39"
     },
     {
-      "path": "WebsiteTodo.md",
-      "words": 2065,
-      "lines": 129,
-      "created": "2025-09-10 01:13:33",
-      "updated": "2026-07-08 21:24:33"
-    },
-    {
       "path": "PlayGround/Posts/AI 下的思考.md",
       "words": 8,
       "lines": 1,
@@ -173,13 +215,6 @@
       "lines": 64,
       "created": "2026-06-05 18:19:37",
       "updated": "2026-06-15 21:09:54"
-    },
-    {
-      "path": "ExpSummary/data_accuracy_cal.md",
-      "words": 647,
-      "lines": 122,
-      "created": "2026-04-20 21:27:45",
-      "updated": "2026-06-14 23:09:26"
     },
     {
       "path": "AI/Agent/Skill.md",
@@ -581,13 +616,6 @@
       "updated": "2025-11-19 21:22:46"
     },
     {
-      "path": "Tools/Protobuf.md",
-      "words": 398,
-      "lines": 66,
-      "created": "2025-11-12 20:43:44",
-      "updated": "2025-11-18 21:32:29"
-    },
-    {
       "path": "Tools/Docker.md",
       "words": 301,
       "lines": 94,
@@ -733,6 +761,27 @@
       "lines": 37,
       "created": "2025-08-23 16:27:08",
       "updated": "2025-08-28 11:25:23"
+    },
+    {
+      "path": "PlayGround/Posts/【捡垃圾】雷蛇mini多啦A梦改无线.md",
+      "words": 439,
+      "lines": 38,
+      "created": null,
+      "updated": null
+    },
+    {
+      "path": "PlayGround/Posts/【分享】租房经验分享.md",
+      "words": 18,
+      "lines": 3,
+      "created": null,
+      "updated": null
+    },
+    {
+      "path": "EmbeddedAtelier/ESP32/reference.md",
+      "words": 3,
+      "lines": 4,
+      "created": null,
+      "updated": null
     }
   ]
 }
